@@ -11,4 +11,5 @@ public class MovieRecApplication {
     public static void main(String[] args) {
         SpringApplication.run(MovieRecApplication.class, args);
     }
+
 }
