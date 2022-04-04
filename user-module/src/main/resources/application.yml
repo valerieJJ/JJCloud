@@ -2,7 +2,15 @@ server:
   port: 8003
 spring:
   application:
-    name: sql-conn-service
+    name: user-module
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
+      discovery:
+        register: true
+        enabled: true
+#        instance-id: 1
+        root: /zk-server
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/moviedb
