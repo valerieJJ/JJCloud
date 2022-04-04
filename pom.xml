@@ -10,9 +10,9 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>purchase-serivce</module>
+<!--    <module>purchase-serivce</module>-->
     <module>movie-rec</module>
-    <module>sql-conn</module>
+    <module>user-module</module>
   </modules>
 
   <!-- FIXME change it to the project's website -->
