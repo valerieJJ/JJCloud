@@ -10,8 +10,9 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>module-pay8001</module>
+    <module>purchase-serivce</module>
     <module>movie-rec</module>
+    <module>sql-conn</module>
   </modules>
 
   <!-- FIXME change it to the project's website -->

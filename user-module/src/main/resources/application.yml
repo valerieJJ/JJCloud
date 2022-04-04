@@ -1,0 +1,13 @@
+server:
+  port: 8003
+spring:
+  application:
+    name: sql-conn-service
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/moviedb
+    username: root
+    password: 20031230
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
