@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>user login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+
+<body class="text-center">
+
+<div class="container">
+    <form class="form-signin" th:action="@{/login}" th:object="${user}" method="post">
+        <img class="mb-4" th:src="@{/img/smoothcriminal.svg}" alt="" width="300" height="200">
+        <h1 class="h3 mb-3 font-weight-normal" color="#FFA500">Welcome to Neverland!</h1>
+
+        <label class="sr-only">Username</label>
+        <input class="form-control" type="text" th:field="*{uname}" placeholder="Username"/><br>
+
+        <label class="sr-only">Password</label>
+        <input class="form-control" type="password" value="" th:field="*{password}" placeholder="Password"/><br>
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me" color="#FFA500" > remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" >log in</button>
+    </form><br><!--servelet-->
+
+</div>
+</body>
+
+</html>
+

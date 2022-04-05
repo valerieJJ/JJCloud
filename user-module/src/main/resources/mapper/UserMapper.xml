@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vjj.usermodule.dao.UserDao">
+
+    <resultMap type="vjj.usermodule.model.User" id="UserMap">
+        <result property="uid" column="uid" jdbcType="INTEGER"/>
+        <result property="uname" column="uname" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryAll" resultMap="UserMap">
+        select * from t_user
+        <where>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+            <if test="uname != null and uname != ''">
+                and uname = #{uname}
+            </if>
+            <if test="password != null">
+                and password = #{password}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserMap">
+        select
+          uid, uname, password
+        from t_user
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="queryById" resultMap="UserMap">
+        select
+          uid, uname, password
+        from t_user
+        where uid = #{uid}
+    </select>
+    <select id="queryByUname" resultMap="UserMap">
+        select
+          uid, uname, password
+        from t_user
+        where uname = #{uname}
+    </select>
+
+    <update id="update" parameterType="vjj.usermodule.model.User">
+        update t_user set uname=#{uname},password=#{password} where uid=#{uid}
+    </update>
+
+    <insert id="addUser" parameterType="vjj.usermodule.model.User">
+        insert into t_user (uid,uname,password) values (#{uid},#{uname},#{password});
+    </insert>
+
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from t_user where uid = #{uid}
+    </delete>
+</mapper>

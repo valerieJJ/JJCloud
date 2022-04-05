@@ -3,11 +3,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>sql-conn</title>
+    <title>index</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
-<body>
-sql
 
-<p th:text="${movie.getName()}"></p>
+<body class="text-center">
+
+<div class="container">
+    <button class="btn btn-lg btn-primary" onclick="{ location.href='/login'}">login</button>
+    <button class="btn btn-lg btn-primary" onclick="{ location.href='/register'}">register</button>
+
+</div>
+
 </body>
 </html>

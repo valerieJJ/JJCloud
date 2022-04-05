@@ -1,17 +1,22 @@
 package vjj.usermodule.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestOperations;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-
-//import vjj.movierec.domain.TB1;
-//import vjj.movierec.myModel.Movie;
-//import vjj.usermodule.service.ITbService;
-import vjj.usermodule.model.Movie;
-import vjj.usermodule.model.TB1;
-import vjj.usermodule.service.TBServiceImp1;
+import vjj.movierec.domain.TB1;
+import vjj.movierec.myModel.Movie;
+import vjj.usermodule.service.ITbService;
 
 import java.util.UUID;
 
@@ -20,20 +25,43 @@ public class TBController {
     @Value("${server.port}")
     private String serverPort;
 
+    private String serviceUrl = "http://movie-recommend-service";
+
+//    @Bean
+//    public RestTemplate restTemplate(RestTemplateBuilder builder){
+//        return builder.build();
+//    }
     @Autowired
-    TBServiceImp1 tbServiceImp1;
+    private RestTemplate restTemplate;
 
-//    @Autowired
-//    private ITbService tbServiceImp1;
+    @Autowired
+    private ITbService iTbService;
 
-    @RequestMapping("/user/zk")
+//    @RequestMapping("/zk")
+//    public ModelAndView tb(){
+//
+////        System.out.println(serviceUrl()+"\n");
+//
+//        TB1 tb1 = restTemplate.getForObject(serviceUrl+"/zkk", TB1.class);
+//        ModelAndView modelAndView = new ModelAndView();
+//        Movie movie = new Movie();
+//        movie.set_id(tb1.getMid()+"");
+////        movie.setName(tb1.getMname());
+//        movie.setName(tb1.getMname()+", service with zookeeper："+UUID.randomUUID().toString());
+//        modelAndView.addObject("movie", movie);
+//        modelAndView.setViewName("index");
+//        System.out.println(movie.getName());
+//        return modelAndView;
+//    }
+
+    @RequestMapping("/zk")
     public ModelAndView tb(){
-        TB1 tb1 = tbServiceImp1.queryByMid(1001);
-
+        TB1 tb = restTemplate.getForObject(serviceUrl+"/zkk", TB1.class);
+//
+        TB1 tb1 = iTbService.queryByMid();
         ModelAndView modelAndView = new ModelAndView();
         Movie movie = new Movie();
         movie.set_id(tb1.getMid()+"");
-//        movie.setName(tb1.getMname());
         movie.setName("service with zookeeper："+UUID.randomUUID().toString());
         modelAndView.addObject("movie", movie);
         modelAndView.setViewName("index");

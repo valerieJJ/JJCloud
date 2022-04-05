@@ -1,5 +1,4 @@
-server:
-  port: 8003
+
 spring:
   application:
     name: user-module
@@ -7,10 +6,10 @@ spring:
     zookeeper:
       connect-string: localhost:2181
       discovery:
-        register: true
+        register: false # 客户端，无需注册到Zookeeper服务器上
         enabled: true
 #        instance-id: 1
-        root: /zk-server
+#        root: /zk-server
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/moviedb
