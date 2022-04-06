@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import vjj.movierec.domain.TB1;
+import vjj.movierec.myModel.Movie;
 
 
 @FeignClient(name="movie-recommend-service")
-public interface ITbService {
+public interface MovieRecService {
 
     @RequestMapping(path = "/zkk", method = RequestMethod.GET)
     @ResponseBody
-    public String queryByMid();
+    public Movie getMovie();
 }

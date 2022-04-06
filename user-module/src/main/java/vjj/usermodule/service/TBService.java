@@ -7,7 +7,7 @@ import vjj.usermodule.model.TB1;
 
 
 @Service
-public class TBServiceImp implements TBService1 {
+public class TBService implements ITBService {
     @Autowired
     TBDao tbMapper;
 
