@@ -1,26 +1,15 @@
 package vjj.usermodule.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-import vjj.movierec.domain.TB1;
 import vjj.movierec.myModel.Movie;
 import vjj.usermodule.service.DiscoverServer;
-import vjj.usermodule.service.ITbService;
-
-import java.util.UUID;
+import vjj.usermodule.service.MovieRecService;
 
 @RestController
 public class TBController {
@@ -37,7 +26,7 @@ public class TBController {
     private RestTemplate restTemplate;
 
     @Autowired
-    private ITbService iTbService;
+    private MovieRecService movieRecService;
 
 //    @RequestMapping("/zk")
 //    public ModelAndView tb(){
@@ -60,13 +49,14 @@ public class TBController {
     private DiscoverServer discoverServer;
 
     @RequestMapping(value = "/zk", method = RequestMethod.GET)
-    public String tb(){
-        Movie movie = new Movie();
-        String s = discoverServer.getTB();
-        movie.set_id(s + "");
-        movie.setName("service from movie recommend："+UUID.randomUUID().toString());
-//        movie.setName("service from movie recommend："+UUID.randomUUID().toString());
-        return discoverServer.getTB();
+    public ModelAndView tb(){
+        Movie movie = discoverServer.getMovie();
+        String name = movie.getName();
+        movie.setName(name + ": service from movie recommend");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("movie", movie);
+        modelAndView.setViewName("zk");
+        return modelAndView;
     }
 //    public ModelAndView tb(){
 ////        TB1 tb = restTemplate.getForObject(serviceUrl+"/zkk", TB1.class);

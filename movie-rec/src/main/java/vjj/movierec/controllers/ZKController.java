@@ -11,7 +11,7 @@ import vjj.movierec.services.imp.TBServiceImp1;
 
 import java.util.UUID;
 
-@RestController
+@Controller
 public class ZKController {
 
     @Value("${server.port}")
@@ -35,7 +35,8 @@ public class ZKController {
     }
 
     @RequestMapping(value = "/zkk", method = RequestMethod.GET)
-    public String zk_tb(){
+    @ResponseBody
+    public Movie zk_tb(){
         TB1 tb1 = tbServiceImp1.queryByMid(1001);
 
         ModelAndView modelAndView = new ModelAndView();
@@ -46,6 +47,6 @@ public class ZKController {
         modelAndView.addObject("movie", movie);
         modelAndView.setViewName("zkindex");
         System.out.println(movie.getName());
-        return "movie-rec responding";
+        return movie;
     }
 }
