@@ -13,5 +13,6 @@ import vjj.movierec.domain.TB1;
 public interface ITbService {
 
     @RequestMapping(path = "/zkk", method = RequestMethod.GET)
-    public TB1 queryByMid();
+    @ResponseBody
+    public String queryByMid();
 }
