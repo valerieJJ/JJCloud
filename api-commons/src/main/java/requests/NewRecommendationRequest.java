@@ -1,4 +1,4 @@
-package vjj.movierec.myModel.requests;
+package requests;
 
 public class NewRecommendationRequest {
 

@@ -1,4 +1,4 @@
-package vjj.movierec.myModel;
+package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

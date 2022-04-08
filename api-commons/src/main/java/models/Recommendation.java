@@ -1,4 +1,4 @@
-package vjj.movierec.myModel;
+package models;
 
 public class Recommendation {
     private int mid;

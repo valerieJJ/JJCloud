@@ -1,15 +1,21 @@
-package vjj.movierec.myModel;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package VO;
 
 import java.io.Serializable;
 
-public class Movie implements Serializable{
-
-    @JsonIgnore
-    private String _id;
+public class MovieVO implements Serializable {
 
     private int mid;
+    private String score;
+
+    public int getCountRates() {
+        return countRates;
+    }
+
+    public void setCountRates(int countRates) {
+        this.countRates = countRates;
+    }
+
+    private int countRates;
 
     private String name;
 
@@ -21,8 +27,6 @@ public class Movie implements Serializable{
 
     private String shoot;
 
-    private Double score;
-
     private String language;
 
     private String genres;
@@ -30,14 +34,6 @@ public class Movie implements Serializable{
     private String actors;
 
     private String directors;
-
-    public int getMid() {
-        return mid;
-    }
-
-    public void setMid(int mid) {
-        this.mid = mid;
-    }
 
     public String getName() {
         return name;
@@ -79,7 +75,6 @@ public class Movie implements Serializable{
         this.shoot = shoot;
     }
 
-
     public String getLanguage() {
         return language;
     }
@@ -99,6 +94,7 @@ public class Movie implements Serializable{
     public String getActors() {
         return actors;
     }
+
     public void setActors(String actors) {
         this.actors = actors;
     }
@@ -111,19 +107,28 @@ public class Movie implements Serializable{
         this.directors = directors;
     }
 
-    public Double getScore() {
-        return score;
+    public MovieVO() {
     }
 
-    public void setScore(Double score) {
+    public MovieVO(int mid, String score) {
+        this.mid = mid;
         this.score = score;
     }
 
-    public String get_id() {
-        return _id;
+    public int getMid() {
+        return mid;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setMid(int mid) {
+        this.mid = mid;
     }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
 }

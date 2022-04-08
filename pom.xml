@@ -13,6 +13,7 @@
     <module>movie-rec</module>
     <module>user-module</module>
     <module>api-commons</module>
+      <module>order-service</module>
   </modules>
 
   <!-- FIXME change it to the project's website -->

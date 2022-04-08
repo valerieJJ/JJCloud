@@ -1,4 +1,4 @@
-package vjj.movierec.myModel;
+package models;
 
 public class Song {
     private String name;

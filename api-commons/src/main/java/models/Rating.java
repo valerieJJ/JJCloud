@@ -1,11 +1,11 @@
-package vjj.movierec.myModel;
+package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class Favorite implements Serializable {
+public class Rating implements Serializable {
 
     @JsonIgnore
     private String _id;
@@ -14,27 +14,18 @@ public class Favorite implements Serializable {
 
     private int mid;
 
+    private double score;
+
     private long timestamp;
 
-    public Favorite() {
+    public Rating() {
     }
 
-    public String get_id() {
-        return _id;
-    }
-
-    public int getMid() {
-        return mid;
-    }
-
-    public Favorite(int uid, int mid) {
+    public Rating(int uid, int mid, double score) {
         this.uid = uid;
         this.mid = mid;
+        this.score = score;
         this.timestamp = new Date().getTime();
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
     }
 
     public int getUid() {
@@ -45,8 +36,20 @@ public class Favorite implements Serializable {
         this.uid = uid;
     }
 
+    public int getMid() {
+        return mid;
+    }
+
     public void setMid(int mid) {
         this.mid = mid;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
     }
 
     public long getTimestamp() {
@@ -55,5 +58,13 @@ public class Favorite implements Serializable {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 }

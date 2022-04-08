@@ -1,21 +1,15 @@
-package vjj.movierec.myModel.VO;
+package models;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 
-public class MovieVO implements Serializable {
+public class Movie implements Serializable{
+
+    @JsonIgnore
+    private String _id;
 
     private int mid;
-    private String score;
-
-    public int getCountRates() {
-        return countRates;
-    }
-
-    public void setCountRates(int countRates) {
-        this.countRates = countRates;
-    }
-
-    private int countRates;
 
     private String name;
 
@@ -27,6 +21,8 @@ public class MovieVO implements Serializable {
 
     private String shoot;
 
+    private Double score;
+
     private String language;
 
     private String genres;
@@ -34,6 +30,14 @@ public class MovieVO implements Serializable {
     private String actors;
 
     private String directors;
+
+    public int getMid() {
+        return mid;
+    }
+
+    public void setMid(int mid) {
+        this.mid = mid;
+    }
 
     public String getName() {
         return name;
@@ -75,6 +79,7 @@ public class MovieVO implements Serializable {
         this.shoot = shoot;
     }
 
+
     public String getLanguage() {
         return language;
     }
@@ -94,7 +99,6 @@ public class MovieVO implements Serializable {
     public String getActors() {
         return actors;
     }
-
     public void setActors(String actors) {
         this.actors = actors;
     }
@@ -107,28 +111,19 @@ public class MovieVO implements Serializable {
         this.directors = directors;
     }
 
-    public MovieVO() {
-    }
-
-    public MovieVO(int mid, String score) {
-        this.mid = mid;
-        this.score = score;
-    }
-
-    public int getMid() {
-        return mid;
-    }
-
-    public void setMid(int mid) {
-        this.mid = mid;
-    }
-
-    public String getScore() {
+    public Double getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(Double score) {
         this.score = score;
     }
 
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 }

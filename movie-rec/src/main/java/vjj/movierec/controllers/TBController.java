@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vjj.movierec.domain.TB1;
-//import vjj.movierec.myModel.Movie;
+//import models.Movie;
 import models.*;
 import vjj.movierec.services.imp.TBServiceImp1;
 

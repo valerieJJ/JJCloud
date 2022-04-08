@@ -1,11 +1,11 @@
-package vjj.movierec.myModel;
+package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class Comment implements Serializable {
+public class Tag implements Serializable {
 
     @JsonIgnore
     private String _id;
@@ -14,26 +14,18 @@ public class Comment implements Serializable {
 
     private int mid;
 
-    private String content;
+    private String tag;
 
     private long timestamp;
 
-    public String get_id() {
-        return _id;
-    }
-
-    public Comment() {
-    }
-
-    public Comment(int uid, int mid, String content) {
+    public Tag(int uid, int mid, String tag) {
         this.uid = uid;
         this.mid = mid;
-        this.content = content;
+        this.tag = tag;
         this.timestamp = new Date().getTime();
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public Tag() {
     }
 
     public int getUid() {
@@ -52,12 +44,12 @@ public class Comment implements Serializable {
         this.mid = mid;
     }
 
-    public String getContent() {
-        return content;
+    public String getTag() {
+        return tag;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public long getTimestamp() {
@@ -66,5 +58,13 @@ public class Comment implements Serializable {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 }

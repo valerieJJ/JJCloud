@@ -13,11 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-//import vjj.movierec.myModel.Movie;
-//import vjj.movierec.myModel.Rating;
-//import vjj.movierec.myModel.Recommendation;
+//import models.Movie;
+//import models.Rating;
+//import models.Recommendation;
 //import vjj.movierec.myModel.VO.MovieVO;
-//import vjj.movierec.myModel.requests.NewRecommendationRequest;
+//import requests.NewRecommendationRequest;
 //import valerie.myUtils.Constant;
 import models.*;
 import VO.*;

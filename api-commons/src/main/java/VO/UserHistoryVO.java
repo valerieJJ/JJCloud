@@ -1,4 +1,4 @@
-package vjj.movierec.myModel.VO;
+package VO;
 
 import java.io.Serializable;
 import java.util.HashMap;

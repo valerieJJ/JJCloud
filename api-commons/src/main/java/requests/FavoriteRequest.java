@@ -1,6 +1,6 @@
-package vjj.movierec.myModel.requests;
+package requests;
 
-public class LikeRequest {
+public class FavoriteRequest {
 
     private int uid;
     private int mid;
@@ -9,7 +9,7 @@ public class LikeRequest {
         this.uid = uid;
     }
 
-    public LikeRequest(int uid, int mid) {
+    public FavoriteRequest(int uid, int mid) {
         this.uid = uid;
         this.mid = mid;
     }

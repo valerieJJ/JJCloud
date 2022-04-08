@@ -1,4 +1,4 @@
-package vjj.movierec.myModel.DTO;
+package DTO;
 
 import java.io.Serializable;
 
