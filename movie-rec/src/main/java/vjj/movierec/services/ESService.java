@@ -25,9 +25,12 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vjj.movierec.myModel.DTO.MovieDTO;
-import vjj.movierec.myModel.Song;
-import vjj.movierec.myModel.VO.MovieVO;
+//import vjj.movierec.myModel.DTO.MovieDTO;
+//import vjj.movierec.myModel.Song;
+//import vjj.movierec.myModel.VO.MovieVO;
+import models.*;
+import VO.*;
+import DTO.*;
 
 
 import java.io.IOException;

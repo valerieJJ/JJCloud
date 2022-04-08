@@ -5,22 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import vjj.movierec.myModel.Movie;
-import vjj.movierec.myModel.PermissionAnnotation;
-import vjj.movierec.myModel.requests.LoginUserRequest;
+
+
 import vjj.usermodule.model.User;
 import vjj.usermodule.service.UserService;
-import vjj.usermodule.service.UserServiceImpl;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Controller

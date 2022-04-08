@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import vjj.movierec.myModel.DTO.MovieDTO;
-import vjj.movierec.myModel.VO.MovieVO;
-import vjj.movierec.myModel.requests.HotMovieRequest;
-import vjj.movierec.myModel.requests.LatestMovieRequest;
+//import vjj.movierec.myModel.DTO.MovieDTO;
+//import vjj.movierec.myModel.VO.MovieVO;
+//import vjj.movierec.myModel.requests.HotMovieRequest;
+//import vjj.movierec.myModel.requests.LatestMovieRequest;
 import vjj.movierec.services.RecService;
+import models.*;
+import VO.*;
+import requests.*;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

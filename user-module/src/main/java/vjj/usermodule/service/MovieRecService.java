@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import vjj.movierec.domain.TB1;
-import vjj.movierec.myModel.Movie;
+import models.*;
 
 
 @FeignClient(name="movie-recommend-service")

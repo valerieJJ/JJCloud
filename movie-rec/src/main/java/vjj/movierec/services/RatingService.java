@@ -11,9 +11,11 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 //import scala.Int;
-import vjj.movierec.myModel.Movie;
-import vjj.movierec.myModel.Rating;
-import vjj.movierec.myModel.requests.MovieRatingRequest;
+//import vjj.movierec.myModel.Movie;
+//import vjj.movierec.myModel.Rating;
+//import vjj.movierec.myModel.requests.MovieRatingRequest;
+import models.*;
+import requests.MovieRatingRequest;
 
 import java.io.IOException;
 import java.net.UnknownHostException;

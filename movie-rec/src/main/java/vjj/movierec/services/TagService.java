@@ -5,13 +5,16 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.*;
 import com.mongodb.util.JSON;
+import models.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
-import vjj.movierec.myModel.requests.TagRequest;
-import vjj.movierec.myModel.Tag;
+import models.*;
+import VO.*;
+import requests.TagRequest;
 
 
+import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +45,9 @@ public class TagService {
             e.printStackTrace();
             return null;
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
