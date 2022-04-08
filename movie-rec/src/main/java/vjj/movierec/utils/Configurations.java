@@ -28,7 +28,6 @@ public class Configurations {
     private int esPort =  9300;
     private String redisHost;
 
-
     public Configurations() throws IOException {
         Properties properties = new Properties();
         Resource resource = new ClassPathResource("neverland.properties");

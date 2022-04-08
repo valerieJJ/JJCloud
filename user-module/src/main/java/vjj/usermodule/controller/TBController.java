@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-import vjj.movierec.myModel.Movie;
+import models.*;
 import vjj.usermodule.service.DiscoverServer;
 import vjj.usermodule.service.MovieRecService;
 

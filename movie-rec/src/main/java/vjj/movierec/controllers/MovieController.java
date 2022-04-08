@@ -6,12 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import vjj.movierec.myModel.DTO.MovieDTO;
-import vjj.movierec.myModel.*;
-import vjj.movierec.myModel.VO.MovieVO;
-import vjj.movierec.myModel.requests.MovieRatingRequest;
-import vjj.movierec.services.*;
 
+//import vjj.movierec.myModel.*;
+//import vjj.movierec.myModel.requests.*;
+//import vjj.movierec.myModel.VO.*;
+import requests.MovieRatingRequest;
+import vjj.movierec.services.*;
+import models.*;
+import VO.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

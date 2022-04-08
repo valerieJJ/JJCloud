@@ -25,9 +25,12 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vjj.movierec.myModel.DTO.MovieDTO;
-import vjj.movierec.myModel.Song;
-import vjj.movierec.myModel.VO.MovieVO;
+//import vjj.movierec.myModel.DTO.MovieDTO;
+//import models.Song;
+//import vjj.movierec.myModel.VO.MovieVO;
+import models.*;
+import VO.*;
+import DTO.*;
 
 
 import java.io.IOException;
@@ -36,7 +39,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// 7.8.0
 @Service
 public class ESService {
     @Autowired

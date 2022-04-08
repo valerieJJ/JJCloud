@@ -22,5 +22,4 @@ public class ESController {
         model.addAttribute("ESdata", data);
         return "/searchES";
     }
-
 }

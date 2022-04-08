@@ -1,13 +1,13 @@
 package vjj.movierec.services;
 
+import models.User;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import vjj.movierec.myModel.User;
-import vjj.movierec.myModel.requests.FavoriteRequest;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 @Order(1)
 public class PermissionAspect {
     //定义一个AOP切面类时，在类上加个@Aspect注解，然后用@Component注解将该类交给SPring管理
-    @Pointcut("@annotation(vjj.movierec.myModel.PermissionAnnotation)")
+    @Pointcut("@annotation(vjj.movierec.services.PermissionAnnotation)")
     private void permissionCheck(){
     }
 

@@ -1,12 +1,14 @@
 package vjj.movierec.controllers;
 
+import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 //import valerie.myDAO.UserServiceImpl;
-import vjj.movierec.myModel.User;
+//import models.User;
 import vjj.movierec.services.*;
+
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
