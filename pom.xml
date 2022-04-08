@@ -13,6 +13,8 @@
 <!--    <module>purchase-serivce</module>-->
     <module>movie-rec</module>
     <module>user-module</module>
+      <module>commons</module>
+    <module>commons</module>
   </modules>
 
   <!-- FIXME change it to the project's website -->

@@ -36,7 +36,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// 7.8.0
 @Service
 public class ESService {
     @Autowired
