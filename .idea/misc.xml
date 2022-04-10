@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/purchase-serivce/pom.xml" />
         <option value="$PROJECT_DIR$/user-module/pom.xml" />
         <option value="$PROJECT_DIR$/web-consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/movie-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

@@ -22,7 +22,6 @@ public class UserModuleApplication {
     @Bean
     @LoadBalanced
     RestTemplate restTemplate(){
-//        return builder.build();
         return new RestTemplate();
     }
     public static void main(String[] args) {

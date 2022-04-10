@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import models.*;
 
 @Configuration
-@EnableFeignClients
 public class DiscoverServer {
     @Autowired
     private MovieRecService service;

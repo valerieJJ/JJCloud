@@ -1,0 +1,57 @@
+
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Welcome to NeverLand</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+<!--    <link th:href="@{css/styles.css}" rel="stylesheet" />-->
+</head>
+<!--background="/assets/img/msc7.jpg" background-repeat="no"-->
+<body class="text-center">
+<!--<body class="masthead">-->
+
+<div class="container">
+<!--    <form class="form-signin" th:action="@{/user}" th:object="${user}" method="post">-->
+<!--    <form class="form-signin" th:action="@{/user/mainpage}" th:object="${user}" method="post">-->
+    <form class="form-signin" th:action="@{/user/dologin}" th:object="${user}" method="post">
+    <img class="mb-4" th:src="@{/img/smoothcriminal.svg}" alt="" width="300" height="200">
+    <h1 class="h3 mb-3 font-weight-normal" color="#FFA500">Welcome to Neverland!</h1>
+
+    <label class="sr-only">Username</label>
+    <input class="form-control" type="text" th:field="*{username}" placeholder="Username"/><br>
+
+    <label class="sr-only">Password</label>
+    <input class="form-control" type="password" value="" th:field="*{password}" placeholder="Password"/><br>
+
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me" color="#FFA500" > remember me
+        </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" >log in</button>
+<!--    <button class="btn btn-lg btn-primary btn-block" type="submit" th:action="@{/register.html}">register</button>-->
+<!--    <button class="btn btn-lg btn-primary btn-block" type="submit" th:action="@{/user/register}">register</button>-->
+<!--    <p class="mt-5 mb-3 text-muted">© 2017-2018</p>-->
+    <a class="btn btn-sm" color="#fcba03">中文</a>
+    <a class="btn btn-sm" color="#fcba03">English</a>
+</form><br><!--servelet-->
+
+    <button class="btn btn-lg btn-primary" onclick="{ location.href='/user/register'}">register</button>
+    <button class="btn btn-lg btn-primary" onclick="{ location.href='/'}">NeverLand</button>
+
+</div>
+<!--<form action="/dologin" method="post">-->
+<!--    I want ur name <input type="text" name="username"><br>-->
+<!--    I want ur key <input type="password" name="password"><br>-->
+<!--    <input type="submit" value="Come!">-->
+<!--</form>-->
+
+</body>
+
+</html>

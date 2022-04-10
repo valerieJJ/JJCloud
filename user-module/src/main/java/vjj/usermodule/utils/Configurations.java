@@ -30,7 +30,7 @@ public class Configurations {
         Properties properties = new Properties();
         Resource resource = new ClassPathResource("application.properties");
         properties.load(new FileInputStream(resource.getFile()));
-        this.redisHost = properties.getProperty("redis.host");
+        this.redisHost = properties.getProperty("spring.redis.host");
     }
 
     @Bean(name = "mongoClient")
