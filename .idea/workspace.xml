@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eb49d935-e8db-49a8-9be0-5ddf4b92384a" name="Default Changelist" comment="zk-fea: service discover, feign, zookeeper">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="eb49d935-e8db-49a8-9be0-5ddf4b92384a" name="Default Changelist" comment="add api-commons" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -375,10 +371,17 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="948" y="344" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1649175518076" />
+<<<<<<< HEAD
     <state x="555" y="154" width="1207" height="862" key="CommitChangelistDialog2" timestamp="1649572216645">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="555" y="154" width="1207" height="862" key="CommitChangelistDialog2/0.0.1792.1120@0.0.1792.1120" timestamp="1649572216645" />
+=======
+    <state x="470" y="232" width="1322" height="862" key="CommitChangelistDialog2" timestamp="1649573349104">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="470" y="232" width="1322" height="862" key="CommitChangelistDialog2/0.0.1792.1120@0.0.1792.1120" timestamp="1649573349104" />
+>>>>>>> fea-order
     <state x="104" y="120" key="DiffContextDialog" timestamp="1649051630359">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>

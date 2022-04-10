@@ -45,10 +45,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-dependencies</artifactId>-->
-<!--        </dependency>-->
 
     <!--=============== zookeeper ================-->
         <!--springboot整合zookeeper客户端-->
@@ -109,7 +105,6 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-<!--            <version>1.2.11</version>-->
         </dependency>
 
 
