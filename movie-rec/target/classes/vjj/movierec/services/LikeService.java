@@ -11,11 +11,12 @@ import com.mongodb.util.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
-import vjj.movierec.myModel.Favorite;
-import vjj.movierec.myModel.Like;
-import vjj.movierec.myModel.requests.FavoriteRequest;
-import vjj.movierec.myModel.requests.LikeRequest;
 
+import models.*;
+import VO.*;
+import requests.*;
+
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class LikeService {
     public LikeService() throws UnknownHostException {
     }
 
-    public Like DBOjbect2Like(DBObject object){
+    public Like DBOjbect2Like(DBObject object) {
         try{
             return objectMapper.readValue(JSON.serialize(object), Like.class);
 
@@ -45,6 +46,9 @@ public class LikeService {
             e.printStackTrace();
             return null;
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        } catch( IOException e){
             e.printStackTrace();
             return null;
         }
@@ -61,7 +65,7 @@ public class LikeService {
         return true;
     }
 
-    public boolean dropLike2Mongo(Integer uid, Integer mid) throws IllegalAccessException {
+    public boolean dropLike2Mongo(Integer uid, Integer mid) {
         BasicDBObject query = new BasicDBObject();
         query.append("uid", uid);
         query.append("mid", mid);
@@ -70,7 +74,7 @@ public class LikeService {
         return true;
     }
 
-    public Like findLike(int uid, int mid){
+    public Like findLike(int uid, int mid) {
         BasicDBObject query = new BasicDBObject();
         query.append("uid", uid);
         query.append("mid", mid);
@@ -84,7 +88,7 @@ public class LikeService {
         }
     }
 
-    public List<Like> getMovieLikes(int mid){
+    public List<Like> getMovieLikes(int mid) {
         BasicDBObject query = new BasicDBObject();
         query.append("mid", mid);
         DBCursor cursor = this.getCollection().find(query);
@@ -126,7 +130,7 @@ public class LikeService {
         jedis.lpush("uid:"+like.getUid(),String.valueOf(like.getMid()));
     }
 
-    public boolean likeExistMongo(int uid, int mid){
+    public boolean likeExistMongo(int uid, int mid) {
         if(findLike(uid, mid)!=null){
             return true;
         }else {

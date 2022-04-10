@@ -13,13 +13,12 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 //import scala.Int;
-import vjj.movierec.myModel.Favorite;
-import vjj.movierec.myModel.Movie;
-import vjj.movierec.myModel.Rating;
-import vjj.movierec.myModel.Tag;
-import vjj.movierec.myModel.requests.FavoriteRequest;
-import vjj.movierec.myModel.requests.TagRequest;
+//import vjj.movierec.myModel.*;
+import models.*;
+import VO.*;
+import requests.*;
 
+import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.*;
 //import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
@@ -54,6 +53,9 @@ public class FavoriteService {
             e.printStackTrace();
             return null;
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
