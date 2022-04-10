@@ -9,11 +9,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="purchase-serivce" />
         <module name="commons" />
-        <module name="order-service" />
-        <module name="movie-rec" />
         <module name="movie-service" />
-        <module name="api-commons" />
         <module name="user-module" />
+        <module name="movie-rec" />
+        <module name="api-commons" />
+        <module name="order-service" />
         <module name="web-consumer" />
       </profile>
     </annotationProcessing>

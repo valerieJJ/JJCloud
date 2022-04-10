@@ -1,0 +1,30 @@
+server:
+  port: 8006
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/moviedb
+    username: root
+    password: 20031230
+  aop:
+    proxy-target-class: true
+  redis:
+    host: localhost
+    port: 6379
+    database: 8
+  session:
+    store-type: redis
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
+      discovery:
+        enabled: true
+        register: true
+    loadbalancer:
+      ribbon:
+        enabled: true
+
+mybatis:
+  mapper-locations:
+    - classpath:mapper/*.xml
+    - classpath*:vjj/**/mapper/*.xml
