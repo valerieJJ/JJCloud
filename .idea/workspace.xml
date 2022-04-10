@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eb49d935-e8db-49a8-9be0-5ddf4b92384a" name="Default Changelist" comment="add api-commons">
-      <change beforePath="$PROJECT_DIR$/movie-rec/src/main/resources/static/css/ks/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie-rec/src/main/resources/static/css/ks/dashboard.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie-rec/src/main/resources/static/css/ks/msc7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie-rec/src/main/resources/static/css/ks/signin.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-module/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/pom.xml" afterDir="false" />
-    </list>
+    <list default="true" id="eb49d935-e8db-49a8-9be0-5ddf4b92384a" name="Default Changelist" comment="add api-commons" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,14 +59,15 @@
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/api-commons/src/main" />
-      <recent name="$PROJECT_DIR$/sql-conn/src/main/resources" />
-      <recent name="$PROJECT_DIR$/sql-conn/src/main/resources/templates" />
-      <recent name="$PROJECT_DIR$/movie-rec/src/main/java/vjj/movierec/controllers" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/user-module/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/user-module/src/main/resources/static/css" />
+      <recent name="$PROJECT_DIR$/movie-rec/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/user-module/src/main/resources" />
+      <recent name="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="vjj.movierec.services" />
@@ -81,12 +76,11 @@
       <recent name="model" />
       <recent name="controller" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/user-module/src/main/resources/templates" />
-      <recent name="$PROJECT_DIR$/user-module/src/main/resources/static/css" />
-      <recent name="$PROJECT_DIR$/movie-rec/src/main/resources/templates" />
-      <recent name="$PROJECT_DIR$/user-module/src/main/resources" />
-      <recent name="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/api-commons/src/main" />
+      <recent name="$PROJECT_DIR$/sql-conn/src/main/resources" />
+      <recent name="$PROJECT_DIR$/sql-conn/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/movie-rec/src/main/java/vjj/movierec/controllers" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.MovieRecApplication">
