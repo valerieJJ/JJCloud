@@ -20,12 +20,12 @@
   <url>http://maven.apache.org/</url>
   <inceptionYear>2001</inceptionYear>
 
-  <distributionManagement>
-    <site>
-      <id>website</id>
-      <url>scp://webhost.company.com/www/website</url>
-    </site>
-  </distributionManagement>
+<!--  <distributionManagement>-->
+<!--    <site>-->
+<!--      <id>website</id>-->
+<!--      <url>scp://webhost.company.com/www/website</url>-->
+<!--    </site>-->
+<!--  </distributionManagement>-->
 
   <!--统一管理jar包版本-->
   <properties>
@@ -36,6 +36,7 @@
     <lombok.version>1.18.10</lombok.version>
     <log4j.version>1.2.17</log4j.version>
     <mysql.version>8.0.18</mysql.version>
+    <redis.version>2.9.0</redis.version>
     <druid.version>1.1.16</druid.version>
     <mybatis.spring.boot.version>2.1.1</mybatis.spring.boot.version>
 
@@ -82,30 +83,29 @@
         <version>${mysql.version}</version>
         <scope>runtime</scope>
       </dependency>
-      <!-- druid-->
+      <!-- druid 连接池-->
       <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>druid</artifactId>
         <version>${druid.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid-spring-boot-starter</artifactId>
+        <version>1.1.10</version>
       </dependency>
       <!--mybatis-->
       <dependency>
         <groupId>org.mybatis.spring.boot</groupId>
         <artifactId>mybatis-spring-boot-starter</artifactId>
         <version>2.1.1</version>
-<!--        <version>${mybatis.spring.boot.version}</version>-->
       </dependency>
-      <!--junit-->
+
+      <!-- ============== redis ================ -->
       <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>${junit.version}</version>
-      </dependency>
-      <!--log4j-->
-      <dependency>
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-        <version>${log4j.version}</version>
+        <groupId>redis.clients</groupId>
+        <artifactId>jedis</artifactId>
+        <version>${redis.version}</version>
       </dependency>
 
       <!--thymleaf-->
@@ -119,6 +119,49 @@
         <artifactId>spring-boot-starter-thymeleaf</artifactId>
         <version>2.5.6</version>
       </dependency>
+
+      <!--junit-->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+      </dependency>
+      <!--log4j-->
+      <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.2.11</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>bootstrap</artifactId>
+        <version>3.3.5</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.apache.zookeeper</groupId>
+        <artifactId>zookeeper</artifactId>
+        <version>3.5.5</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
     </dependencies>
 
   </dependencyManagement>
