@@ -1,13 +1,23 @@
 #server:
 #  port: 8002
-spring:
-  application:
-    name: movie-recommend-service
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/moviedb
-    username: root
-    password: 20031230
-
-mybatis:
-  mapperLocations: classpath:mapper/*.xml
+#spring:
+#  application:
+#    name: movie-recommend-service
+#  cloud:
+#    zookeeper:
+#      connect-string: localhost:2181
+#      discovery:
+#        register: true
+#        enabled: true
+#        instance-id: movie-recommend-service
+##        instance-host: localhost
+##        root: /zk-server-provider
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/moviedb
+#    username: root
+#    password: 20031230
+#
+#mybatis:
+#  mapperLocations: classpath:mapper/*.xml
+#
