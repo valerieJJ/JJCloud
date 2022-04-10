@@ -25,6 +25,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="movie-rec" options="" />
+      <module name="order-service" options="" />
       <module name="purchase-serivce" options="" />
       <module name="user-module" options="" />
       <module name="web-consumer" options="-parameters" />
