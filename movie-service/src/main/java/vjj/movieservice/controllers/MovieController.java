@@ -42,8 +42,7 @@ public class MovieController {
         return movieService.getMovieTypes();
     }
 
-//    @RequestMapping(value = "/movie/query", method = RequestMethod.POST)
-    @GetMapping("/movie/query")
+    @RequestMapping(value = "/movie/query", method = RequestMethod.GET)
     public Movie getMovieById(@RequestParam("mid") int mid) throws ExecutionException, InterruptedException {
         System.out.println("getmovie - get mid = "+mid);
         Movie movie = movieService.findByMID(mid);
@@ -51,7 +50,7 @@ public class MovieController {
     }
 
     @RequestMapping(value = "/movie/score", method = RequestMethod.GET)
-    public Map<String, Object> getScoreById(int mid) throws ExecutionException, InterruptedException {
+    public String getScoreById(@RequestParam("mid") int mid) throws ExecutionException, InterruptedException {
         System.out.println("getmovie - get mid = "+mid);
         CompletableFuture<Movie> asy_movie = movieService.asyfindByMID(mid);
         CompletableFuture<String> asy_movie_score = ratingService.asygetMovieAverageScores(mid);
@@ -69,14 +68,14 @@ public class MovieController {
             map.put("movie", movie);
             map.put("movie_score", movie_score);
         }
-        return map;
+        return movie_score;
     }
 
     @RequestMapping(value = "/movie/rate", method = RequestMethod.POST)
     public Model rateMovie(
-            @ModelAttribute("rating") Rating ratingReq,
-            Model model,
-            HttpServletRequest request
+            @RequestParam("rating") Rating ratingReq,
+            @RequestParam("model") Model model,
+            @RequestParam("request") HttpServletRequest request
     ) throws JsonProcessingException, IllegalAccessException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -103,20 +102,16 @@ public class MovieController {
     }
 
     @RequestMapping(value = "/movie/folder", method = RequestMethod.GET)
-    public Map<String, Object> goMovieFolder2(String type) throws UnknownHostException {
+    public List<Movie> goMovieFolder2(@RequestParam("type") String type) throws UnknownHostException {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("~~~ go to "+ type);
         String field = "genres";
         List<Movie> data = movieService.getCollectionData(field, type);
-        Map<String, Object> map = new HashMap<>();
-        map.put("movies", data);
-        map.put("folder_name", type);
-//        modelAndView.setViewName("movieFolder");
-        return map;
+        return data;
     }
 
     @RequestMapping(value = "/movie/movieid", method = RequestMethod.GET)
-    public Map<String, Object> getMovieInfo(int mid, HttpServletRequest request) throws ExecutionException, InterruptedException {
+    public Map<String, Object> getMovieInfo(@RequestParam("mid")int mid, @RequestParam("request") HttpServletRequest request) throws ExecutionException, InterruptedException {
         System.out.println("getmovie - get mid = "+mid);
         CompletableFuture<Movie> asy_movie = movieService.asyfindByMID(mid);
         CompletableFuture<String> asy_movie_score = ratingService.asygetMovieAverageScores(mid);
@@ -147,8 +142,10 @@ public class MovieController {
 
     @RequestMapping(value = "/movie/moviefield", method = RequestMethod.GET)
 //    @PermissionAnnotation
-    public Map<String, Object> searchMovieByField(String fieldname, String value
-                            , HttpServletRequest request) throws IOException {
+    public Map<String, Object> searchMovieByField(
+            @RequestParam("fieldname") String fieldname
+            ,@RequestParam("value") String value
+            ,@RequestParam("request") HttpServletRequest request) throws IOException {
         System.out.println("search movie field = "+fieldname);
         System.out.println("search value = " + value);
         String es_collection = "movietags";

@@ -1,7 +1,8 @@
 package vjj.usermodule.service;
 
 
-import vjj.usermodule.model.User;
+
+import models.User;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface UserService {
 
 //    User updateById(Integer uid);
 
-    User updatePassword(User user);
+    User updateUser(User user);
 
     boolean deleteById(Integer uid);
 

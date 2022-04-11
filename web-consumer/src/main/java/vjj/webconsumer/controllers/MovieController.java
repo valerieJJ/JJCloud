@@ -24,7 +24,6 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 
-@RequestMapping("/movie")
 @Controller
 public class MovieController {
     @Autowired
@@ -38,7 +37,7 @@ public class MovieController {
     @Autowired
     private FavoriteService favoriteService;
 
-    @RequestMapping("rate")
+    @RequestMapping("/movie/rate")
     public String rateMovie(
             @ModelAttribute("rating") Rating ratingReq,
             Model model,
@@ -59,36 +58,34 @@ public class MovieController {
         }
 
         Movie movie = (Movie)session.getAttribute("movie");
-        Map<String, Object> res = movieService.getScoreById(mid);
+        String movie_score = movieService.getScoreById(movie.getMid());
         model.addAttribute("movie", movie);
-        model.addAttribute("movie_score", res.get("movie_score"));
+        model.addAttribute("movie_score", movie_score);
         return "movieInfo";
     }
 
-    @RequestMapping("/moviefolder")
+    @RequestMapping("/movie/moviefolder")
     public ModelAndView goMovieFolder(String type) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("~~~ go to "+ type);
-        Map<String, Object> map = movieService.goMovieFolder(type);
-        List<Movie> data = (List<Movie>) map.get("movies");
+        List<Movie> data = movieService.goMovieFolder(type);
         modelAndView.addObject("movies", data);
-        modelAndView.addObject("folder_name", map.get("folder_name"));
+        modelAndView.addObject("folder_name", type);
         modelAndView.setViewName("movieFolder");
         return modelAndView;
     }
 
-    @RequestMapping("/movieid")
+    @RequestMapping("/movie/movieid")
     public ModelAndView getMovieInfo(
             @ModelAttribute("mid") int mid
             ,@ModelAttribute("rating") Rating rating
             , HttpServletRequest request
-            , ModelAndView modelAndView) throws ExecutionException, InterruptedException {
+            , ModelAndView modelAndView) {
 
         System.out.println("getmovie - get mid = "+mid);
 
-        Map<String,Object> map = movieService.getMovieInfo(mid, request);
-        Movie movie = (Movie) map.get("movie");
-        String movie_score = (String) map.get("movie_score");
+        Movie movie = movieService.getMovieById(mid);
+        String movie_score = movieService.getScoreById(mid);
 
         if(movie==null){
             System.out.println("movie not found");
@@ -110,11 +107,10 @@ public class MovieController {
         return modelAndView;
     }
 
-    @RequestMapping("/moviefield")
+    @RequestMapping("/movie/moviefield")
     @PermissionAnnotation
-    public ModelAndView searchMovieByName(String fieldname
-                                          , String value
-            , HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView searchMovieByName(String fieldname, String value
+                        , HttpServletRequest request, HttpServletResponse response) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("search movie field = "+fieldname);
         System.out.println("search value = " + value);
@@ -139,7 +135,7 @@ public class MovieController {
         return modelAndView;
     }
 
-    @RequestMapping("/favor")
+    @RequestMapping("/movie/favor")
 //    @PermissionAnnotation
     public void doFavor(
             HttpServletRequest request

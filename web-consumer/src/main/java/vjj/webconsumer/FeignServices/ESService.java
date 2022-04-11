@@ -11,5 +11,5 @@ public interface ESService {
 
     @RequestMapping(value = "/es/search", method = RequestMethod.GET)
     @ResponseBody
-    public String searchES2(@RequestParam String queryCollection);
+    public String searchES2(@RequestParam("queryCollection") String queryCollection);
 }

@@ -2,6 +2,7 @@ package vjj.usermodule.controller;
 
 import VO.MovieVO;
 import models.Movie;
+import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
-import vjj.usermodule.model.User;
 import vjj.usermodule.service.MovieRecService;
 import vjj.usermodule.service.UserService;
 
@@ -62,28 +62,9 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/userlogin")
-    @ResponseBody
-    public User userlogin(@RequestBody User usr) throws UnknownHostException, ExecutionException, InterruptedException {
-        User user = userService.queryByName(usr.getUname());
-        if(usr.getPassword().equals(user.getPassword())){
-            return user;
-        }else{
-            return null;
-        }
-    }
-
-    @PostMapping("/userregister")
-    @ResponseBody
-    public User register2(@RequestBody User usr) throws UnknownHostException, ExecutionException, InterruptedException {
-        usr.setRole((usr.getRole()==null)?"user":usr.getRole());
-        User res = userService.addUser(usr);
-        return res;
-    }
-
     @PostMapping("/login")
     public ModelAndView login(@ModelAttribute User usr
-            ,HttpServletRequest request, HttpServletResponse response) throws UnknownHostException, ExecutionException, InterruptedException {
+            ,HttpServletRequest request) {
         HttpSession session = request.getSession();
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.queryByName(usr.getUname());
@@ -117,7 +98,6 @@ public class UserController {
         return modelAndView;
     }
 
-
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String update(Model model){
         model.addAttribute("user", new User());
@@ -131,33 +111,13 @@ public class UserController {
         User user = (User) session.getAttribute("tuser");
         user.setPassword(usr.getPassword());
         user.setRole((usr.getRole()==null)?"user":user.getRole());
-        userService.updatePassword(user);
+        userService.updateUser(user);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user", user);
         modelAndView.setViewName("userView");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/userupdate", method = RequestMethod.POST)
-    @ResponseBody
-    public User updateUser2(@RequestParam("usr") User usr, @RequestParam("request") HttpServletRequest request){
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("tuser");
-        user.setPassword(usr.getPassword());
-        user.setRole((usr.getRole()==null)?"user":user.getRole());
-        userService.updatePassword(user);
-        return user;
-    }
-
-    @RequestMapping(value = "/userdelete", method = RequestMethod.POST)
-    public String deleteUser2(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("tuser");
-        userService.deleteById(user.getUid());
-        session.removeAttribute("tuser");
-        System.out.println("delete successful");
-        return "delete success";
-    }
 
     @RequestMapping(value = "/user/uid", method = RequestMethod.GET)
     public User queryByUid2(Integer uid) {
@@ -169,7 +129,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/deleteUser")
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public String deleteUser(Model model
             , HttpServletResponse response, HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -206,6 +166,43 @@ public class UserController {
         modelAndView.addObject("user", user);
         modelAndView.setViewName("userView");
         return modelAndView;
+    }
+
+
+    @RequestMapping(value = "/userlogin", method = RequestMethod.POST)
+    @ResponseBody
+    public User userlogin(@RequestBody User user) {
+        return userService.queryByName(user.getUname());
+    }
+
+    @RequestMapping(value = "/userregister", method = RequestMethod.POST)
+    @ResponseBody
+    public User register2(@RequestBody User usr) {
+        usr.setRole((usr.getRole()==null)?"user":usr.getRole());
+        User res = userService.addUser(usr);
+        return res;
+    }
+
+    @RequestMapping(value = "/userupdate", method = RequestMethod.POST)
+    @ResponseBody
+    public User updateUser2(@RequestParam("usr") User usr, @RequestParam("request") HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("tuser");
+        user.setPassword(usr.getPassword());
+        user.setRole((usr.getRole()==null)?"user":user.getRole());
+        userService.updateUser(user);
+        return user;
+    }
+
+    @RequestMapping(value = "/userdelete", method = RequestMethod.POST)
+    @ResponseBody
+    public String deleteUser2(@RequestParam("request") HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("tuser");
+        userService.deleteById(user.getUid());
+        session.removeAttribute("tuser");
+        System.out.println("delete successful");
+        return "delete success";
     }
 
 }

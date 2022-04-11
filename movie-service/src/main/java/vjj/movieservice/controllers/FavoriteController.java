@@ -16,13 +16,13 @@ public class FavoriteController {
     @Autowired
     private FavoriteService favoriteService;
 
-    @RequestMapping(value = "/favor/list", method = RequestMethod.POST)
+    @RequestMapping(value = "/favor/list", method = RequestMethod.GET)
     public List<Favorite> getFavorite(@RequestParam("uid") Integer uid){
         List<Favorite> favoriteList = favoriteService.getFavoriteHistory(uid);
         return favoriteList;
     }
 
-    @RequestMapping(value = "/rank",method = RequestMethod.POST)
+    @RequestMapping(value = "/rank",method = RequestMethod.GET)
     public Set<String> getRank(){
         Set<String> rank = favoriteService.getZsetRank();
         return rank;
@@ -40,14 +40,6 @@ public class FavoriteController {
         return state;
     }
 
-//    @RequestMapping(value = "/favor/query", method = RequestMethod.POST)
-//    public boolean query(Integer mid, HttpServletRequest request){
-//        HttpSession session = request.getSession();
-//        User user = (User) session.getAttribute("user");
-//        boolean state = (favoriteService.findFavorite2Mongo(user.getUid(), mid)==null)?false:true;
-//        return state;
-//    }
-//
     @RequestMapping(value = "/favor/query", method = RequestMethod.GET)
     public boolean query(@RequestParam("uid") Integer uid, @RequestParam("mid") Integer mid){
         return (favoriteService.findFavorite2Mongo(uid, mid)==null)?false:true;

@@ -1,9 +1,11 @@
 package vjj.usermodule.service;
 
+import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vjj.usermodule.model.User;
+
+
 import vjj.usermodule.dao.UserDao;
 
 import java.util.List;
@@ -43,8 +45,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User updatePassword(User user) {
-        this.userDao.updatePassword(user);
+    public User updateUser(User user) {
+        this.userDao.updateUser(user);
         return this.queryById(user.getUid());
     }
 
@@ -56,6 +58,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String getRole(Integer uid) {
-        return userDao.getRole(uid);
+        return userDao.queryUserRole(uid);
     }
 }

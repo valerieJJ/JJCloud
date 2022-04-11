@@ -1,4 +1,4 @@
-package vjj.usermodule.model;
+package vjj.usermodule.model.exc;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

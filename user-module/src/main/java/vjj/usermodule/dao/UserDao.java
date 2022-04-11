@@ -1,16 +1,16 @@
 package vjj.usermodule.dao;
 
+import models.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import vjj.usermodule.model.User;
+
 
 import java.util.List;
 
 @Mapper
 @Repository
 public interface UserDao {
-
 
     User queryById(Integer uid);
 
@@ -24,9 +24,11 @@ public interface UserDao {
 
 //    int updateById(Integer uid);
 
-    int updatePassword(User user);
+    int updateUser(User user);
 
     int deleteById(Integer uid);
 
-    String getRole(Integer uid);
+    String queryUserRole(Integer uid);
+
+
 }

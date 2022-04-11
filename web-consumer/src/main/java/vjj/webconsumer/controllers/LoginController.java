@@ -7,6 +7,7 @@ import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,11 +45,11 @@ public class LoginController {
     private MovieService movieService;
 
     /****************************  Register  **************************/
-    @RequestMapping("/user/register")
+    @RequestMapping(value = "/user/register", method = RequestMethod.GET)
     public String register(){
         return "register";
     }
-    @RequestMapping("/user/doregister")
+    @RequestMapping(value = "/user/register", method = RequestMethod.POST)
     public String register(Model model, HttpServletRequest request) throws ExecutionException, InterruptedException {
         String name = request.getParameter("username");
         String password = request.getParameter("password");
@@ -56,7 +57,7 @@ public class LoginController {
         System.out.println("username is " + name);
         System.out.println("password is " + password);
 
-        User user = userService.register(new User(name,password,"user"));
+        User user = userService.update(new User(name,password,"user"), request);
         if(user==null){
             System.out.println("user already exists, please login");
             model.addAttribute("success",false);
@@ -74,10 +75,15 @@ public class LoginController {
         return "mainIndex";
     }
 
+    @RequestMapping(value = "/user/login", method = RequestMethod.GET)
+    public String gologin(Model model){
+        model.addAttribute("user", new User());
+        return "login";
+    }
 
-    @RequestMapping(value = "/user/dologin", method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     public String login(@ModelAttribute("user") User usr, @ModelAttribute("movie") Movie movieReq
-            , Model model, HttpServletRequest request, HttpServletResponse response) throws UnknownHostException, ExecutionException, InterruptedException {
+            , HttpServletRequest request, HttpServletResponse response) throws UnknownHostException, ExecutionException, InterruptedException {
 
         LoginUserRequest loginUserRequest = new LoginUserRequest(usr.getUname(),usr.getPassword());
 
@@ -87,10 +93,11 @@ public class LoginController {
             System.out.println("已登陆");
             return "redirect:main";
         }
-
+        System.out.println("get usr: " + usr.toString());
+        usr.setRole("user");
         User user = userService.login(usr);
 
-        if(user==null){
+        if(user==null || !usr.getPassword().equals(user.getPassword())){
             System.out.println("Account does not exist");
             return "login";
         }else {

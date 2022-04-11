@@ -2,10 +2,7 @@ package vjj.movieservice.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import requests.MovieRatingRequest;
 import vjj.movieservice.services.RatingService;
 
@@ -21,13 +18,13 @@ public class RatingController {
         return ratingService.updataMovieRating(ratingRequest);
     }
 
-    @RequestMapping(value = "/rating/score", method = RequestMethod.POST)
-    public String getMovieAverageScores(Integer mid){
+    @RequestMapping(value = "/rating/score", method = RequestMethod.GET)
+    public String getMovieAverageScores(@RequestParam("mid") Integer mid){
         return ratingService.getMovieAverageScores(mid);
     }
 
-    @RequestMapping(value = "/rating/scoreAsc", method = RequestMethod.POST)
-    public CompletableFuture<String> asygetMovieAverageScores(Integer mid){
+    @RequestMapping(value = "/rating/scoreAsc", method = RequestMethod.GET)
+    public CompletableFuture<String> asygetMovieAverageScores(@RequestParam("mid") Integer mid){
         return ratingService.asygetMovieAverageScores(mid);
     }
 }

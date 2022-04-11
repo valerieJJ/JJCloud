@@ -4,7 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="vjj.usermodule.dao.UserDao">
 
-    <resultMap type="vjj.usermodule.model.User" id="UserMap">
+<!--    <resultMap type="vjj.usermodule.model.exc.User" id="UserMap">-->
+    <resultMap type="models.User" id="UserMap">
         <result property="uid" column="uid" jdbcType="INTEGER"/>
         <result property="uname" column="uname" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
@@ -58,12 +59,12 @@
         where uname = #{uname}
     </select>
 
-    <update id="updatePassword" parameterType="vjj.usermodule.model.User">
-        update t_user set uname=#{uname},password=#{password} where uid=#{uid}
+    <update id="updateUser" parameterType="models.User">
+        update t_user set uname=#{uname},password=#{password},role=#{role} where uid=#{uid}
     </update>
 
-    <insert id="addUser" parameterType="vjj.usermodule.model.User">
-        insert into t_user (uid,uname,password) values (#{uid},#{uname},#{password});
+    <insert id="addUser" parameterType="models.User">
+        insert into t_user (uid,uname,password,role) values (#{uid},#{uname},#{password},#{role});
     </insert>
 
 

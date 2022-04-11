@@ -40,7 +40,7 @@ public class PermissionAspect {
 //        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();//获取response
 
         try {
-            if(user.getUsername().equals("michael"))
+            if(user.getUname().equals("michael"))
                 throw new Exception("no privilege");
         } catch (Exception ex) {
 //            request.setAttribute("msg", "no privilege");

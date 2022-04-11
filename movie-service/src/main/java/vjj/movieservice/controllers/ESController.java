@@ -26,7 +26,7 @@ public class ESController {
 
     @RequestMapping(value = "/es/search", method = RequestMethod.GET)
     @ResponseBody
-    public String searchES2(@RequestParam String queryCollection) throws IOException {
+    public String searchES2(@RequestParam("queryCollection") String queryCollection) throws IOException {
         String data = this.esService.search(queryCollection);
         return data;
     }

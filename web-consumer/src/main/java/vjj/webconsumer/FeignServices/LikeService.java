@@ -15,6 +15,6 @@ public interface LikeService {
 
 
     @RequestMapping(value = "/movie/likerequest", method = RequestMethod.POST)
-    public boolean updateLike(@RequestParam LikeRequest likeRequest);
+    public boolean updateLike(@RequestParam("likeRequest") LikeRequest likeRequest);
 
 }

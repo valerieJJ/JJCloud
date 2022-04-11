@@ -6,11 +6,10 @@ public class User implements Serializable {
     private Integer uid;
     private String uname;
     private String password;
+    private String role;
 
     public User() {
     }
-
-    private String role;
 
     public String getRole() {
         return role;

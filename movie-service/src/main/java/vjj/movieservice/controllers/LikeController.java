@@ -20,7 +20,7 @@ public class LikeController {
     }
 
     @RequestMapping(value = "/movie/likerequest", method = RequestMethod.POST)
-    public boolean updateLike(@RequestParam LikeRequest likeRequest) throws IllegalAccessException {
+    public boolean updateLike(@RequestParam("likeRequest") LikeRequest likeRequest) throws IllegalAccessException {
         return likeService.updateLike(likeRequest);
     }
 }
