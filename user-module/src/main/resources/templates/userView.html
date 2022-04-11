@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user-view</title>
+</head>
+<body>
+user name:
+
+<p th:text="${user.getUname()}"></p>
+
+
+
+<!--<div class="row">-->
+<!--    <div class="col-lg-4 col-sm-6 mb-4" th:each="user:${userList}">-->
+<!--        <div class="text-center">-->
+<!--            <div th:text="${user.getUid()}"></div>-->
+<!--            <div th:text="${user.getUname()}"></div>-->
+<!--            <div th:text="${user.getPassword()}"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+</body>
+</html>

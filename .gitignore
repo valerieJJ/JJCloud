@@ -1,0 +1,11 @@
+/.idea/
+.idea/
+/movie-rec/target/
+/api-commons/target/
+/movie-service/target/
+/.order-service/target/
+/web-consumer/target/
+/movie-service/.mvn/
+/order-service/.mvn/
+/web-consumer/.mvn/
+/user-module/.mvn/

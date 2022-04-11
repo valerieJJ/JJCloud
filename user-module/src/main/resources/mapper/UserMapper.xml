@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vjj.usermodule.dao.UserDao">
+
+<!--    <resultMap type="vjj.usermodule.model.exc.User" id="UserMap">-->
+    <resultMap type="models.User" id="UserMap">
+        <result property="uid" column="uid" jdbcType="INTEGER"/>
+        <result property="uname" column="uname" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="role" column="role" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryAll" resultMap="UserMap">
+        select * from t_user
+        <where>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+            <if test="uname != null and uname != ''">
+                and uname = #{uname}
+            </if>
+            <if test="password != null">
+                and password = #{password}
+            </if>
+            <if test="role != null">
+                and role = #{role}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserMap">
+        select
+          uid, uname, password, role
+        from t_user
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="queryById" resultMap="UserMap">
+        select
+          uid, uname, password, role
+        from t_user
+        where uid = #{uid}
+    </select>
+
+    <select id="queryUserRole" resultMap="UserMap">
+        select
+            role
+        from t_user
+        where uid = #{uid}
+    </select>
+
+    <select id="queryByUname" resultMap="UserMap">
+        select
+          uid, uname, password, role
+        from t_user
+        where uname = #{uname}
+    </select>
+
+    <update id="updateUser" parameterType="models.User">
+        update t_user set uname=#{uname},password=#{password},role=#{role} where uid=#{uid}
+    </update>
+
+    <insert id="addUser" parameterType="models.User">
+        insert into t_user (uid,uname,password,role) values (#{uid},#{uname},#{password},#{role});
+    </insert>
+
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from t_user where uid = #{uid}
+    </delete>
+</mapper>

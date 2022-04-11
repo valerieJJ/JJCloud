@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>account page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+
+<body class="text-center">
+
+<button class="btn btn-lg btn-primary" onclick="{ location.href='/deleteUser'}">deleteUser</button>
+
+
+<div class="container">
+    <form class="form-signin" th:action="@{/update}" th:object="${user}" method="post">
+        <label class="sr-only">new password</label>
+        <input class="form-control" type="password" value="" th:field="*{password}" placeholder="Password"/><br>
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me" color="#FFA500" > remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" >commit</button>
+    </form><br><!--servelet-->
+
+</div>
+</body>
+
+</html>
+

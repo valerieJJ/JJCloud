@@ -14,10 +14,15 @@ import java.util.List;
 import java.util.Set;
 
 import com.mongodb.util.JSON;
-import vjj.movierec.myModel.Movie;
-import vjj.movierec.myModel.User;
-import vjj.movierec.myModel.requests.LoginUserRequest;
-import vjj.movierec.myModel.requests.RegisterUserRequest;
+
+//import models.Movie;
+//import models.ex.User;
+//import requests.LoginUserRequest;
+//import requests.RegisterUserRequest;
+
+import models.*;
+import requests.*;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
