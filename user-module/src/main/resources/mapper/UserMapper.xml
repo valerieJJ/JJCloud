@@ -8,6 +8,7 @@
         <result property="uid" column="uid" jdbcType="INTEGER"/>
         <result property="uname" column="uname" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="role" column="role" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="queryAll" resultMap="UserMap">
@@ -22,31 +23,42 @@
             <if test="password != null">
                 and password = #{password}
             </if>
+            <if test="role != null">
+                and role = #{role}
+            </if>
         </where>
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="UserMap">
         select
-          uid, uname, password
+          uid, uname, password, role
         from t_user
         limit #{offset}, #{limit}
     </select>
 
     <select id="queryById" resultMap="UserMap">
         select
-          uid, uname, password
+          uid, uname, password, role
         from t_user
         where uid = #{uid}
     </select>
+
+    <select id="queryUserRole" resultMap="UserMap">
+        select
+            role
+        from t_user
+        where uid = #{uid}
+    </select>
+
     <select id="queryByUname" resultMap="UserMap">
         select
-          uid, uname, password
+          uid, uname, password, role
         from t_user
         where uname = #{uname}
     </select>
 
-    <update id="update" parameterType="vjj.usermodule.model.User">
+    <update id="updatePassword" parameterType="vjj.usermodule.model.User">
         update t_user set uname=#{uname},password=#{password} where uid=#{uid}
     </update>
 

@@ -1,4 +1,4 @@
-package vjj.movieservice.controllers;
+package vjj.movieservice.controllers.exc;
 
 import models.User;
 import org.springframework.beans.factory.annotation.Autowired;

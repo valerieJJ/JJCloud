@@ -8,20 +8,17 @@ import org.springframework.web.servlet.ModelAndView;
 import requests.HotMovieRequest;
 import requests.LatestMovieRequest;
 import vjj.webconsumer.FeignServices.RecService;
-import vjj.webconsumer.config.DiscoverServer;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 @Controller
 public class WelcomeController {
     @Autowired
     private RecService recService;
 
-    @RequestMapping("")
-    public ModelAndView welcomePage() throws ExecutionException, InterruptedException {
+    @RequestMapping("/")
+    public ModelAndView welcomePage() {
         Map<String, List<MovieVO>> map = recService.getRecommend();
         List<MovieVO> hotmovies = map.get("rechotmovieVOS");
         List<MovieVO> latestmovies = map.get("reclatestmovieVOS");

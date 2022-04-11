@@ -2,15 +2,17 @@ package vjj.webconsumer.FeignServices;
 
 import VO.MovieVO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import requests.HotMovieRequest;
+import requests.LatestMovieRequest;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 @FeignClient(name = "movie-service")
 public interface RecService {
-    @GetMapping("/rec")
+    @RequestMapping(value = "/rec", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, List<MovieVO>> getRecommend();
 }

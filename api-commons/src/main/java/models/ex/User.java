@@ -1,15 +1,20 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.userdetails.User;
-
-public class Account implements Serializable {
+@NoArgsConstructor
+@AllArgsConstructor
+@Accessors(chain = true)
+@Data
+public class User implements Serializable {
 
     @JsonIgnore
     private String _id;
@@ -27,14 +32,6 @@ public class Account implements Serializable {
     private long timestamp;
 
     private List<String> prefGenres = new ArrayList<>();
-//
-//    public Account(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-//        super(username, password, authorities);
-//    }
-//
-//    public Account(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
-//        super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
-//    }
 
     public String getUsername() {
         return username;

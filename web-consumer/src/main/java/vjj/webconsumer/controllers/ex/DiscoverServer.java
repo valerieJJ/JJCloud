@@ -1,4 +1,4 @@
-package vjj.webconsumer.config;
+package vjj.webconsumer.controllers.ex;
 
 import VO.MovieVO;
 import models.Rating;
@@ -22,7 +22,7 @@ public class DiscoverServer {
     public Map<String, Object> getMovie(
             int mid
             , Rating rating){
-        return movieService.getMovie(mid, rating);
+        return movieService.getScoreById(mid);
     }
 
     public Map<String, List<MovieVO>> getRecommend() {

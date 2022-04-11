@@ -1,51 +1,40 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Accessors(chain = true)
-@Data
 public class User implements Serializable {
-
-    @JsonIgnore
-    private String _id;
-
-    private  String nickname = "mike";
-
-    private int uid;
-
-    private String username;
-
+    private Integer uid;
+    private String uname;
     private String password;
 
-    private boolean first;
-
-    private long timestamp;
-
-    private List<String> prefGenres = new ArrayList<>();
-
-    public String getUsername() {
-        return username;
+    public User() {
     }
 
-    public void setUsername(String username) {
-        this.uid = username.hashCode();
-        this.username = username;
+    private String role;
+
+    public String getRole() {
+        return role;
     }
 
-    public String getNickname(){return nickname;}
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 
     public String getPassword() {
@@ -56,47 +45,19 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public boolean isFirst() {
-        return first;
+    public User(String uname, String password, String role) {
+        this.uname = uname;
+        this.password = password;
+        this.role = role;
     }
 
-    public void setFirst(boolean first) {
-        this.first = first;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public boolean passwordMatch(String password) {
-        return this.password.compareTo(password) == 0;
-    }
-
-    public int getUid() {
-        return uid;
-    }
-
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
-
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
-    }
-
-    public List<String> getPrefGenres() {
-        return prefGenres;
-    }
-
-    public void setPrefGenres(List<String> prefGenres) {
-        this.prefGenres = prefGenres;
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid=" + uid +
+                ", uname='" + uname + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

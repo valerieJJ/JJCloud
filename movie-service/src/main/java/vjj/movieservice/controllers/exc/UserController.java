@@ -1,4 +1,4 @@
-package vjj.movieservice.controllers;
+package vjj.movieservice.controllers.exc;
 
 import VO.MovieVO;
 import models.Favorite;

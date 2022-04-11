@@ -19,16 +19,16 @@ public class TBController {
     @Autowired
     private DiscoverServer discoverServer;
 
-    @RequestMapping(value = "/zk", method = RequestMethod.GET)
-    public ModelAndView tb(){
-        Movie movie = discoverServer.getMovie();
-        String name = movie.getName();
-        movie.setName(name + ": service from movie recommend");
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("movie", movie);
-        modelAndView.setViewName("zk");
-        return modelAndView;
-    }
+//    @RequestMapping(value = "/zk", method = RequestMethod.GET)
+//    public ModelAndView tb(){
+//        Movie movie = discoverServer.getMovie();
+//        String name = movie.getName();
+//        movie.setName(name + ": service from movie recommend");
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.addObject("movie", movie);
+//        modelAndView.setViewName("zk");
+//        return modelAndView;
+//    }
 //    public ModelAndView tb(){
 ////        TB1 tb = restTemplate.getForObject(serviceUrl+"/zkk", TB1.class);
 //        String tb1 = iTbService.queryByMid();

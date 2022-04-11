@@ -20,7 +20,9 @@ public interface UserService {
 
 //    User updateById(Integer uid);
 
-    User update(User user);
+    User updatePassword(User user);
 
     boolean deleteById(Integer uid);
+
+    String getRole(Integer uid);
 }

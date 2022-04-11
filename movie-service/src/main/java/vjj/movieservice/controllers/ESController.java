@@ -23,4 +23,10 @@ public class ESController {
         model.addAttribute("ESdata", data);
         return "/searchES";
     }
+
+    @RequestMapping("/es/search")
+    public String searchES2(String queryCollection) throws IOException {
+        String data = this.esService.search(queryCollection);
+        return data;
+    }
 }

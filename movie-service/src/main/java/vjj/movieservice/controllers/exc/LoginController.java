@@ -1,4 +1,4 @@
-package vjj.movieservice.controllers;
+package vjj.movieservice.controllers.exc;
 
 import VO.MovieVO;
 import models.Movie;
@@ -76,7 +76,7 @@ public class LoginController {
     public String login(@ModelAttribute("user") User usr, @ModelAttribute("movie") Movie movieReq
             , Model model, HttpServletRequest request, HttpServletResponse response) throws UnknownHostException, ExecutionException, InterruptedException {
 
-        LoginUserRequest loginUserRequest = new LoginUserRequest(usr.getUsername(),usr.getPassword());
+        LoginUserRequest loginUserRequest = new LoginUserRequest(usr.getUname(),usr.getPassword());
 
         HttpSession session = request.getSession();
         User userCheck = (User) session.getAttribute("user");
@@ -91,7 +91,7 @@ public class LoginController {
             System.out.println("Account does not exist");
             return "login";
         }else {
-            System.out.println("\nGet username="+user.getUsername());
+            System.out.println("\nGet username="+user.getUname());
             System.out.println("Get password="+user.getPassword());
 
             // 将登录用户信息保存到session中

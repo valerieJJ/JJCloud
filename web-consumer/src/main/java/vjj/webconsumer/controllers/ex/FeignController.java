@@ -1,16 +1,14 @@
-package vjj.webconsumer.controllers;
+package vjj.webconsumer.controllers.ex;
 
 import models.Movie;
 import models.Rating;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import vjj.webconsumer.FeignServices.MovieService;
-import vjj.webconsumer.config.DiscoverServer;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;

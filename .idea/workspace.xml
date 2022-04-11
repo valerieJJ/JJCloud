@@ -1,22 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68db6475-d0a1-4c92-b91e-c2f5ea2d6de7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/order-service/src/main/java/vjj/orderservice/MBGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order-service/src/main/java/vjj/orderservice/config/MyBatisConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order-service/src/main/java/vjj/orderservice/services/IOrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order-service/src/main/java/vjj/orderservice/services/OrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order-service/src/main/resources/MybatisGeneratorConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order-service/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order-service/src/main/resources/jdbcGen.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="68db6475-d0a1-4c92-b91e-c2f5ea2d6de7" name="Default Changelist" comment="order-service mybatis generator">
+      <change afterPath="$PROJECT_DIR$/api-commons/src/main/java/models/ex/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/FavoriteController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/LikeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/RatingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/exc/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/services/exc/PermissionAspect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/FeignServices/ESService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/FeignServices/FavoriteService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/FeignServices/LikeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/FeignServices/RatingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/FeignServices/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/controllers/MovieController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/controllers/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/services/PermissionAnnotation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/vjj/orderservice/OrderServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/vjj/orderservice/OrderServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/vjj/orderservice/config/ApplicationContextConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/vjj/orderservice/config/ApplicationContextConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/vjj/orderservice/controllers/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/vjj/orderservice/controllers/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-module/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-commons/src/main/java/models/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-commons/src/main/java/models/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-commons/src/main/java/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-commons/src/main/java/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/src/main/java/vjj/movierec/controllers/LoginIntercepter.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-rec/src/main/java/vjj/movierec/controllers/LoginIntercepter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/src/main/java/vjj/movierec/services/MongodbService.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-rec/src/main/java/vjj/movierec/services/MongodbService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/src/main/java/vjj/movierec/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-rec/src/main/java/vjj/movierec/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/neverland.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/about/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/about/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/about/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/about/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/close-icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/header-bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/logos/facebook.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/logos/google.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/logos/ibm.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/logos/microsoft.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/map-image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/msc5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/msc6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/msc7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/myIcons/mick.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/myIcons/mickey.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/myIcons/mj.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/navbar-logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/portfolio/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/portfolio/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/portfolio/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/portfolio/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/portfolio/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/portfolio/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/team/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/team/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/assets/img/team/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/css/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/images/next.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/images/previous.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/images/snext.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/images/sprevious.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/img/bootstrap-solid.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/img/smoothcriminal.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/static/img/walker.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/accountPage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/addUserPage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/jjLogin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/mainIndex.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/movieFolder.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/movieInfo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/movieList.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/movieRec.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/mscDetails.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/mscPlayer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/searchES.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/show.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/templates/whoisit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/MovieRecApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/controllers/ESController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/controllers/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/controllers/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/controllers/LoginIntercepter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/controllers/LoginIntercepter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/controllers/MongodbController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/controllers/MovieController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/controllers/MovieController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/controllers/MusicController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/controllers/RecMovieController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/controllers/TBController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/controllers/UserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/controllers/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/controllers/WelcomeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/dao/TBDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/domain/TB1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/ESService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/FavoriteService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/LikeService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/LoggerAspect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/MongodbService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/MovieService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/PermissionAspect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/PermissionAspect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/RatingService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/RecAspect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/RecService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/TBService1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/TagService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/services/imp/TBServiceImp1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/utils/Configurations.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/utils/Constant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/utils/CookieUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/utils/LoginConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/utils/SpringUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/utils/ThreadConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/utils/ZKtool.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-rec/target/classes/vjj/movierec/utils/ZookeeperConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/MovieServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/MovieServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/ESController.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/ESController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/LoginIntercepter.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/exc/LoginIntercepter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/MongodbController.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/MongodbController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/MovieController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/RecMovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/RecMovieController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/exc/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/WelcomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/controllers/WelcomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/services/MongodbService.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/services/MongodbService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/services/PermissionAnnotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/services/exc/PermissionAnnotation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/services/PermissionAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/services/PermissionAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/services/exc/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-service/src/main/java/vjj/movieservice/utils/LoginConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-module/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/controller/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/controller/TBController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/controller/TBController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/service/DiscoverServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/service/DiscoverServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/service/MovieRecService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/service/MovieRecService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/service/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/utils/Configurations.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/utils/Configurations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-module/src/main/resources/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-module/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/user-module/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-consumer/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/FeignServices/MovieService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/FeignServices/MovieService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/FeignServices/RecService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/FeignServices/RecService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/config/DiscoverServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/controllers/ex/DiscoverServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/controllers/FeignController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/controllers/ex/FeignController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/controllers/WelcomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/controllers/WelcomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/jjLogin.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,8 +169,8 @@
         <option value="FxmlFile" />
         <option value="spring-beans.schema" />
         <option value="HTML File" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -65,11 +201,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="jdk8" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/web-consumer/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/services" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3077874" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
   </component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
@@ -79,18 +215,18 @@
       <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web-consumer/src/main/java/vjj/webconsumer/services" />
       <recent name="$PROJECT_DIR$/web-consumer/src/main/resources" />
       <recent name="$PROJECT_DIR$/movie-service/src/main/java/vj/movieservice" />
       <recent name="$PROJECT_DIR$/user-module/src/main/resources/templates" />
       <recent name="$PROJECT_DIR$/user-module/src/main/resources/static/css" />
-      <recent name="$PROJECT_DIR$/movie-rec/src/main/resources/templates" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="models" />
+      <recent name="vjj.webconsumer.model" />
       <recent name="vjj.webconsumer.controllers" />
+      <recent name="vjj.usermodule" />
       <recent name="vjj.movierec.services" />
-      <recent name="vjj.usermodule.utils" />
-      <recent name="" />
-      <recent name="model" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/order-service/src/main/resources/vjj/orderservice/mapper" />
@@ -100,7 +236,7 @@
       <recent name="$PROJECT_DIR$/sql-conn/src/main/resources/templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.OrderServiceApplication">
+  <component name="RunManager" selected="Spring Boot.MovieServiceApplication">
     <configuration name="MBGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="vjj.orderservice.MBGenerator" />
       <module name="order-service" />
@@ -234,8 +370,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MBGenerator" />
         <item itemvalue="Spring Boot.MovieServiceApplication" />
+        <item itemvalue="Application.MBGenerator" />
         <item itemvalue="Spring Boot.SqlConnApplication" />
       </list>
     </recent_temporary>
@@ -258,7 +394,7 @@
       <workItem from="1649008942406" duration="8036000" />
       <workItem from="1649263400056" duration="9960000" />
       <workItem from="1649433416945" duration="679000" />
-      <workItem from="1649599597037" duration="4820000" />
+      <workItem from="1649599597037" duration="33188000" />
     </task>
     <task id="LOCAL-00001" summary="initial version">
       <created>1648969267554</created>
@@ -351,7 +487,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649583844989</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="order-service mybatis generator">
+      <created>1649608820627</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1649608820627</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -370,13 +513,14 @@
     <MESSAGE value="zk-fea: service discover, feign, zookeeper" />
     <MESSAGE value="add api-commons" />
     <MESSAGE value="add web module" />
-    <option name="LAST_COMMIT_MESSAGE" value="add web module" />
+    <MESSAGE value="order-service mybatis generator" />
+    <option name="LAST_COMMIT_MESSAGE" value="order-service mybatis generator" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="642" y="244" key="#Project_Structure" timestamp="1649577543420">
+    <state x="642" y="244" key="#Project_Structure" timestamp="1649645924518">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="642" y="244" key="#Project_Structure/0.0.1792.1120@0.0.1792.1120" timestamp="1649577543420" />
+    <state x="642" y="244" key="#Project_Structure/0.0.1792.1120@0.0.1792.1120" timestamp="1649645924518" />
     <state x="620" y="282" width="1098" height="682" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1649583595038">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -385,10 +529,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="1091" y="471" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1648660959137" />
-    <state x="1011" y="231" key="#com.intellij.ide.util.MemberChooser" timestamp="1649606951613">
+    <state x="1011" y="231" key="#com.intellij.ide.util.MemberChooser" timestamp="1649626046725">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="1011" y="231" key="#com.intellij.ide.util.MemberChooser/0.0.1792.1120@0.0.1792.1120" timestamp="1649606951613" />
+    <state x="1011" y="231" key="#com.intellij.ide.util.MemberChooser/0.0.1792.1120@0.0.1792.1120" timestamp="1649626046725" />
     <state x="794" y="214" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1649160533494">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -409,10 +553,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="948" y="344" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1649175518076" />
-    <state x="470" y="232" width="1322" height="862" key="CommitChangelistDialog2" timestamp="1649583844649">
+    <state x="401" y="258" width="1322" height="862" key="CommitChangelistDialog2" timestamp="1649650478117">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="470" y="232" width="1322" height="862" key="CommitChangelistDialog2/0.0.1792.1120@0.0.1792.1120" timestamp="1649583844649" />
+    <state x="401" y="258" width="1322" height="862" key="CommitChangelistDialog2/0.0.1792.1120@0.0.1792.1120" timestamp="1649650478117" />
     <state x="104" y="120" key="DiffContextDialog" timestamp="1649051630359">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -421,38 +565,38 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="992" y="461" width="518" height="198" key="Github.ShareDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1648969333378" />
-    <state width="1126" height="242" key="GridCell.Tab.0.bottom" timestamp="1649608201017">
+    <state width="1352" height="225" key="GridCell.Tab.0.bottom" timestamp="1649658744467">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1126" height="242" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1649608201017" />
-    <state width="1126" height="242" key="GridCell.Tab.0.center" timestamp="1649608201016">
+    <state width="1352" height="225" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1649658744467" />
+    <state width="1352" height="225" key="GridCell.Tab.0.center" timestamp="1649658744467">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1126" height="242" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1649608201016" />
-    <state width="1126" height="242" key="GridCell.Tab.0.left" timestamp="1649608201016">
+    <state width="1352" height="225" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1649658744467" />
+    <state width="1352" height="225" key="GridCell.Tab.0.left" timestamp="1649658744466">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1126" height="242" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1649608201016" />
-    <state width="1126" height="242" key="GridCell.Tab.0.right" timestamp="1649608201017">
+    <state width="1352" height="225" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1649658744466" />
+    <state width="1352" height="225" key="GridCell.Tab.0.right" timestamp="1649658744467">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1126" height="242" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1649608201017" />
-    <state width="1126" height="242" key="GridCell.Tab.1.bottom" timestamp="1649608201020">
+    <state width="1352" height="225" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1649658744467" />
+    <state width="1352" height="225" key="GridCell.Tab.1.bottom" timestamp="1649658744468">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1126" height="242" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1649608201020" />
-    <state width="1126" height="242" key="GridCell.Tab.1.center" timestamp="1649608201019">
+    <state width="1352" height="225" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1649658744468" />
+    <state width="1352" height="225" key="GridCell.Tab.1.center" timestamp="1649658744468">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1126" height="242" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1649608201019" />
-    <state width="1126" height="242" key="GridCell.Tab.1.left" timestamp="1649608201018">
+    <state width="1352" height="225" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1649658744468" />
+    <state width="1352" height="225" key="GridCell.Tab.1.left" timestamp="1649658744468">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1126" height="242" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1649608201018" />
-    <state width="1126" height="242" key="GridCell.Tab.1.right" timestamp="1649608201019">
+    <state width="1352" height="225" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1649658744468" />
+    <state width="1352" height="225" key="GridCell.Tab.1.right" timestamp="1649658744468">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1126" height="242" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1649608201019" />
+    <state width="1352" height="225" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1649658744468" />
     <state width="1126" height="242" key="GridCell.Tab.2.bottom" timestamp="1649608201021">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -481,10 +625,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="898" y="318" key="RollbackChangesDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1649577480857" />
-    <state x="550" y="264" width="953" height="732" key="SettingsEditor" timestamp="1649577301079">
+    <state x="550" y="264" width="953" height="732" key="SettingsEditor" timestamp="1649642944509">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="550" y="264" width="953" height="732" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1649577301079" />
+    <state x="550" y="264" width="953" height="732" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1649642944509" />
     <state x="732" y="297" key="Vcs.Push.Dialog.v2" timestamp="1649443570656">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -493,23 +637,22 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="711" y="440" key="git4idea.rebase.GitRebaseDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1649433847040" />
-    <state x="655" y="268" width="1084" height="682" key="new project wizard" timestamp="1649577042800">
+    <state width="600" height="428" key="javadoc.popup" timestamp="1649614895064">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="655" y="268" width="1084" height="682" key="new project wizard/0.0.1792.1120@0.0.1792.1120" timestamp="1649577042800" />
-    <state x="1009" y="362" width="670" height="676" key="search.everywhere.popup" timestamp="1649579693538">
+    <state width="600" height="428" key="javadoc.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1649614895064" />
+    <state x="655" y="268" width="1084" height="682" key="new project wizard" timestamp="1649610018210">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="1009" y="362" width="670" height="676" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1649579693538" />
+    <state x="655" y="268" width="1084" height="682" key="new project wizard/0.0.1792.1120@0.0.1792.1120" timestamp="1649610018210" />
+    <state x="1009" y="362" width="670" height="676" key="search.everywhere.popup" timestamp="1649645749685">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="1009" y="362" width="670" height="676" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1649645749685" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/user-module/src/main/java/vjj/usermodule/controller/UserController.java</url>
-          <line>82</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/order-service/src/main/java/vjj/orderservice/controllers/OrderController.java</url>
           <line>26</line>

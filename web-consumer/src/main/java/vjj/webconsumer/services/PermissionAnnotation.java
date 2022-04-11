@@ -1,4 +1,4 @@
-package vjj.movieservice.services;
+package vjj.webconsumer.services;
 
 import java.lang.annotation.*;
 

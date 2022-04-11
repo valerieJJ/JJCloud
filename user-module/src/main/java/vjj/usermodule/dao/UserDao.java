@@ -10,6 +10,8 @@ import java.util.List;
 @Mapper
 @Repository
 public interface UserDao {
+
+
     User queryById(Integer uid);
 
     User queryByUname(String uname);
@@ -22,7 +24,9 @@ public interface UserDao {
 
 //    int updateById(Integer uid);
 
-    int update(User user);
+    int updatePassword(User user);
 
     int deleteById(Integer uid);
+
+    String getRole(Integer uid);
 }

@@ -1,4 +1,4 @@
-package vjj.movieservice.services;
+package vjj.movieservice.services.exc;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -12,6 +12,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import requests.LoginUserRequest;
 import requests.RegisterUserRequest;
+import vjj.movieservice.services.MongodbService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,32 +39,18 @@ public class UserService {
     private ThreadLocal<DBCollection> collection = new ThreadLocal<>();
     private ThreadLocal<DBObject> userobj = new ThreadLocal<>();
 
-    public UserService() throws UnknownHostException {
+    public UserService() {
     }
-
-    public String getnickname(){
-        User user = new User();
-        return user.getNickname();
-    }
-
-//    public User getUserbyCookie(String userTicket, HttpServletRequest request, HttpServletResponse response){
-//        if(!StringUtils.hasText(userTicket)) return  null;
-//        User user = (User) redisTemplate.opsForValue().get("user:"+userTicket);
-//        if (user!=null){
-//            CookieUtil.setCookie(request, response, "userticket", userTicket);
-//        }
-//        return user;
-//    }
 
     public User getDefaultUser(){
         User user = new User();
-        user.setUsername("mickey");
+        user.setUname("mickey");
         return user;
     }
 
     public User getUser(RegisterUserRequest request){
         User user = new User();
-        user.setUsername(request.getUsername());
+        user.setUname(request.getUsername());
         user.setPassword(request.getPassword());
         return user;
     }
@@ -102,11 +89,11 @@ public class UserService {
         }
 
         User user = new User();
-        user.setUsername(request.getUsername());
+        user.setUname(request.getUsername());
         user.setPassword(request.getPassword());
-        user.setFirst(true);
-        user.setTimestamp(System.currentTimeMillis());
-        BasicDBObject u = new BasicDBObject("username", user.getUsername())
+//        user.setFirst(true);
+//        user.setTimestamp(System.currentTimeMillis());
+        BasicDBObject u = new BasicDBObject("username", user.getUname())
                 .append("password", user.getPassword());
         getUserCollection().insert(u);
 //      getUserCollection().insert(Document.parse(objectMapper.writeValueAsString(user)));
@@ -118,7 +105,7 @@ public class UserService {
         User user = findUserMongoDB(loginUserRequest.getUsername());
         if(null == user) {
             return null;
-        }else if(!user.passwordMatch(loginUserRequest.getPassword())){
+        }else if(!user.getPassword().equals(loginUserRequest.getPassword())){
             return null;
         }
 //        CookieUtil.setCookie(request, response, "userticket", userticket);

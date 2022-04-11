@@ -11,7 +11,4 @@ public class DiscoverServer {
     @Autowired
     private MovieRecService service;
 
-    public Movie getMovie(){
-        return service.getMovie();
-    }
 }

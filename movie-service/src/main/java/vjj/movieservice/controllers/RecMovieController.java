@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-@RestController
+//@RestController
 public class RecMovieController {
     @Autowired
     private RecService recService;
@@ -36,8 +36,6 @@ public class RecMovieController {
         modelAndView.addObject("rechotmovieVOS",hotmovies);
 
         modelAndView.addObject("reclatestmovieVOS",latestmovies);
-
-
         modelAndView.setViewName("index");
         return modelAndView;
     }

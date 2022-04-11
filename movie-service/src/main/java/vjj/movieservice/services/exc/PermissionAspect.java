@@ -1,4 +1,4 @@
-package vjj.movieservice.services;
+package vjj.movieservice.services.exc;
 
 import models.User;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 @Order(1)
 public class PermissionAspect {
     //定义一个AOP切面类时，在类上加个@Aspect注解，然后用@Component注解将该类交给SPring管理
-    @Pointcut("@annotation(vjj.movieservice.services.PermissionAnnotation)")
+    @Pointcut("@annotation(vjj.movieservice.services.exc.PermissionAnnotation)")
     private void permissionCheck(){
     }
 
@@ -40,7 +40,7 @@ public class PermissionAspect {
 //        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();//获取response
 
         try {
-            if(user.getUsername().equals("michael"))
+            if(user.getUname().equals("michael"))
                 throw new Exception("no privilege");
         } catch (Exception ex) {
 //            request.setAttribute("msg", "no privilege");

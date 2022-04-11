@@ -7,6 +7,16 @@ public class User implements Serializable {
     private String uname;
     private String password;
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    private String role;
+
     public Integer getUid() {
         return uid;
     }
@@ -37,6 +47,7 @@ public class User implements Serializable {
                 "uid=" + uid +
                 ", uname='" + uname + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

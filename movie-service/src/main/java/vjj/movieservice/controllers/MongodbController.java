@@ -1,6 +1,7 @@
 package vjj.movieservice.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +10,7 @@ import vjj.movieservice.services.MongodbService;
 
 import java.net.UnknownHostException;
 
-@RestController
+@Controller
 public class MongodbController {
     @Autowired
     private MongodbService mongoservice;

@@ -6,7 +6,6 @@ import models.Movie;
 import models.Rating;
 import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,7 +13,6 @@ import requests.MovieRatingRequest;
 import vjj.movieservice.services.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -22,13 +20,10 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-@RequestMapping("/movie")
 @RestController
 public class MovieController {
     @Autowired
     private MovieService movieService;
-    @Autowired
-    private UserService userService;
     @Autowired
     private RatingService ratingService;
     @Autowired
@@ -37,10 +32,26 @@ public class MovieController {
     private FavoriteService favoriteService;
 
 
-    @RequestMapping(value = "/mymovie")
-    public Map<String, Object> getMovieById(
-            int mid
-            , Rating rating) throws ExecutionException, InterruptedException {
+    @RequestMapping(value = "/movie/list", method = RequestMethod.POST)
+    public List<MovieVO> getMovieVOS(@RequestBody List<Integer> mids){
+        return movieService.getMovieVOS(mids);
+    }
+
+    @RequestMapping(value = "/movie/types", method = RequestMethod.POST)
+    public HashMap<String, String> getMovieTypes(){
+        return movieService.getMovieTypes();
+    }
+
+//    @RequestMapping(value = "/movie/query", method = RequestMethod.POST)
+    @PostMapping("/movie/query")
+    public Movie getMovieById(@RequestParam("mid") int mid) throws ExecutionException, InterruptedException {
+        System.out.println("getmovie - get mid = "+mid);
+        Movie movie = movieService.findByMID(mid);
+        return movie;
+    }
+
+    @RequestMapping(value = "/movie/score", method = RequestMethod.POST)
+    public Map<String, Object> getScoreById(int mid) throws ExecutionException, InterruptedException {
         System.out.println("getmovie - get mid = "+mid);
         CompletableFuture<Movie> asy_movie = movieService.asyfindByMID(mid);
         CompletableFuture<String> asy_movie_score = ratingService.asygetMovieAverageScores(mid);
@@ -60,9 +71,8 @@ public class MovieController {
         }
         return map;
     }
-
-    @RequestMapping("rate")
-    public String rateMovie(
+    @RequestMapping(value = "/movie/rate", method = RequestMethod.POST)
+    public Model rateMovie(
             @ModelAttribute("rating") Rating ratingReq,
             Model model,
             HttpServletRequest request
@@ -78,42 +88,34 @@ public class MovieController {
         if(done){
             model.addAttribute("rating_message", "rating successful");
             System.out.println("rating updated successful!");
-            System.out.println("user "+user.getUsername());
+            System.out.println("user "+user.getUname());
             System.out.println("mid = "+mid);
             System.out.println("score = "+score);
         }else {
             model.addAttribute("rating_message", "rating failed");
         }
-
         Movie movie = (Movie)session.getAttribute("movie");
-
         String movie_score = ratingService.getMovieAverageScores(mid);
         model.addAttribute("movie", movie);
-
         model.addAttribute("movie_score", movie_score);
-        return "movieInfo";
+        return model;
     }
 
-    @RequestMapping("/moviefolder")
-    public ModelAndView goMovieFolder(String type) throws UnknownHostException {
+    @RequestMapping(value = "/movie/moviefolder", method = RequestMethod.POST)
+    public Map<String, Object> goMovieFolder2(String type) throws UnknownHostException {
         ModelAndView modelAndView = new ModelAndView();
-
         System.out.println("~~~ go to "+ type);
-//        String field="language";
         String field = "genres";
         List<Movie> data = movieService.getCollectionData(field, type);
-        modelAndView.addObject("movies", data);
-        modelAndView.addObject("folder_name", type);
-        modelAndView.setViewName("movieFolder");
-        return modelAndView;
+        Map<String, Object> map = new HashMap<>();
+        map.put("movies", data);
+        map.put("folder_name", type);
+//        modelAndView.setViewName("movieFolder");
+        return map;
     }
 
-    @RequestMapping("/movieid")
-    public ModelAndView getMovieInfo(
-            @ModelAttribute("mid") int mid
-            ,@ModelAttribute("rating") Rating rating
-            , HttpServletRequest request
-            , ModelAndView modelAndView) throws ExecutionException, InterruptedException {
+    @RequestMapping(value = "/movie/movieid", method = RequestMethod.POST)
+    public Map<String, Object> getMovieInfo(int mid, HttpServletRequest request) throws ExecutionException, InterruptedException {
         System.out.println("getmovie - get mid = "+mid);
         CompletableFuture<Movie> asy_movie = movieService.asyfindByMID(mid);
         CompletableFuture<String> asy_movie_score = ratingService.asygetMovieAverageScores(mid);
@@ -121,32 +123,31 @@ public class MovieController {
         Movie movie = asy_movie.get();
         String movie_score = asy_movie_score.get();
 
+        Map<String, Object> res = new HashMap<>();
+        res.put("movie", null);
+        res.put("movie_score", 0);
+
         if(movie==null){
             System.out.println("movie not found");
-            modelAndView.setViewName("show");
         }else {
-            modelAndView.addObject("movie",movie);
-            modelAndView.addObject("movie_score", movie_score);
+            res.put("movie",movie);
+            res.put("movie_score", movie_score);
         }
-        modelAndView.addObject("rating_message", "how do u like it?");
+        res.put("rating_message", "how do u like it?");
         HttpSession session = request.getSession();
         session.setAttribute("movie", movie);
 
         User user = (User) session.getAttribute("user");
         boolean state = favoriteService.favoriteExistMongo(user.getUid(), mid);
-        modelAndView.addObject("state", state);
-
+        res.put("state", state);
         System.out.println("get state2: "+ state);
-        modelAndView.setViewName("movieInfo");
-        return modelAndView;
+        return res;
     }
 
-    @RequestMapping("/moviefield")
-    @PermissionAnnotation
-    public ModelAndView searchMovieByName(String fieldname
-                                          , String value
-            , HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ModelAndView modelAndView = new ModelAndView();
+    @RequestMapping(value = "/movie/moviefield", method = RequestMethod.POST)
+//    @PermissionAnnotation
+    public Map<String, Object> searchMovieByField(String fieldname, String value
+                            , HttpServletRequest request) throws IOException {
         System.out.println("search movie field = "+fieldname);
         System.out.println("search value = " + value);
         String es_collection = "movietags";
@@ -154,15 +155,13 @@ public class MovieController {
         String[] includes = {"mid", "name", "genres", "language", "descri", "issue", "shoot", "directors", "timelong"};
 
         HashMap<List<MovieVO>, String> map;
-        map = esService.fullQuery("match", es_collection,
-                fieldname, value, excludes, includes, 6);
-
+        map = esService.fullQuery("match", es_collection, fieldname, value, excludes, includes, 6);
         Set<List<MovieVO>> set = map.keySet();
         List<MovieVO> movieVOList = new ArrayList<>();
+        Map<String, Object> res = new HashMap<>();
         for(List<MovieVO> list: set){
             for(MovieVO movieVO: list){
                 Integer mid = movieVO.getMid();
-//                MovieVO movieVO = new MovieVO();
                 Movie mov = movieService.findByMID(mid);
                 String movie_score = ratingService.getMovieAverageScores(mid);
                 movieVO.setScore(movie_score);
@@ -176,26 +175,21 @@ public class MovieController {
 
         if(movieVOList==null){
             System.out.println("movie not found");
-            modelAndView.setViewName("show");
         }else {
             System.out.println("goto moviename = "+ movieVOList.get(0));
-            modelAndView.addObject("movieVOList",movieVOList);
-            modelAndView.addObject("number",movieVOList.size());
-            modelAndView.addObject("fieldname",fieldname);
-            modelAndView.addObject("value", value);
-            modelAndView.setViewName("movieList");
-//            modelAndView.setViewName("movieInfo");
+            res.put("movieVOList",movieVOList);
+            res.put("number",movieVOList.size());
+            res.put("fieldname",fieldname);
+            res.put("value", value);
             HttpSession session = request.getSession();
             session.setAttribute("movieVOList", movieVOList);
         }
-        return modelAndView;
+        return res;
     }
 
 
-    @RequestMapping("/favor")
-    public void doFavor(
-            HttpServletRequest request
-            , Model model) {
+    @RequestMapping(value = "/movie/favor", method = RequestMethod.POST)
+    public boolean doFavor(HttpServletRequest request, Model model) {
         int mid = (int) request.getAttribute("mid");
         System.out.println("getmovie - get mid = "+mid);
 
@@ -210,8 +204,8 @@ public class MovieController {
         User user = (User) session.getAttribute("user");
         boolean state = favoriteService.favoriteExistMongo(user.getUid(), mid);
         model.addAttribute("state", state);
-
         System.out.println("get state2: "+ state);
+        return  state;
     }
 
 

@@ -43,8 +43,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User update(User user) {
-        this.userDao.update(user);
+    public User updatePassword(User user) {
+        this.userDao.updatePassword(user);
         return this.queryById(user.getUid());
     }
 
@@ -52,5 +52,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public boolean deleteById(Integer uid) {
         return this.userDao.deleteById(uid)>0;
+    }
+
+    @Override
+    public String getRole(Integer uid) {
+        return userDao.getRole(uid);
     }
 }
