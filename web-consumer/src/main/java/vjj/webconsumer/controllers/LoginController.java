@@ -7,19 +7,16 @@ import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 import requests.HotMovieRequest;
 import requests.LatestMovieRequest;
 import requests.LoginUserRequest;
-import requests.RegisterUserRequest;
-import vjj.webconsumer.FeignServices.FavoriteService;
-import vjj.webconsumer.FeignServices.MovieService;
+import vjj.webconsumer.FeignServices.FeignFavorService;
+import vjj.webconsumer.FeignServices.FeignMovieService;
 import vjj.webconsumer.FeignServices.RecService;
-import vjj.webconsumer.FeignServices.UserService;
+import vjj.webconsumer.FeignServices.FeignUserService;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +25,6 @@ import javax.servlet.http.HttpSession;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 
@@ -36,19 +32,16 @@ import java.util.concurrent.ExecutionException;
 public class LoginController {
 
     @Autowired
-    private UserService userService;
+    private FeignUserService feignUserService;
     @Autowired
     private RecService recService;
-    @Autowired
-    private FavoriteService favoriteService;
-    @Autowired
-    private MovieService movieService;
 
     /****************************  Register  **************************/
     @RequestMapping(value = "/user/register", method = RequestMethod.GET)
     public String register(){
         return "register";
     }
+
     @RequestMapping(value = "/user/register", method = RequestMethod.POST)
     public String register(Model model, HttpServletRequest request) throws ExecutionException, InterruptedException {
         String name = request.getParameter("username");
@@ -57,7 +50,7 @@ public class LoginController {
         System.out.println("username is " + name);
         System.out.println("password is " + password);
 
-        User user = userService.update(new User(name,password,"user"), request);
+        User user = feignUserService.update(new User(name,password,"user"), request);
         if(user==null){
             System.out.println("user already exists, please login");
             model.addAttribute("success",false);
@@ -95,7 +88,7 @@ public class LoginController {
         }
         System.out.println("get usr: " + usr.toString());
         usr.setRole("user");
-        User user = userService.login(usr);
+        User user = feignUserService.login(usr);
 
         if(user==null || !usr.getPassword().equals(user.getPassword())){
             System.out.println("Account does not exist");
@@ -118,6 +111,7 @@ public class LoginController {
 //            return "mainIndex";
         }
     }
+
     /****************************  Log out  **************************/
     @RequestMapping("/user/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
@@ -137,7 +131,9 @@ public class LoginController {
         }else{
             System.out.println("failed to logout");
         }
-        return "index";
+        return "redirect:/";
+//        return "index";
+//        return "";
     }
 
     public void getRecs2(Model model) throws ExecutionException, InterruptedException {

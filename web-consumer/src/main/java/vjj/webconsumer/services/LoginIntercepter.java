@@ -1,11 +1,12 @@
-package vjj.movieservice.controllers.exc;
+package vjj.webconsumer.services;
 
 import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
-import vjj.movieservice.services.UserService;
+import vjj.webconsumer.FeignServices.FeignUserService;
+
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +16,7 @@ import javax.servlet.http.HttpSession;
 @Component
 public class LoginIntercepter implements HandlerInterceptor {
     @Autowired
-    private UserService userService;
-//    @Autowired
-//    private UserServiceImpl userService;
+    private FeignUserService userService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -25,7 +24,7 @@ public class LoginIntercepter implements HandlerInterceptor {
         Cookie[] cookies = request.getCookies();
         // 如果没有cookie，重定向到登录洁面
         if(null==cookies){
-            response.sendRedirect(request.getContextPath() + "/user/dologin");
+            response.sendRedirect(request.getContextPath() + "/user/login");
             return false;
         }
         String userticket = null;
@@ -38,7 +37,7 @@ public class LoginIntercepter implements HandlerInterceptor {
 
         // 如果cookie里面没有用户登录信息，重定向到登陆界面
         if(!StringUtils.hasText(userticket)){
-            response.sendRedirect(request.getContextPath() + "/user/dologin");
+            response.sendRedirect(request.getContextPath() + "/user/login");
             return  false;
         }
 
@@ -46,7 +45,7 @@ public class LoginIntercepter implements HandlerInterceptor {
         HttpSession session = request.getSession();
         Object object = (User) session.getAttribute("user");
         if(object==null){
-            User user = userService.findByUsername(userticket);
+            User user = userService.queryByName(userticket);
             session.setAttribute("user", user);
         }
         return true;

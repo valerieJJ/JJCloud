@@ -1,6 +1,8 @@
 package requests;
 
-public class NewRecommendationRequest {
+import java.io.Serializable;
+
+public class NewRecommendationRequest implements Serializable {
 
     private int sum;
 

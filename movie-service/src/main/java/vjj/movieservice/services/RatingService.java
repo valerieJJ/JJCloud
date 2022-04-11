@@ -89,7 +89,6 @@ public class RatingService {
         return String.format("%.2f", avgScore).toString();
     }
 
-
     @Async
     public CompletableFuture<String> asygetMovieAverageScores(int mid){
         System.out.println("Async finding movie average score by mID...");

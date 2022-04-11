@@ -1,6 +1,8 @@
 package requests;
 
-public class LoginUserRequest {
+import java.io.Serializable;
+
+public class LoginUserRequest implements Serializable {
 
     private String username;
 

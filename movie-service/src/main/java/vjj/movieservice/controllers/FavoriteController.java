@@ -29,13 +29,15 @@ public class FavoriteController {
     }
 
     @RequestMapping(value = "/favor/update", method = RequestMethod.POST)
-    public boolean updateFavor(@RequestBody FavoriteRequest favoriteRequest) throws IllegalAccessException {
+    public boolean updateFavor(@RequestParam("uid") Integer uid, @RequestParam("mid") Integer mid) throws IllegalAccessException {
+        FavoriteRequest favoriteRequest = new FavoriteRequest(uid, mid);
         boolean state = favoriteService.updateFavorite(favoriteRequest);
         return state;
     }
 
     @RequestMapping(value = "/favor/delete", method = RequestMethod.POST)
-    public boolean deleteFavor(@RequestBody FavoriteRequest favoriteRequest) throws IllegalAccessException {
+    public boolean deleteFavor(@RequestParam("uid") Integer uid, @RequestParam("mid") Integer mid) throws IllegalAccessException {
+        FavoriteRequest favoriteRequest = new FavoriteRequest(uid, mid);
         boolean state = favoriteService.dropFavorite(favoriteRequest);
         return state;
     }

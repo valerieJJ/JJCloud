@@ -1,6 +1,8 @@
 package requests;
 
-public class TagRequest {
+import java.io.Serializable;
+
+public class TagRequest implements Serializable {
     private int uid;
     private int mid;
     private String tag;

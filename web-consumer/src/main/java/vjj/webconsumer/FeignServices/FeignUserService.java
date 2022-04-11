@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 @FeignClient("user-module")
-public interface UserService {
+public interface FeignUserService {
 
     @RequestMapping(value = "/userlogin", method = RequestMethod.POST)
     public User login(@RequestBody User user);
@@ -23,5 +23,7 @@ public interface UserService {
     @RequestMapping(value = "/userdelete", method = RequestMethod.POST)
     public String delete(@RequestParam("request") HttpServletRequest request);
 
+    @RequestMapping(value = "/user/uname", method = RequestMethod.GET)
+    public User queryByName(String uname);
 }
 

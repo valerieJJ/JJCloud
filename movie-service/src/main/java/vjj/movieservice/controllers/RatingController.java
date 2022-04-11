@@ -14,8 +14,14 @@ public class RatingController {
     private RatingService ratingService;
 
     @RequestMapping(value = "/rating/update", method = RequestMethod.POST)
-    public boolean updataMovieRating(@RequestBody MovieRatingRequest ratingRequest) throws JsonProcessingException, IllegalAccessException {
-        return ratingService.updataMovieRating(ratingRequest);
+    public String updataMovieRating(@RequestParam("uid") Integer uid
+            , @RequestParam("mid") Integer mid
+            , @RequestParam("score") Double score ) throws JsonProcessingException, IllegalAccessException {
+
+        MovieRatingRequest ratingRequest = new MovieRatingRequest(uid, mid, score);
+        boolean done = ratingService.updataMovieRating(ratingRequest);
+        String movie_score = ratingService.getMovieAverageScores(mid);
+        return movie_score;
     }
 
     @RequestMapping(value = "/rating/score", method = RequestMethod.GET)

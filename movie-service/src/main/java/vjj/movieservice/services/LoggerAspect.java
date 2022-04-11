@@ -27,7 +27,7 @@ public class LoggerAspect {
     // 切入点：待增强的方法是RecMovieController类中的所有方法
     // @Pointcut("@args(valerie.mycontrollers.MovieController)")
     // execution（<修饰符模式>？<返回类型模式><方法名模式>（<参数模式>）<异常模式>？）除了返回类型模式，方法名模式和参数模式外，其它项都是可选的。
-    @Pointcut("execution(public * vjj.movieservice.controllers.RecMovieController.*(..))")
+    @Pointcut("execution(public * vjj.movieservice.controllers.FavoriteController.*(..))")
     public void point(){
         System.out.println("\nHere comes the pointCut...");
     }
@@ -62,7 +62,7 @@ public class LoggerAspect {
 //        List<MovieVO> latestmovies = hotMovieVOS.get();
 
         // 记录下请求内容
-        logger.info("do favor aspect\nURL : " + request.getRequestURL().toString());
+        logger.info("\ndo favor aspect\nURL : " + request.getRequestURL().toString());
 //        System.out.println();
 //        System.out.println("MyAspect : " + hotmovies.size());
     }
@@ -73,7 +73,7 @@ public class LoggerAspect {
     @AfterReturning(returning = "ret", pointcut = "point()")
     public void doAfterReturning(Object ret) throws Throwable {
         // 处理完请求，返回内容
-        System.out.println("aop : login to explore more");
+        System.out.println("log done");
     }
 
 

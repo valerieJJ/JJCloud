@@ -1,6 +1,8 @@
 package requests;
 
-public class LatestMovieRequest {
+import java.io.Serializable;
+
+public class LatestMovieRequest implements Serializable {
     private int sum;
 
     public int getSum() {

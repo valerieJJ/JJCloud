@@ -4,10 +4,12 @@ import com.mongodb.MongoClient;
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.web.client.RestTemplate;
 import redis.clients.jedis.Jedis;
 
 import java.io.FileInputStream;
@@ -28,6 +30,12 @@ public class Configurations {
     private String esHost = "localhost";
     private int esPort =  9300;
     private String redisHost;
+
+    @Bean
+    @LoadBalanced
+    RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
 
     public Configurations() throws IOException {
         Properties properties = new Properties();

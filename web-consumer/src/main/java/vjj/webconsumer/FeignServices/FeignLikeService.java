@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import requests.LikeRequest;
 
 @FeignClient("movie-service")
-public interface LikeService {
+public interface FeignLikeService {
 
     @RequestMapping(value = "/movie/like", method = RequestMethod.GET)
     public boolean queryLike(@RequestParam("mid")Integer mid

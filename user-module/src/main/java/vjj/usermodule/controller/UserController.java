@@ -128,6 +128,14 @@ public class UserController {
         return user;
     }
 
+    @RequestMapping(value = "/user/uname", method = RequestMethod.GET)
+    public User queryByName(String uname) {
+        User user = userService.queryByName(uname);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("userView");
+        return user;
+    }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public String deleteUser(Model model

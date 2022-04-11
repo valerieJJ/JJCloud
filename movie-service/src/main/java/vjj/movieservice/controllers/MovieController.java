@@ -55,6 +55,7 @@ public class MovieController {
         CompletableFuture<Movie> asy_movie = movieService.asyfindByMID(mid);
         CompletableFuture<String> asy_movie_score = ratingService.asygetMovieAverageScores(mid);
         CompletableFuture.allOf(asy_movie,asy_movie_score).join();
+        System.out.println("completableFuture get all");
         Movie movie = asy_movie.get();
         String movie_score = asy_movie_score.get();
 
@@ -71,35 +72,17 @@ public class MovieController {
         return movie_score;
     }
 
-    @RequestMapping(value = "/movie/rate", method = RequestMethod.POST)
-    public Model rateMovie(
-            @RequestParam("rating") Rating ratingReq,
-            @RequestParam("model") Model model,
-            @RequestParam("request") HttpServletRequest request
-    ) throws JsonProcessingException, IllegalAccessException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-
-        int mid = ratingReq.getMid();
-        double score = ratingReq.getScore();
-
-        MovieRatingRequest ratingRequest = new MovieRatingRequest(user.getUid(), mid, score);
-        boolean done = ratingService.updataMovieRating(ratingRequest);
-        if(done){
-            model.addAttribute("rating_message", "rating successful");
-            System.out.println("rating updated successful!");
-            System.out.println("user "+user.getUname());
-            System.out.println("mid = "+mid);
-            System.out.println("score = "+score);
-        }else {
-            model.addAttribute("rating_message", "rating failed");
-        }
-        Movie movie = (Movie)session.getAttribute("movie");
-        String movie_score = ratingService.getMovieAverageScores(mid);
-        model.addAttribute("movie", movie);
-        model.addAttribute("movie_score", movie_score);
-        return model;
-    }
+//    @RequestMapping(value = "/movie/rate", method = RequestMethod.POST)
+//    public String rateMovie(
+//            @RequestParam("uid") Integer uid
+//            , @RequestParam("mid") Integer mid
+//            , @RequestParam("score") Double score
+//    ) throws JsonProcessingException, IllegalAccessException {
+//        MovieRatingRequest ratingRequest = new MovieRatingRequest(uid, mid, score);
+//        boolean done = ratingService.updataMovieRating(ratingRequest);
+//        String movie_score = ratingService.getMovieAverageScores(mid);
+//        return movie_score;
+//    }
 
     @RequestMapping(value = "/movie/folder", method = RequestMethod.GET)
     public List<Movie> goMovieFolder2(@RequestParam("type") String type) throws UnknownHostException {

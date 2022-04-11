@@ -15,60 +15,58 @@ import requests.MovieRatingRequest;
 
 import vjj.webconsumer.FeignServices.*;
 import vjj.webconsumer.services.PermissionAnnotation;
+//import vjj.webconsumer.services.PermissionAnnotation;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 
 @Controller
 public class MovieController {
     @Autowired
-    private MovieService movieService;
+    private FeignMovieService feignMovieService;
     @Autowired
-    private UserService userService;
+    private FeignUserService feignUserService;
     @Autowired
-    private RatingService ratingService;
+    private FeignRatingService feignRatingService;
     @Autowired
-    private ESService esService;
-    @Autowired
-    private FavoriteService favoriteService;
+    private FeignFavorService feignFavorService;
 
     @RequestMapping("/movie/rate")
+    @PermissionAnnotation
     public String rateMovie(
             @ModelAttribute("rating") Rating ratingReq,
             Model model,
-            HttpServletRequest request
-    ) throws JsonProcessingException, IllegalAccessException {
+            HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-
         int mid = ratingReq.getMid();
         double score = ratingReq.getScore();
-
-        MovieRatingRequest ratingRequest = new MovieRatingRequest(user.getUid(), mid, score);
-        boolean done = ratingService.updataMovieRating(ratingRequest);
-        if(done){
-            model.addAttribute("rating_message", "rating successful");
-        }else {
+//        MovieRatingRequest ratingRequest = new MovieRatingRequest(user.getUid(), mid, score);
+        String new_score = feignRatingService.updateMovieRating(user.getUid(), mid, score);
+        if(new_score==null||new_score.equals("") ){
             model.addAttribute("rating_message", "rating failed");
+        }else {
+            model.addAttribute("rating_message", "rating successful");
+            System.out.println("rating updated successful!");
+            System.out.println("user "+user.getUname());
+            System.out.println("mid = "+mid);
+            System.out.println("score = "+score);
         }
-
-        Movie movie = (Movie)session.getAttribute("movie");
-        String movie_score = movieService.getScoreById(movie.getMid());
+        Movie movie = (Movie) session.getAttribute("movie");
         model.addAttribute("movie", movie);
-        model.addAttribute("movie_score", movie_score);
+        model.addAttribute("movie_score", new_score);
         return "movieInfo";
     }
 
     @RequestMapping("/movie/moviefolder")
+    @PermissionAnnotation
     public ModelAndView goMovieFolder(String type) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("~~~ go to "+ type);
-        List<Movie> data = movieService.goMovieFolder(type);
+        List<Movie> data = feignMovieService.goMovieFolder(type);
         modelAndView.addObject("movies", data);
         modelAndView.addObject("folder_name", type);
         modelAndView.setViewName("movieFolder");
@@ -84,8 +82,8 @@ public class MovieController {
 
         System.out.println("getmovie - get mid = "+mid);
 
-        Movie movie = movieService.getMovieById(mid);
-        String movie_score = movieService.getScoreById(mid);
+        Movie movie = feignMovieService.getMovieById(mid);
+        String movie_score = feignMovieService.getScoreById(mid);
 
         if(movie==null){
             System.out.println("movie not found");
@@ -99,7 +97,7 @@ public class MovieController {
         session.setAttribute("movie", movie);
 
         User user = (User) session.getAttribute("user");
-        boolean state = favoriteService.query(user.getUid(), mid);
+        boolean state = feignFavorService.query(user.getUid(), mid);
         modelAndView.addObject("state", state);
 
         System.out.println("get state2: "+ state);
@@ -114,7 +112,7 @@ public class MovieController {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("search movie field = "+fieldname);
         System.out.println("search value = " + value);
-        Map<String, Object> res = movieService.searchMovieByField(fieldname, value, request);
+        Map<String, Object> res = feignMovieService.searchMovieByField(fieldname, value, request);
 
         List<MovieVO> movieVOList = (List<MovieVO>) res.get("movieVOList");
         int num = (int) res.get("number");
@@ -136,14 +134,14 @@ public class MovieController {
     }
 
     @RequestMapping("/movie/favor")
-//    @PermissionAnnotation
+    @PermissionAnnotation
     public void doFavor(
             HttpServletRequest request
             , Model model) {
         int mid = (int) request.getAttribute("mid");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        boolean state = favoriteService.query(user.getUid(), mid);
+        boolean state = feignFavorService.query(user.getUid(), mid);
         model.addAttribute("state", state);
         System.out.println("get state2: "+ state);
     }

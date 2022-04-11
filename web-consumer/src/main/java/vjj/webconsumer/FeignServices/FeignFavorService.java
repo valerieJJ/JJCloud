@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 @FeignClient("movie-service")
-public interface FavoriteService {
+public interface FeignFavorService {
     @RequestMapping(value = "/favor/list", method = RequestMethod.GET)
     public List<Favorite> getFavoriteHistory(@RequestParam("uid") Integer uid);
 
@@ -18,10 +18,10 @@ public interface FavoriteService {
     public Set<String> getRank();
 
     @RequestMapping(value = "/favor/update", method = RequestMethod.POST)
-    public boolean updateFavor(@RequestBody FavoriteRequest favoriteRequest);
+    public boolean updateFavor(@RequestParam("uid") Integer uid, @RequestParam("mid") Integer mid);
 
     @RequestMapping(value = "/favor/delete", method = RequestMethod.POST)
-    public boolean deleteFavor(@RequestBody FavoriteRequest favoriteRequest);
+    public boolean deleteFavor(@RequestParam("uid") Integer uid, @RequestParam("mid") Integer mid);
 
     @RequestMapping(value = "/favor/query", method = RequestMethod.GET)
     public boolean query(@RequestParam("uid") Integer uid, @RequestParam("mid") Integer mid);
