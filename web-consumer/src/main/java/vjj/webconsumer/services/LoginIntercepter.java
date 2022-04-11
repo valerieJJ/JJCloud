@@ -28,22 +28,26 @@ public class LoginIntercepter implements HandlerInterceptor {
             return false;
         }
         String userticket = null;
+
         for(Cookie item: cookies){
             if(item.getName().equals("userticket")){
                 userticket = item.getValue();
                 break;
             }
         }
-
-        // 如果cookie里面没有用户登录信息，重定向到登陆界面
-        if(!StringUtils.hasText(userticket)){
-            response.sendRedirect(request.getContextPath() + "/user/login");
-            return  false;
-        }
+        System.out.println("login-intercepter: userticket is " + userticket);
 
         // 获取登录后保存在session中的用户信息，如果为null，则说明session已过期
         HttpSession session = request.getSession();
         Object object = (User) session.getAttribute("user");
+
+        // 如果cookie里面没有用户登录信息，重定向到登陆界面
+        if (userticket==null&&object==null){
+            System.out.println("login-intercepter: redirect to login");
+            response.sendRedirect(request.getContextPath() + "/user/login");
+            return false;
+        }
+
         if(object==null){
             User user = userService.queryByName(userticket);
             session.setAttribute("user", user);
