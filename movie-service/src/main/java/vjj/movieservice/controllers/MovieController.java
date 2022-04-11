@@ -32,25 +32,25 @@ public class MovieController {
     private FavoriteService favoriteService;
 
 
-    @RequestMapping(value = "/movie/list", method = RequestMethod.POST)
-    public List<MovieVO> getMovieVOS(@RequestBody List<Integer> mids){
+    @RequestMapping(value = "/movie/list", method = RequestMethod.GET)
+    public List<MovieVO> getMovieVOS(@RequestParam("mids") List<Integer> mids){
         return movieService.getMovieVOS(mids);
     }
 
-    @RequestMapping(value = "/movie/types", method = RequestMethod.POST)
+    @RequestMapping(value = "/movie/types", method = RequestMethod.GET)
     public HashMap<String, String> getMovieTypes(){
         return movieService.getMovieTypes();
     }
 
 //    @RequestMapping(value = "/movie/query", method = RequestMethod.POST)
-    @PostMapping("/movie/query")
+    @GetMapping("/movie/query")
     public Movie getMovieById(@RequestParam("mid") int mid) throws ExecutionException, InterruptedException {
         System.out.println("getmovie - get mid = "+mid);
         Movie movie = movieService.findByMID(mid);
         return movie;
     }
 
-    @RequestMapping(value = "/movie/score", method = RequestMethod.POST)
+    @RequestMapping(value = "/movie/score", method = RequestMethod.GET)
     public Map<String, Object> getScoreById(int mid) throws ExecutionException, InterruptedException {
         System.out.println("getmovie - get mid = "+mid);
         CompletableFuture<Movie> asy_movie = movieService.asyfindByMID(mid);
@@ -71,6 +71,7 @@ public class MovieController {
         }
         return map;
     }
+
     @RequestMapping(value = "/movie/rate", method = RequestMethod.POST)
     public Model rateMovie(
             @ModelAttribute("rating") Rating ratingReq,
@@ -101,7 +102,7 @@ public class MovieController {
         return model;
     }
 
-    @RequestMapping(value = "/movie/moviefolder", method = RequestMethod.POST)
+    @RequestMapping(value = "/movie/folder", method = RequestMethod.GET)
     public Map<String, Object> goMovieFolder2(String type) throws UnknownHostException {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("~~~ go to "+ type);
@@ -114,7 +115,7 @@ public class MovieController {
         return map;
     }
 
-    @RequestMapping(value = "/movie/movieid", method = RequestMethod.POST)
+    @RequestMapping(value = "/movie/movieid", method = RequestMethod.GET)
     public Map<String, Object> getMovieInfo(int mid, HttpServletRequest request) throws ExecutionException, InterruptedException {
         System.out.println("getmovie - get mid = "+mid);
         CompletableFuture<Movie> asy_movie = movieService.asyfindByMID(mid);
@@ -144,7 +145,7 @@ public class MovieController {
         return res;
     }
 
-    @RequestMapping(value = "/movie/moviefield", method = RequestMethod.POST)
+    @RequestMapping(value = "/movie/moviefield", method = RequestMethod.GET)
 //    @PermissionAnnotation
     public Map<String, Object> searchMovieByField(String fieldname, String value
                             , HttpServletRequest request) throws IOException {
@@ -188,7 +189,7 @@ public class MovieController {
     }
 
 
-    @RequestMapping(value = "/movie/favor", method = RequestMethod.POST)
+    @RequestMapping(value = "/movie/favor", method = RequestMethod.GET)
     public boolean doFavor(HttpServletRequest request, Model model) {
         int mid = (int) request.getAttribute("mid");
         System.out.println("getmovie - get mid = "+mid);

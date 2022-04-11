@@ -12,7 +12,7 @@ import java.util.concurrent.CompletableFuture;
 
 @FeignClient(name = "movie-service")
 public interface RecService {
-    @RequestMapping(value = "/rec", method = RequestMethod.POST)
-    @ResponseBody
+
+    @RequestMapping(value = "/rec", method = RequestMethod.GET)
     public Map<String, List<MovieVO>> getRecommend();
 }

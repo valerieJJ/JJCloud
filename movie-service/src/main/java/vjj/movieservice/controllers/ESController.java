@@ -1,22 +1,22 @@
 package vjj.movieservice.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vjj.movieservice.services.ESService;
 
 
 import java.io.IOException;
 
-@RestController
+@Controller
 public class ESController {
     @Autowired
     private ESService esService;
 
     public ESController() {}
 
-    @RequestMapping("/searchES")
+    @RequestMapping(value = "/essearch", method = RequestMethod.GET)
     public String searchES(Model model) throws IOException {
         String queryCollection = "movietags";
         String data = this.esService.search(queryCollection);
@@ -24,8 +24,9 @@ public class ESController {
         return "/searchES";
     }
 
-    @RequestMapping("/es/search")
-    public String searchES2(String queryCollection) throws IOException {
+    @RequestMapping(value = "/es/search", method = RequestMethod.GET)
+    @ResponseBody
+    public String searchES2(@RequestParam String queryCollection) throws IOException {
         String data = this.esService.search(queryCollection);
         return data;
     }

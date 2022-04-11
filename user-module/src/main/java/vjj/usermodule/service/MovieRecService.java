@@ -18,12 +18,12 @@ public interface MovieRecService {
     @RequestMapping(path = "/rec", method = RequestMethod.GET)
     public Map<String, List<MovieVO>> welcomePage();
 
-    @RequestMapping(value = "/movie/query", method = RequestMethod.POST)
+    @RequestMapping(value = "/movie/query", method = RequestMethod.GET)
     public Movie getMovieById(@RequestParam("mid") int mid);
 
-    @RequestMapping(value = "/movie/types", method = RequestMethod.POST)
+    @RequestMapping(value = "/movie/types", method = RequestMethod.GET)
     public HashMap<String, String> getMovieTypes();
 
-    @RequestMapping(value = "/movie/list", method = RequestMethod.POST)
-    public List<MovieVO> getMovieVOS(@RequestBody List<Integer> mids);
+    @RequestMapping(value = "/movie/list", method = RequestMethod.GET)
+    public List<MovieVO> getMovieVOS(@RequestParam("mids") List<Integer> mids);
 }
