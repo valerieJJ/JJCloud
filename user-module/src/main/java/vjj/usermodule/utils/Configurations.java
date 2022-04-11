@@ -1,9 +1,5 @@
 package vjj.usermodule.utils;
 
-import com.mongodb.MongoClient;
-import org.apache.http.HttpHost;
-import org.elasticsearch.client.RestClient;
-import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -30,22 +26,9 @@ public class Configurations {
         Properties properties = new Properties();
         Resource resource = new ClassPathResource("application.properties");
         properties.load(new FileInputStream(resource.getFile()));
-        this.redisHost = properties.getProperty("redis.host");
+        this.redisHost = properties.getProperty("spring.redis.host");
     }
 
-    @Bean(name = "mongoClient")
-    public MongoClient getMongoClient() throws UnknownHostException {
-        MongoClient mongoClient = new MongoClient( mongoHost , mongoPort );
-        return mongoClient;
-    }
-
-    @Bean(name = "esClient")
-    public RestHighLevelClient getESClient() throws UnknownHostException {
-        RestHighLevelClient esClient = new RestHighLevelClient(
-                RestClient.builder(new HttpHost("localhost",9200,"http"))
-        );
-        return esClient;
-    }
 
     @Bean(name = "jedis")
     public Jedis getRedisClient(){

@@ -1,6 +1,8 @@
 package requests;
 
-public class FavoriteRequest {
+import java.io.Serializable;
+
+public class FavoriteRequest implements Serializable {
 
     private int uid;
     private int mid;

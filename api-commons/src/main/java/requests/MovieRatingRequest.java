@@ -1,6 +1,8 @@
 package requests;
 
-public class MovieRatingRequest {
+import java.io.Serializable;
+
+public class MovieRatingRequest implements Serializable {
 
     private int uid;
 
@@ -41,5 +43,14 @@ public class MovieRatingRequest {
 
     public void setScore(Double score) {
         this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return "MovieRatingRequest{" +
+                "uid=" + uid +
+                ", mid=" + mid +
+                ", score=" + score +
+                '}';
     }
 }

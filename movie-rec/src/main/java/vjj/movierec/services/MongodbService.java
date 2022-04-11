@@ -7,7 +7,7 @@ import com.mongodb.*;
 import com.mongodb.util.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-//import models.User;
+//import models.ex.User;
 //import vjj.movierec.domain.Movie;
 import models.*;
 

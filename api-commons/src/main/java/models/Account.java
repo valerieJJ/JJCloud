@@ -9,7 +9,7 @@ import java.util.List;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.userdetails.User;
 
-public class Account extends User implements Serializable {
+public class Account implements Serializable {
 
     @JsonIgnore
     private String _id;

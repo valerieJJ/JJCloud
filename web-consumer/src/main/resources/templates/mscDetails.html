@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>mscDetails</title>
+</head>
+<body>
+<!--<p th:if="${msg != null && msg.trim() != ''}" th:text="${msg}"/>-->
+
+<form >
+
+    <input th:text="${mscID}" placeholder="musicID" />
+<!--    <input th:name="openkey" placeholder="openkey"/>-->
+    <button type="submit">goto</button>
+
+    </form>
+<a class="portfolio-link" data-bs-toggle="modal"  th:href="'https://y.qq.com/n/ryqq/songDetail/'+${mscID}">gggootoo</a>
+
+
+</body>
+</html>

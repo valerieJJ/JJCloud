@@ -13,51 +13,22 @@ import vjj.usermodule.service.MovieRecService;
 
 @RestController
 public class TBController {
-    @Value("${server.port}")
-    private String serverPort;
-
-    private String serviceUrl = "http://movie-recommend-service";
-
-//    @Bean
-//    public RestTemplate restTemplate(RestTemplateBuilder builder){
-//        return builder.build();
-//    }
-    @Autowired
-    private RestTemplate restTemplate;
-
     @Autowired
     private MovieRecService movieRecService;
-
-//    @RequestMapping("/zk")
-//    public ModelAndView tb(){
-//
-////        System.out.println(serviceUrl()+"\n");
-//
-//        TB1 tb1 = restTemplate.getForObject(serviceUrl+"/zkk", TB1.class);
-//        ModelAndView modelAndView = new ModelAndView();
-//        Movie movie = new Movie();
-//        movie.set_id(tb1.getMid()+"");
-////        movie.setName(tb1.getMname());
-//        movie.setName(tb1.getMname()+", service with zookeeper："+UUID.randomUUID().toString());
-//        modelAndView.addObject("movie", movie);
-//        modelAndView.setViewName("index");
-//        System.out.println(movie.getName());
-//        return modelAndView;
-//    }
 
     @Autowired
     private DiscoverServer discoverServer;
 
-    @RequestMapping(value = "/zk", method = RequestMethod.GET)
-    public ModelAndView tb(){
-        Movie movie = discoverServer.getMovie();
-        String name = movie.getName();
-        movie.setName(name + ": service from movie recommend");
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("movie", movie);
-        modelAndView.setViewName("zk");
-        return modelAndView;
-    }
+//    @RequestMapping(value = "/zk", method = RequestMethod.GET)
+//    public ModelAndView tb(){
+//        Movie movie = discoverServer.getMovie();
+//        String name = movie.getName();
+//        movie.setName(name + ": service from movie recommend");
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.addObject("movie", movie);
+//        modelAndView.setViewName("zk");
+//        return modelAndView;
+//    }
 //    public ModelAndView tb(){
 ////        TB1 tb = restTemplate.getForObject(serviceUrl+"/zkk", TB1.class);
 //        String tb1 = iTbService.queryByMid();

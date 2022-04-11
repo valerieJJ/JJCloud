@@ -1,6 +1,8 @@
 package requests;
 
-public class LikeRequest {
+import java.io.Serializable;
+
+public class LikeRequest implements Serializable {
 
     private int uid;
     private int mid;

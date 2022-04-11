@@ -1,6 +1,8 @@
 package requests;
 
-public class HotMovieRequest {
+import java.io.Serializable;
+
+public class HotMovieRequest implements Serializable {
     private int sum;
 
     public int getSum() {
