@@ -28,9 +28,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="api-commons" />
-    <orderEntry type="module" module-name="user-module" />
-    <orderEntry type="module" module-name="movie-service" />
-    <orderEntry type="module" module-name="api-commons" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.10.1" level="project" />
     <orderEntry type="module" module-name="user-module" />
     <orderEntry type="library" name="Maven: org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.1" level="project" />

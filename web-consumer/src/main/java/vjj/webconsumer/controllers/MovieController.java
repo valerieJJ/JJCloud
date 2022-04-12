@@ -35,7 +35,6 @@ public class MovieController {
     private FeignFavorService feignFavorService;
 
     @RequestMapping("/movie/rate")
-    @PermissionAnnotation
     public String rateMovie(
             @ModelAttribute("rating") Rating ratingReq,
             Model model,
