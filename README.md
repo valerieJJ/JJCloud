@@ -1,6 +1,12 @@
 # Latest updates can be seen on `dev` branch. 
 
-springcloud + zookeeper + ...
+springcloud，springboot，
+
+zookeepeer，
+
+mongodb，mybatis，redis，elasticsearch
+
+thymleaf
 
 This is an project that is currently under development.
 
