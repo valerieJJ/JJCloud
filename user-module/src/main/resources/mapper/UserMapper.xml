@@ -63,6 +63,10 @@
         update t_user set uname=#{uname},password=#{password},role=#{role} where uid=#{uid}
     </update>
 
+    <update id=" updatePassword" parameterType="models.User">
+        update t_user set password=#{password} where uid=#{uid}
+    </update>
+
     <insert id="addUser" parameterType="models.User">
         insert into t_user (uid,uname,password,role) values (#{uid},#{uname},#{password},#{role});
     </insert>

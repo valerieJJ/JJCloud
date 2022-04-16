@@ -50,7 +50,7 @@ public class LoginController {
         System.out.println("username is " + name);
         System.out.println("password is " + password);
 
-        User user = feignUserService.update(new User(name,password,"user"), request);
+        User user = feignUserService.update(new User(name,password,"user"));
         if(user==null){
             System.out.println("user already exists, please login");
             model.addAttribute("success",false);
@@ -69,7 +69,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/user/login", method = RequestMethod.GET)
-    public String gologin(Model model){
+    public String login(Model model){
         model.addAttribute("user", new User());
         return "login";
     }

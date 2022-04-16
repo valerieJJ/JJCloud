@@ -67,7 +67,9 @@ public class RecService {
         DBCollection movieCollection = mongodbService.getCollection("Movie");
 //        BasicDBObject shoot =
 //        DBCursor cursor = movieCollection.find().sort(Sorts.orderBy(Sorts.descending("times"))).limit(sum);
-        DBCursor cursor = movieCollection.find().sort(new BasicDBObject("shoot", -1));//.sort(Sorts.descending("yearmonth")).limit(sum)
+        DBCursor cursor = movieCollection.find()
+                                .sort(new BasicDBObject("shoot", -1));
+                                //.sort(Sorts.descending("yearmonth")).limit(sum)
         List<MovieVO> movieVOS = new ArrayList<>();
         while (cursor.hasNext() && sum != 0) {
             MovieDTO movieDTO = DBObject2MovieDTO(cursor.next());

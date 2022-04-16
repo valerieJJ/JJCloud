@@ -23,6 +23,8 @@ public interface UserService {
 
     User updateUser(User user);
 
+    User updatePwd(Integer uid, String password);
+
     boolean deleteById(Integer uid);
 
     String getRole(Integer uid);

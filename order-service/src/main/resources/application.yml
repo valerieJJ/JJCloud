@@ -2,6 +2,8 @@ server:
   port: 8006
 
 spring:
+  application:
+    name: order-service
   datasource:
     url: jdbc:mysql://localhost:3306/moviedb
     username: root

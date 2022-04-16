@@ -51,6 +51,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User updatePwd(Integer uid, String password) {
+        this.userDao.updatePassword(uid, password);
+        return this.queryById(uid);
+    }
+
+    @Override
     @Transactional
     public boolean deleteById(Integer uid) {
         return this.userDao.deleteById(uid)>0;

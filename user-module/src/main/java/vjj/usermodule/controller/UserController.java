@@ -23,7 +23,7 @@ import java.net.UnknownHostException;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
-@Controller
+@RestController
 public class UserController {
     @Autowired
     private UserService userService;
@@ -138,8 +138,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-    public String deleteUser(Model model
-            , HttpServletResponse response, HttpServletRequest request){
+    public String deleteUser(HttpServletRequest request){
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("tuser");
         userService.deleteById(user.getUid());
@@ -192,25 +191,26 @@ public class UserController {
     }
 
     @RequestMapping(value = "/userupdate", method = RequestMethod.POST)
-    @ResponseBody
-    public User updateUser2(@RequestParam("usr") User usr, @RequestParam("request") HttpServletRequest request){
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("tuser");
-        user.setPassword(usr.getPassword());
-        user.setRole((usr.getRole()==null)?"user":user.getRole());
+    public User updateUser2(@RequestBody User user){
+//        HttpSession session = request.getSession();
+//        User user = (User) session.getAttribute("tuser");
+//        user.setPassword(usr.getPassword());
+//        user.setRole((usr.getRole()==null)?"user":user.getRole());
+        System.out.println("user-module: "+user.toString()+"\n\n");
         userService.updateUser(user);
-        return user;
+        return userService.queryById(user.getUid());
+    }
+
+    @RequestMapping(value = "/updatepassword", method = RequestMethod.POST)
+    public User updatePwd(@RequestParam("uid") Integer uid, @RequestParam("password") String password){
+        return userService.updatePwd(uid, password);
     }
 
     @RequestMapping(value = "/userdelete", method = RequestMethod.POST)
-    @ResponseBody
-    public String deleteUser2(@RequestParam("request") HttpServletRequest request){
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("tuser");
-        userService.deleteById(user.getUid());
-        session.removeAttribute("tuser");
+    public String deleteUser2(@RequestParam("uid") Integer uid){
+        userService.deleteById(uid);
         System.out.println("delete successful");
-        return "delete success";
+        return "deleted successful";
     }
 
 }

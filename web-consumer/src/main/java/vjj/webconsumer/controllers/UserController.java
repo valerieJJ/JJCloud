@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import requests.FavoriteRequest;
 import requests.LikeRequest;
 import vjj.webconsumer.FeignServices.*;
+import vjj.webconsumer.services.IdentityAnnotation;
+import vjj.webconsumer.services.PermissionAnnotation;
 //import vjj.webconsumer.services.PermissionAnnotation;
 
 import javax.servlet.ServletException;
@@ -56,11 +58,12 @@ public class UserController {
         }
     }
 
-    @RequestMapping("/user/account")
+    @RequestMapping(value = "/user/account", method = RequestMethod.GET)
     public String accountPage(Model model, HttpServletRequest request){//
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         System.out.println("account action: sessionID" + session.getId());
+
         HashMap<String, String> movie_types = feignMovieService.getMovieTypes();
         if(user==null){
             System.out.println("please log in first");
@@ -84,7 +87,7 @@ public class UserController {
     }
 
     @RequestMapping("/user/main")
-    public ModelAndView goIndex(@ModelAttribute("movie") Movie movie, HttpServletRequest request) throws ExecutionException, InterruptedException {
+    public ModelAndView goIndex(@ModelAttribute("movie") Movie movie, HttpServletRequest request) {
         HttpSession session = request.getSession();
         ModelAndView mv = new ModelAndView();
         User user = (User) session.getAttribute("user");
@@ -160,6 +163,61 @@ public class UserController {
 
         String toUrl = "/movie/movieid?mid="+mid;
         request.getRequestDispatcher(toUrl).forward(request, response);
+    }
+
+    @RequestMapping(value = "/user/update", method = RequestMethod.GET)
+    public String update(){
+        return "userSetting";
+    }
+
+    @RequestMapping(value = "/user/updatePassword", method = RequestMethod.POST)
+    @PermissionAnnotation
+    public String updatePassword(@RequestParam("password") String password, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        user.setPassword(password);
+        user.setRole("user");
+        System.out.println("web: "+user.toString()+"\n\n");
+//        feignUserService.updatePwd(user.getUid(), password);
+        feignUserService.update(user);
+        System.out.println("password reseted ");
+
+        session.setAttribute("user", user);
+
+        List<Favorite> favoriteList = feignFavorService.getFavoriteHistory(user.getUid());
+        List<Integer> mids = new ArrayList<>();
+        for (Favorite favorite: favoriteList){
+            Integer mid = favorite.getMid();
+            mids.add(mid);
+        }
+        List<MovieVO> favoriteMovieVOS = feignMovieService.getMovieVOS(mids);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("favoriteMovieVOS", favoriteMovieVOS);
+
+        return  "redirect:/user/account";
+    }
+
+    @RequestMapping(value = "/user/updateName", method = RequestMethod.POST)
+    public String updateName(@RequestParam("name") String name, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        user.setPassword(name);
+        feignUserService.update(user);
+        session.setAttribute("user", user);
+        return  "redirect:/user/account";
+    }
+
+    @RequestMapping(value = "/user/delete")
+    @IdentityAnnotation
+    @PermissionAnnotation
+    public String delete(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        System.out.println("delete uid="+user.getUid());
+
+        feignUserService.delete(user.getUid());
+        session.removeAttribute("user");
+        return "redirect:/";
     }
 
     public void getRecs(ModelAndView mv) throws ExecutionException, InterruptedException {

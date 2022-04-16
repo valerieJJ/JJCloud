@@ -26,6 +26,10 @@ public interface UserDao {
 
     int updateUser(User user);
 
+    int updatePassword(@Param("uid") Integer uid, @Param("password") String password);
+
+    int updateUname(String uname);
+
     int deleteById(Integer uid);
 
     String queryUserRole(Integer uid);

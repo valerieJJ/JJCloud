@@ -1,7 +1,6 @@
 package vjj.webconsumer.controllers;
 
 import VO.MovieVO;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import models.Movie;
 import models.Rating;
 import models.User;
@@ -10,10 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import requests.MovieRatingRequest;
 
 import vjj.webconsumer.FeignServices.*;
+import vjj.webconsumer.services.IdentityAnnotation;
 import vjj.webconsumer.services.PermissionAnnotation;
 //import vjj.webconsumer.services.PermissionAnnotation;
 
@@ -35,10 +35,12 @@ public class MovieController {
     private FeignFavorService feignFavorService;
 
     @RequestMapping("/movie/rate")
+    @IdentityAnnotation
     public String rateMovie(
-            @ModelAttribute("rating") Rating ratingReq,
+            HttpServletRequest request,
+            HttpServletResponse response,
             Model model,
-            HttpServletRequest request) {
+            @ModelAttribute("rating") Rating ratingReq) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         int mid = ratingReq.getMid();
@@ -60,9 +62,28 @@ public class MovieController {
         return "movieInfo";
     }
 
-    @RequestMapping("/movie/moviefolder")
+    @RequestMapping("/movie/favor")
+    @IdentityAnnotation
     @PermissionAnnotation
-    public ModelAndView goMovieFolder(String type) {
+    public void doFavor(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Model model) {
+        int mid = (int) request.getAttribute("mid");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        boolean state = feignFavorService.query(user.getUid(), mid);
+        model.addAttribute("state", state);
+        System.out.println("get state2: "+ state);
+    }
+
+    @RequestMapping("/movie/moviefolder")
+    @IdentityAnnotation
+    @PermissionAnnotation
+    public ModelAndView goMovieFolder(
+            HttpServletRequest request
+            ,HttpServletResponse response
+            ,@RequestParam("type") String type) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("~~~ go to "+ type);
         List<Movie> data = feignMovieService.goMovieFolder(type);
@@ -105,9 +126,8 @@ public class MovieController {
     }
 
     @RequestMapping("/movie/moviefield")
-    @PermissionAnnotation
     public ModelAndView searchMovieByName(String fieldname, String value
-                        , HttpServletRequest request, HttpServletResponse response) {
+                        , HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("search movie field = "+fieldname);
         System.out.println("search value = " + value);
@@ -132,18 +152,6 @@ public class MovieController {
         return modelAndView;
     }
 
-    @RequestMapping("/movie/favor")
-    @PermissionAnnotation
-    public void doFavor(
-            HttpServletRequest request
-            , Model model) {
-        int mid = (int) request.getAttribute("mid");
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        boolean state = feignFavorService.query(user.getUid(), mid);
-        model.addAttribute("state", state);
-        System.out.println("get state2: "+ state);
-    }
 
 
 }

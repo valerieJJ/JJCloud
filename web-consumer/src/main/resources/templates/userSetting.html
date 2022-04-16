@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>account page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+
+<body class="text-center">
+
+<div class="container">
+<div class="col-md-4">
+    <form class="form-signin" th:action="@{/user/updatePassword}" method="post">
+        <h3 class="section-heading text-uppercase">modify password</h3>
+
+        <input class="form-control" th:type="password" th:id="password" th:name="password" placeholder="password"/><br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" >commit</button>
+<!--        <td><input th:type="button" onclick="addUser()" th:value="确定" /></td>-->
+    </form>
+    <br>
+</div>
+
+<div class="col-md-4">
+    <form class="form-signin" th:action="@{/user/updateName}" method="post">
+        <h3 class="section-heading text-uppercase">modify username</h3>
+        <input class="form-control" th:type="text" th:id="name" th:name="name" placeholder="password"/><br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" >commit</button>
+    </form>
+</div>
+    <h2></h2>
+
+    <button class="btn btn-lg btn-primary" onclick="{ location.href='/user/delete'}">deleteUser</button>
+
+</div>
+<!--    <form class="form-signin" th:action="@{/user/updatePassword}" th:object="${user}" method="post">-->
+<!--        <label class="sr-only">new password</label>-->
+<!--        <input class="form-control" type="password" value="" th:field="*{password}" placeholder="Password"/><br>-->
+
+<!--        <div class="checkbox mb-3">-->
+<!--            <label>-->
+<!--                <input type="checkbox" value="remember-me" color="#FFA500" > remember me-->
+<!--            </label>-->
+<!--        </div>-->
+<!--        <button class="btn btn-lg btn-primary btn-block" type="submit" >commit</button>-->
+<!--    </form><br>&lt;!&ndash;servelet&ndash;&gt;-->
+
+</body>
+
+</html>
+
