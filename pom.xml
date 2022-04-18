@@ -42,7 +42,9 @@
     <druid.version>1.1.16</druid.version>
     <mybatis.spring.boot.version>2.1.1</mybatis.spring.boot.version>
 
+    <jackson.core.version>2.10.0</jackson.core.version>
     <elasticsearch.version>7.8.0</elasticsearch.version>
+    <springcloud.version>Hoxton.SR1</springcloud.version>
   </properties>
 
 
@@ -65,7 +67,7 @@
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
-        <version>Hoxton.SR1</version>
+        <version>${springcloud.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -169,6 +171,22 @@
             <artifactId>slf4j-api</artifactId>
           </exclusion>
         </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson.core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackson.core.version}</version>
       </dependency>
 
     </dependencies>

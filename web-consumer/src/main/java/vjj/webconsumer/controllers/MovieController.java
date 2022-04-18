@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import vjj.webconsumer.FeignServices.*;
+import vjj.webconsumer.services.HistoryService;
 import vjj.webconsumer.services.IdentityAnnotation;
 import vjj.webconsumer.services.PermissionAnnotation;
 //import vjj.webconsumer.services.PermissionAnnotation;
@@ -33,6 +34,9 @@ public class MovieController {
     private FeignRatingService feignRatingService;
     @Autowired
     private FeignFavorService feignFavorService;
+
+    @Autowired
+    private HistoryService historyService;
 
     @RequestMapping("/movie/rate")
     @IdentityAnnotation
@@ -114,9 +118,11 @@ public class MovieController {
         }
         modelAndView.addObject("rating_message", "how do u like it?");
         HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        historyService.addHistory(user.getUid(), mid);
         session.setAttribute("movie", movie);
 
-        User user = (User) session.getAttribute("user");
         boolean state = feignFavorService.query(user.getUid(), mid);
         modelAndView.addObject("state", state);
 

@@ -17,6 +17,7 @@ import vjj.webconsumer.FeignServices.FeignFavorService;
 import vjj.webconsumer.FeignServices.FeignMovieService;
 import vjj.webconsumer.FeignServices.RecService;
 import vjj.webconsumer.FeignServices.FeignUserService;
+import vjj.webconsumer.services.HistoryService;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,8 @@ public class LoginController {
     private FeignUserService feignUserService;
     @Autowired
     private RecService recService;
+    @Autowired
+    private HistoryService historyService;
 
     /****************************  Register  **************************/
     @RequestMapping(value = "/user/register", method = RequestMethod.GET)
@@ -122,10 +125,13 @@ public class LoginController {
         response.addCookie(userticket);
 
         HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        historyService.clear(user.getUid());
         // 将用户信息从session中删除
         session.removeAttribute("user");
 
         Object info = session.getAttribute("user");
+
         if(info==null){
             System.out.println("logout success");
         }else{

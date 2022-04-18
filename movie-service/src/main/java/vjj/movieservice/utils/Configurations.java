@@ -24,12 +24,12 @@ import java.util.Properties;
 @Configuration
 public class Configurations {
 
-    private String mongoHost = "localhost";
-    private int mongoPort = 27017;
-    private String esClusterName = "jj-cluster";
-    private String esHost = "localhost";
-    private int esPort =  9300;
-    private String redisHost;
+    private final String mongoHost = "localhost";
+    private final int mongoPort = 27017;
+    private final String esClusterName = "jj-cluster";
+    private final String esHost = "localhost";
+    private final int esPort =  9300;
+    private final String redisHost;
 
     @Bean
     @LoadBalanced
@@ -40,7 +40,8 @@ public class Configurations {
     public Configurations() throws IOException {
         Properties properties = new Properties();
         Resource resource = new ClassPathResource("application.properties");
-        properties.load(new FileInputStream(resource.getFile()));
+//        properties.load(new FileInputStream(resource.getFile()));
+        properties.load(resource.getInputStream());
         this.redisHost = properties.getProperty("spring.redis.host");
     }
 

@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import requests.FavoriteRequest;
 import requests.LikeRequest;
 import vjj.webconsumer.FeignServices.*;
+import vjj.webconsumer.services.HistoryService;
 import vjj.webconsumer.services.IdentityAnnotation;
 import vjj.webconsumer.services.PermissionAnnotation;
 //import vjj.webconsumer.services.PermissionAnnotation;
@@ -39,6 +40,8 @@ public class UserController {
     private FeignFavorService feignFavorService;
     @Autowired
     private FeignLikeService feignLikeService;
+    @Autowired
+    private HistoryService historyService;
 
     public UserController() throws UnknownHostException {
     }
@@ -84,6 +87,30 @@ public class UserController {
         model.addAttribute("favoriteMovieVOS", favoriteMovieVOS);
 
         return "accountPage";
+    }
+
+    @RequestMapping(value = "/user/history", method = RequestMethod.GET)
+    public ModelAndView getHistory(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        List<Integer> history = historyService.getHistory(user.getUid());
+        ModelAndView modelAndView = new ModelAndView();
+
+        if(history==null){
+            System.out.println("no history");
+            modelAndView.addObject("movieVOList",null);
+            modelAndView.addObject("fieldname","no history");
+            modelAndView.addObject("value", "total: 0");
+            modelAndView.addObject("number",0);
+        }else {
+            List<MovieVO> movieVOList = feignMovieService.getMovieVOS(history);
+            modelAndView.addObject("movieVOList",movieVOList);
+            modelAndView.addObject("number",movieVOList.size());
+            modelAndView.addObject("fieldname","Browsing History");
+            modelAndView.addObject("value", "total: "+history.size());
+        }
+        modelAndView.setViewName("movieList");
+        return modelAndView;
     }
 
     @RequestMapping("/user/main")
