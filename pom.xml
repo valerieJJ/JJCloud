@@ -10,7 +10,7 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>movie-rec</module>
+<!--    <module>movie-rec</module>-->
     <module>user-module</module>
     <module>api-commons</module>
       <module>order-service</module>
@@ -203,11 +203,11 @@
     </plugins>
   </build>
 
-  <reporting>
-    <plugins>
-      <plugin>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </reporting>
+<!--  <reporting>-->
+<!--    <plugins>-->
+<!--      <plugin>-->
+<!--        <artifactId>maven-project-info-reports-plugin</artifactId>-->
+<!--      </plugin>-->
+<!--    </plugins>-->
+<!--  </reporting>-->
 </project>
