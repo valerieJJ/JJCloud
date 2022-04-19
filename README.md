@@ -1,12 +1,26 @@
 # Latest updates can be seen on `dev` branch. 
 
-springcloud，springboot，
+### functions
 
-zookeepeer，
+- Welcome page: movie display + Login registration entrance (jump to login page)
+- after login -> mainpage, menu bar includes: movie search + popular movies(number of ratings) + high rating movie list(zset) + user home page
+- Movie search: (drop-down list) select search method (name, actor, language, year), input search information, then jump to page to show the result list
+- Click movie picture => enter **movie detail page**, operation: **score** the movie, **add to my favourite** folder
+- User home page: user information modification, logout, my favorites, user browsing history (redis-list)
 
-mongodb，mybatis，redis，elasticsearch
 
-thymleaf
+### techniques
+- springcloud, zookeeper, feign+hystrix
+- redis、mongo、mysql，elasticsearch
+- thymleaf
+- maven，git
+
+### services
+- api-common
+- movie-service: zk1(mongodb,elasticsearch)，CompletableFuture异步查表+分数计算，
+- user-module: zk2(mysql) CRUD
+- web-consumer：zk3(redis)，Feign调用服务，hystrix服务熔断，Intercepter登陆拦截，aop(身份、权限验证)
+- order-module is currently under development
 
 This is an project that is currently under development.
 
