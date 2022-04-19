@@ -18,6 +18,7 @@ import vjj.webconsumer.services.IdentityAnnotation;
 import vjj.webconsumer.services.PermissionAnnotation;
 //import vjj.webconsumer.services.PermissionAnnotation;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,17 +27,19 @@ import java.util.*;
 
 @Controller
 public class MovieController {
-    @Autowired
-    private FeignMovieService feignMovieService;
-    @Autowired
-    private FeignUserService feignUserService;
+//    @Autowired
+//    private IFeignMovieService IFeignMovieService;
     @Autowired
     private FeignRatingService feignRatingService;
     @Autowired
     private FeignFavorService feignFavorService;
-
     @Autowired
     private HistoryService historyService;
+
+    @Resource
+    private IFeignMovieService iFeignMovieService;
+    @Resource
+    private IFeignRecService iFeignRecService;
 
     @RequestMapping("/movie/rate")
     @IdentityAnnotation
@@ -90,7 +93,7 @@ public class MovieController {
             ,@RequestParam("type") String type) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("~~~ go to "+ type);
-        List<Movie> data = feignMovieService.goMovieFolder(type);
+        List<Movie> data = iFeignMovieService.goMovieFolder(type);
         modelAndView.addObject("movies", data);
         modelAndView.addObject("folder_name", type);
         modelAndView.setViewName("movieFolder");
@@ -106,8 +109,8 @@ public class MovieController {
 
         System.out.println("getmovie - get mid = "+mid);
 
-        Movie movie = feignMovieService.getMovieById(mid);
-        String movie_score = feignMovieService.getScoreById(mid);
+        Movie movie = iFeignMovieService.getMovieById(mid);
+        String movie_score = iFeignMovieService.getScoreById(mid);
 
         if(movie==null){
             System.out.println("movie not found");
@@ -137,7 +140,7 @@ public class MovieController {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("search movie field = "+fieldname);
         System.out.println("search value = " + value);
-        Map<String, Object> res = feignMovieService.searchMovieByField(fieldname, value, request);
+        Map<String, Object> res = iFeignMovieService.searchMovieByField(fieldname, value, request);
 
         List<MovieVO> movieVOList = (List<MovieVO>) res.get("movieVOList");
         int num = (int) res.get("number");

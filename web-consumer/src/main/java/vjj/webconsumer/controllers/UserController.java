@@ -1,22 +1,25 @@
 package vjj.webconsumer.controllers;
 
 import VO.MovieVO;
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import models.Favorite;
 import models.Movie;
 import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import requests.FavoriteRequest;
 import requests.LikeRequest;
+
 import vjj.webconsumer.FeignServices.*;
 import vjj.webconsumer.services.HistoryService;
 import vjj.webconsumer.services.IdentityAnnotation;
 import vjj.webconsumer.services.PermissionAnnotation;
 //import vjj.webconsumer.services.PermissionAnnotation;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,20 +31,22 @@ import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 @Controller
+@DefaultProperties(defaultFallback = "Payment_defaultFallbackMethod")
 public class UserController {
 
     @Autowired
     private FeignUserService feignUserService;
-    @Autowired
-    private FeignMovieService feignMovieService;
-    @Autowired
-    private RecService recService;
     @Autowired
     private FeignFavorService feignFavorService;
     @Autowired
     private FeignLikeService feignLikeService;
     @Autowired
     private HistoryService historyService;
+
+    @Resource
+    private IFeignMovieService iFeignMovieService;
+    @Resource
+    private IFeignRecService iFeignRecService;
 
     public UserController() throws UnknownHostException {
     }
@@ -67,7 +72,7 @@ public class UserController {
         User user = (User) session.getAttribute("user");
         System.out.println("account action: sessionID" + session.getId());
 
-        HashMap<String, String> movie_types = feignMovieService.getMovieTypes();
+        HashMap<String, String> movie_types = iFeignMovieService.getMovieTypes();
         if(user==null){
             System.out.println("please log in first");
             return "index";
@@ -83,7 +88,7 @@ public class UserController {
             Integer mid = favorite.getMid();
             mids.add(mid);
         }
-        List<MovieVO> favoriteMovieVOS = feignMovieService.getMovieVOS(mids);
+        List<MovieVO> favoriteMovieVOS = iFeignMovieService.getMovieVOS(mids);
         model.addAttribute("favoriteMovieVOS", favoriteMovieVOS);
 
         return "accountPage";
@@ -103,7 +108,7 @@ public class UserController {
             modelAndView.addObject("value", "total: 0");
             modelAndView.addObject("number",0);
         }else {
-            List<MovieVO> movieVOList = feignMovieService.getMovieVOS(history);
+            List<MovieVO> movieVOList = iFeignMovieService.getMovieVOS(history);
             modelAndView.addObject("movieVOList",movieVOList);
             modelAndView.addObject("number",movieVOList.size());
             modelAndView.addObject("fieldname","Browsing History");
@@ -121,7 +126,7 @@ public class UserController {
 
         Set<String> rank = feignFavorService.getRank();
         List<Integer> rankmids = rank.stream().limit(5).map(x->Integer.parseInt(x)).collect(Collectors.toList());
-        List<MovieVO> rankMovieVOS = feignMovieService.getMovieVOS(rankmids);
+        List<MovieVO> rankMovieVOS = iFeignMovieService.getMovieVOS(rankmids);
 
         if(user==null){// || session.getAttribute("user")==null
             mv.setViewName("index");
@@ -129,7 +134,7 @@ public class UserController {
         }else{
             System.out.println("goIndex: username = "+user.getUname());
 
-            Map<String , List<MovieVO>> res = recService.getRecommend();
+            Map<String , List<MovieVO>> res = iFeignRecService.getRecommend();
             mv.addObject("rechotmovieVOS", res.get("rechotmovieVOS"));
             mv.addObject("reclatestmovieVOS", res.get("reclatestmovieVOS"));
 //            getRecs(mv);
@@ -217,7 +222,7 @@ public class UserController {
             Integer mid = favorite.getMid();
             mids.add(mid);
         }
-        List<MovieVO> favoriteMovieVOS = feignMovieService.getMovieVOS(mids);
+        List<MovieVO> favoriteMovieVOS = iFeignMovieService.getMovieVOS(mids);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("favoriteMovieVOS", favoriteMovieVOS);
 
@@ -248,9 +253,13 @@ public class UserController {
     }
 
     public void getRecs(ModelAndView mv) throws ExecutionException, InterruptedException {
-        Map<String , List<MovieVO>> res = recService.getRecommend();
+        Map<String , List<MovieVO>> res = iFeignRecService.getRecommend();
         mv.addObject("rechotmovieVOS", res.get("rechotmovieVOS"));
         mv.addObject("reclatestmovieVOS", res.get("reclatestmovieVOS"));
         return;
+    }
+
+    public String Payment_defaultFallbackMethod(){
+        return "线程池：" + Thread.currentThread().getName()+"  8003 defaultFallbackMethod 出错了！！！ ";
     }
 }

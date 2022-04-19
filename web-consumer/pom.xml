@@ -56,6 +56,11 @@
             <scope>test</scope>
         </dependency>
 
+        <!--hystrix-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
 
         <!--=============== zookeeper ================-->
         <!--springboot整合zookeeper客户端-->
@@ -120,6 +125,11 @@
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
             <version>3.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.hystrix</groupId>
+            <artifactId>hystrix-javanica</artifactId>
+            <version>1.5.18</version>
         </dependency>
     </dependencies>
 

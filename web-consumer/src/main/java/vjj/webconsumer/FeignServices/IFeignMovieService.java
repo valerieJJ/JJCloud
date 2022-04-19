@@ -8,29 +8,31 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import requests.MovieRatingRequest;
+import vjj.webconsumer.FeignServices.Imp.FeignMovieService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@FeignClient(name = "movie-service")
-public interface FeignMovieService {
+@Component
+@FeignClient(name = "movie-service", fallback = FeignMovieService.class)
+public interface IFeignMovieService {
 
     @RequestMapping(value = "/movie/movieid", method = RequestMethod.GET)
-    public Map<String, Object> getMovieInfo(@RequestParam("mid") int mid, @RequestParam("request") HttpServletRequest request);
+    Map<String, Object> getMovieInfo(@RequestParam("mid") int mid, @RequestParam("request") HttpServletRequest request);
 
     @RequestMapping(value = "/movie/list", method = RequestMethod.GET)
-    public List<MovieVO> getMovieVOS(@RequestParam("mids") List<Integer> mids);
+    List<MovieVO> getMovieVOS(@RequestParam("mids") List<Integer> mids);
 
     @RequestMapping(value = "/movie/types", method = RequestMethod.GET)
-    public HashMap<String, String> getMovieTypes();
+    HashMap<String, String> getMovieTypes();
 
     @RequestMapping(value = "/movie/query", method = RequestMethod.GET)
-    public Movie getMovieById(@RequestParam("mid") int mid);
+    Movie getMovieById(@RequestParam("mid") int mid);
 
     @RequestMapping(value = "/movie/score", method = RequestMethod.GET)
-    public String getScoreById(@RequestParam("mid") int mid);
+    String getScoreById(@RequestParam("mid") int mid);
 
 //    @RequestMapping(value = "/movie/rate", method = RequestMethod.POST)
 //    public String updateRating( @RequestParam("uid") Integer uid
@@ -38,14 +40,14 @@ public interface FeignMovieService {
 //                            , @RequestParam("score") Double score );
 
     @RequestMapping(value = "/movie/folder", method = RequestMethod.GET)
-    public List<Movie> goMovieFolder(@RequestParam("type") String type);
+    List<Movie> goMovieFolder(@RequestParam("type") String type);
 
     @RequestMapping(value = "/movie/moviefield", method = RequestMethod.GET)
 //    @PermissionAnnotation
-    public Map<String, Object> searchMovieByField(
+    Map<String, Object> searchMovieByField(
             @RequestParam("fieldname") String fieldname
-            ,@RequestParam("value") String value
-            ,@RequestParam("request") HttpServletRequest request);
+            , @RequestParam("value") String value
+            , @RequestParam("request") HttpServletRequest request);
 
 //    @RequestMapping(value = "/movie/movieid", method = RequestMethod.POST)
 //    public Map<String, Object> getMovieInfo(@RequestParam("id") int mid

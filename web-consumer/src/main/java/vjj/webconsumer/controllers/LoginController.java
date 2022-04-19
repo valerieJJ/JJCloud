@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import requests.HotMovieRequest;
 import requests.LatestMovieRequest;
 import requests.LoginUserRequest;
-import vjj.webconsumer.FeignServices.FeignFavorService;
-import vjj.webconsumer.FeignServices.FeignMovieService;
-import vjj.webconsumer.FeignServices.RecService;
 import vjj.webconsumer.FeignServices.FeignUserService;
+import vjj.webconsumer.FeignServices.IFeignMovieService;
+import vjj.webconsumer.FeignServices.IFeignRecService;
 import vjj.webconsumer.services.HistoryService;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,9 +35,9 @@ public class LoginController {
     @Autowired
     private FeignUserService feignUserService;
     @Autowired
-    private RecService recService;
-    @Autowired
     private HistoryService historyService;
+    @Resource
+    private IFeignRecService iFeignRecService;
 
     /****************************  Register  **************************/
     @RequestMapping(value = "/user/register", method = RequestMethod.GET)
@@ -146,7 +146,7 @@ public class LoginController {
         HotMovieRequest hotMovieRequest = new HotMovieRequest(6);//取出6个
         LatestMovieRequest latestMovieRequest = new LatestMovieRequest(6);//取出6个
 
-        Map<String, List<MovieVO>> map = recService.getRecommend();
+        Map<String, List<MovieVO>> map = iFeignRecService.getRecommend();
         List<MovieVO> hotmovies = map.get("rechotmovieVOS");
         List<MovieVO> latestmovies = map.get("reclatestmovieVOS");
 
