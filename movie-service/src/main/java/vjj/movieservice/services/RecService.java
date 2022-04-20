@@ -10,6 +10,8 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import models.Movie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +35,7 @@ import java.util.concurrent.CompletableFuture;
 @Service
 public class RecService {
 
-    private Logger log = LoggerFactory.getLogger(RecService.class);
+    private final Logger log = LoggerFactory.getLogger(RecService.class);
 
     @Autowired
     private MovieService movieService;
@@ -93,9 +95,16 @@ public class RecService {
         }
         return CompletableFuture.completedFuture(movieVOS);
     }
-
+    //运行超过5秒就降级，调用fallback_timeout方法
     @Async
     public CompletableFuture<List<MovieVO>> getHotRecommendations(HotMovieRequest request){
+
+//        try { // for test hystrixcommand
+//            Thread.sleep(10);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
         int sum = request.getSum();
         System.out.println("async hot "+Thread.currentThread());
         System.out.println("hot recommendation getSum = "+sum);
@@ -123,7 +132,6 @@ public class RecService {
             sum--;
         }
         return CompletableFuture.completedFuture(movieVOS);
-
     }
 
 

@@ -32,10 +32,10 @@ public class MovieController {
     @Autowired
     private FeignRatingService feignRatingService;
     @Autowired
-    private FeignFavorService feignFavorService;
-    @Autowired
     private HistoryService historyService;
 
+    @Resource
+    private IFeignFavorService iFeignFavorService;
     @Resource
     private IFeignMovieService iFeignMovieService;
     @Resource
@@ -79,7 +79,7 @@ public class MovieController {
         int mid = (int) request.getAttribute("mid");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        boolean state = feignFavorService.query(user.getUid(), mid);
+        boolean state = iFeignFavorService.query(user.getUid(), mid);
         model.addAttribute("state", state);
         System.out.println("get state2: "+ state);
     }
@@ -126,7 +126,7 @@ public class MovieController {
         historyService.addHistory(user.getUid(), mid);
         session.setAttribute("movie", movie);
 
-        boolean state = feignFavorService.query(user.getUid(), mid);
+        boolean state = iFeignFavorService.query(user.getUid(), mid);
         modelAndView.addObject("state", state);
 
         System.out.println("get state2: "+ state);

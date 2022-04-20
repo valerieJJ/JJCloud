@@ -54,7 +54,7 @@ public class UserController {
     @ResponseBody
     public Movie getMovieById(){
         return movieRecService.getMovieById(2546);
-    };
+    }
 
     @GetMapping("/login")
     public String gologin(Model model){
@@ -129,7 +129,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/uname", method = RequestMethod.GET)
-    public User queryByName(String uname) {
+    public User queryByName(@RequestParam("uname") String uname) {
         User user = userService.queryByName(uname);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user", user);

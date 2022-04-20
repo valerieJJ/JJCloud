@@ -8,6 +8,8 @@ import com.mongodb.*;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Sorts;
 import com.mongodb.util.JSON;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import models.Movie;
 import models.Rating;
 import models.Recommendation;
@@ -144,9 +146,19 @@ public class MovieService {
         return null != findByMID(mid);
     }
 
+    @HystrixCommand(fallbackMethod = "fallback_timeout", commandProperties = {@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000")})
     public Movie findByMID(int mid){
 
         DBObject query = new BasicDBObject("mid", mid);
+
+//        try {
+//            System.out.println("sleeping ...  ");
+//            Thread.sleep(6000);
+//            System.out.println("awake ... ");
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
         DBCursor cursor = getMovieCollection().find(query);
         if(cursor.hasNext()){
             DBObject obj = cursor.next();
@@ -235,5 +247,10 @@ public class MovieService {
 
 //        ArrayList<String> classes = new ArrayList<>(Arrays.asList(cls));
         return map;
+    }
+
+    public Movie fallback_timeout(int mid){
+        System.out.println("The system is busy now, please try again later..."+" || mid="+mid);
+        return null;
     }
 }

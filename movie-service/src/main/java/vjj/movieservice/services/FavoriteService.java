@@ -38,7 +38,7 @@ public class FavoriteService {
     @Autowired
     private MongodbService mongodbService;
     @Autowired
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     private Jedis jedis;
 //    @Autowired
@@ -46,10 +46,10 @@ public class FavoriteService {
     @Autowired
     RedisTemplate redisTemplate;
 
-    private String collectionName = "Favorite";
-    private String zsetName = "favoriteRank";
+    private final String collectionName = "Favorite";
+    private final String zsetName = "favoriteRank";
 
-    public FavoriteService() throws UnknownHostException {
+    public FavoriteService() {
     }
 
     public Favorite DBOjbect2Favorite(DBObject object){
@@ -178,11 +178,7 @@ public class FavoriteService {
     }
 
     public boolean favoriteExistMongo(int uid, int mid){
-        if(findFavorite2Mongo(uid, mid)!=null){
-            return true;
-        }else {
-            return false;
-        }
+        return findFavorite2Mongo(uid, mid) != null;
     }
 
     public boolean updateFavorite2Mongo(Favorite favorite){//先查询后重置用户对该电影的评价

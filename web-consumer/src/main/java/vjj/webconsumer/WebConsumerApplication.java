@@ -12,7 +12,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableFeignClients
 @EnableDiscoveryClient
 @EnableRedisHttpSession
-@EnableHystrix
+@EnableHystrix//@EnableHystrix继承了@EnableCircuitBreaker(激活熔断器功能)
 public class WebConsumerApplication {
 
     public static void main(String[] args) {

@@ -2,11 +2,12 @@ package vjj.webconsumer.controllers;
 
 import VO.MovieVO;
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import models.Favorite;
 import models.Movie;
 import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,12 +38,12 @@ public class UserController {
     @Autowired
     private FeignUserService feignUserService;
     @Autowired
-    private FeignFavorService feignFavorService;
-    @Autowired
     private FeignLikeService feignLikeService;
     @Autowired
     private HistoryService historyService;
 
+    @Resource
+    private IFeignFavorService iFeignFavorService;
     @Resource
     private IFeignMovieService iFeignMovieService;
     @Resource
@@ -66,8 +67,20 @@ public class UserController {
         }
     }
 
+    @HystrixCommand(fallbackMethod = "account_fallback",commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "5000"),
+            @HystrixProperty(name = "circuitBreaker.enabled",value = "true"),// 是否开启断路器
+            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold",value = "4"),// 请求次数
+            @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds",value = "10000"), // 时间窗口期
+            @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage",value = "60"),// 失败率达到多少后跳闸
+    })
     @RequestMapping(value = "/user/account", method = RequestMethod.GET)
     public String accountPage(Model model, HttpServletRequest request){//
+//        try {
+//            Thread.sleep(6000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         System.out.println("account action: sessionID" + session.getId());
@@ -81,8 +94,7 @@ public class UserController {
             model.addAttribute("user", user);
             model.addAttribute("movie_types", movie_types);
         }
-
-        List<Favorite> favoriteList = feignFavorService.getFavoriteHistory(user.getUid());
+        List<Favorite> favoriteList = iFeignFavorService.getFavoriteHistory(user.getUid());
         List<Integer> mids = new ArrayList<>();
         for (Favorite favorite: favoriteList){
             Integer mid = favorite.getMid();
@@ -90,7 +102,6 @@ public class UserController {
         }
         List<MovieVO> favoriteMovieVOS = iFeignMovieService.getMovieVOS(mids);
         model.addAttribute("favoriteMovieVOS", favoriteMovieVOS);
-
         return "accountPage";
     }
 
@@ -124,7 +135,7 @@ public class UserController {
         ModelAndView mv = new ModelAndView();
         User user = (User) session.getAttribute("user");
 
-        Set<String> rank = feignFavorService.getRank();
+        Set<String> rank = iFeignFavorService.getRank();
         List<Integer> rankmids = rank.stream().limit(5).map(x->Integer.parseInt(x)).collect(Collectors.toList());
         List<MovieVO> rankMovieVOS = iFeignMovieService.getMovieVOS(rankmids);
 
@@ -158,11 +169,11 @@ public class UserController {
             boolean succ = false;
 
             if(favoption){
-                succ = feignFavorService.updateFavor(user.getUid(), mid);
+                succ = iFeignFavorService.updateFavor(user.getUid(), mid);
             }else {
-                succ = feignFavorService.deleteFavor(user.getUid(), mid);
+                succ = iFeignFavorService.deleteFavor(user.getUid(), mid);
             }
-            boolean state = feignFavorService.query(user.getUid(), mid);
+            boolean state = iFeignFavorService.query(user.getUid(), mid);
 
             model.addAttribute("success",succ);
             model.addAttribute("state", state);
@@ -216,7 +227,7 @@ public class UserController {
 
         session.setAttribute("user", user);
 
-        List<Favorite> favoriteList = feignFavorService.getFavoriteHistory(user.getUid());
+        List<Favorite> favoriteList = iFeignFavorService.getFavoriteHistory(user.getUid());
         List<Integer> mids = new ArrayList<>();
         for (Favorite favorite: favoriteList){
             Integer mid = favorite.getMid();
@@ -259,7 +270,21 @@ public class UserController {
         return;
     }
 
-    public String Payment_defaultFallbackMethod(){
-        return "线程池：" + Thread.currentThread().getName()+"  8003 defaultFallbackMethod 出错了！！！ ";
+    public String account_fallback(Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        System.out.println("account action: sessionID" + session.getId());
+
+        if(user==null){
+            System.out.println("please log in first");
+            return "index";
+        }else{
+            System.out.println("account action: user " + user.getUname());
+            model.addAttribute("user", user);
+            model.addAttribute("movie_types", null);
+        }
+
+        model.addAttribute("favoriteMovieVOS", null);
+        return "accountPage";
     }
 }

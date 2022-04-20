@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import vjj.webconsumer.FeignServices.IFeignMovieService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,12 +20,14 @@ public class FeignMovieService implements IFeignMovieService {
 
     @Override
     public List<MovieVO> getMovieVOS(List<Integer> mids) {
-        return null;
+        List<MovieVO> res = new ArrayList<>();
+        return res;
     }
 
     @Override
     public HashMap<String, String> getMovieTypes() {
-        return null;
+        HashMap<String, String> res = new HashMap<>();
+        return res;
     }
 
     @Override
@@ -39,11 +42,13 @@ public class FeignMovieService implements IFeignMovieService {
 
     @Override
     public List<Movie> goMovieFolder(String type) {
-        return null;
+        List<Movie> res = new ArrayList<>();
+        return res;
     }
 
     @Override
     public Map<String, Object> searchMovieByField(String fieldname, String value, HttpServletRequest request) {
-        return null;
+        Map<String, Object> res = new HashMap<>();
+        return res;
     }
 }

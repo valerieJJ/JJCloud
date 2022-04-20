@@ -2,6 +2,8 @@ package vjj.movieservice.controllers;
 
 import VO.MovieVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import models.Movie;
 import models.Rating;
 import models.User;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import requests.HotMovieRequest;
 import requests.MovieRatingRequest;
 import vjj.movieservice.services.*;
 
@@ -44,13 +47,14 @@ public class MovieController {
 
     @RequestMapping(value = "/movie/query", method = RequestMethod.GET)
     public Movie getMovieById(@RequestParam("mid") int mid) throws ExecutionException, InterruptedException {
-        System.out.println("getmovie - get mid = "+mid);
+        System.out.println("qeury movie - get mid = "+mid);
+
         Movie movie = movieService.findByMID(mid);
         return movie;
     }
 
     @RequestMapping(value = "/movie/score", method = RequestMethod.GET)
-    public String getScoreById(@RequestParam("mid") int mid) throws ExecutionException, InterruptedException {
+    public String getScoreById(@RequestParam("mid") Integer mid) throws ExecutionException, InterruptedException {
         System.out.println("getmovie - get mid = "+mid);
         CompletableFuture<Movie> asy_movie = movieService.asyfindByMID(mid);
         CompletableFuture<String> asy_movie_score = ratingService.asygetMovieAverageScores(mid);
@@ -72,18 +76,6 @@ public class MovieController {
         return movie_score;
     }
 
-//    @RequestMapping(value = "/movie/rate", method = RequestMethod.POST)
-//    public String rateMovie(
-//            @RequestParam("uid") Integer uid
-//            , @RequestParam("mid") Integer mid
-//            , @RequestParam("score") Double score
-//    ) throws JsonProcessingException, IllegalAccessException {
-//        MovieRatingRequest ratingRequest = new MovieRatingRequest(uid, mid, score);
-//        boolean done = ratingService.updataMovieRating(ratingRequest);
-//        String movie_score = ratingService.getMovieAverageScores(mid);
-//        return movie_score;
-//    }
-
     @RequestMapping(value = "/movie/folder", method = RequestMethod.GET)
     public List<Movie> goMovieFolder2(@RequestParam("type") String type) throws UnknownHostException {
         ModelAndView modelAndView = new ModelAndView();
@@ -96,6 +88,7 @@ public class MovieController {
     @RequestMapping(value = "/movie/movieid", method = RequestMethod.GET)
     public Map<String, Object> getMovieInfo(@RequestParam("mid")int mid, @RequestParam("request") HttpServletRequest request) throws ExecutionException, InterruptedException {
         System.out.println("getmovie - get mid = "+mid);
+
         CompletableFuture<Movie> asy_movie = movieService.asyfindByMID(mid);
         CompletableFuture<String> asy_movie_score = ratingService.asygetMovieAverageScores(mid);
         CompletableFuture.allOf(asy_movie,asy_movie_score).join();
@@ -188,6 +181,5 @@ public class MovieController {
         System.out.println("get state2: "+ state);
         return  state;
     }
-
 
 }
