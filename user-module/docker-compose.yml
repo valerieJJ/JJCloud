@@ -1,0 +1,96 @@
+version: '3.3'
+
+services:
+  user-module:
+    image: cloud-user:1.0
+    container_name: user-module-container
+    ports:
+      - "8003:8003"
+    volumes:
+      - ~/user-docker:/data
+    networks:
+      mynetwork:
+        ipv4_address: 172.19.0.7
+    depends_on:
+      - zoo1
+      - zkredis
+      - zkmysql
+
+  zoo1:
+    image: zookeeper:3.5.5
+    #    build:
+    #      context: .
+    #      dockerfile: zk-dockerfile
+    hostname: zoo1
+    container_name: zoo1-container
+    ports:
+      - 2181:2181
+    networks:
+      mynetwork:
+        ipv4_address: 172.19.0.2
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=172.19.0.3:2888:3888;2181 server.3=172.19.0.4:2888:3888;2181
+
+  zoo2:
+    image: zookeeper:3.5.5
+    hostname: zoo2
+    container_name: zoo2-container
+    ports:
+      - 2182:2181
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=172.19.0.2:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=172.19.0.4:2888:3888;2181
+    networks:
+      mynetwork:
+        ipv4_address: 172.19.0.3
+
+  zoo3:
+    image: zookeeper:3.5.5
+    hostname: zoo3
+    container_name: zoo3-container
+    ports:
+      - 2183:2181
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=172.19.0.2:2888:3888;2181 server.2=172.19.0.3:2888:3888;2181 server.3=0.0.0.0:2888:3888;2181
+    networks:
+      mynetwork:
+        ipv4_address: 172.19.0.4
+
+  zkredis:
+    image: redis:6.2.6
+    ports:
+      - "6379:6379"
+    volumes:
+      - ~/redis/redis.conf:/etc/redis/redis.conf
+      - ~/redis/data:/data
+    command: redis-server /etc/redis/redis.conf
+    networks:
+      mynetwork:
+        ipv4_address: 172.19.0.5
+
+  zkmysql:
+    image: mysql:5.7
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "20031230"
+      MYSQL_DATABASE: "moviedb"
+      MYSQL_USER: "vj"
+      MYSQL_PASSWORD: "20031230"
+    volumes:
+      - ~/mysql/conf/my.cnf:/etc/mysql.cnf
+      - ~/mysql/log:/var/log/mysql
+      - ~/mysql/data:/var/lib/mysql
+    networks:
+      mynetwork:
+        ipv4_address: 172.19.0.6
+    command: --default-authentication-plugin=mysql_native_password
+
+
+networks:
+  mynetwork:
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
