@@ -3,14 +3,13 @@ version: '3.3'
 services:
   user-module:
     image: cloud-user:1.0
-    container_name: user-module-container
+    container_name: user-module-container2
     ports:
       - "8003:8003"
     volumes:
       - ~/user-docker:/data
     networks:
-      mynetwork:
-        ipv4_address: 172.19.0.7
+      - mynetwork
     depends_on:
       - zoo1
       - zkredis
@@ -18,48 +17,43 @@ services:
 
   zoo1:
     image: zookeeper:3.5.5
-    #    build:
-    #      context: .
-    #      dockerfile: zk-dockerfile
     hostname: zoo1
-    container_name: zoo1-container
+    container_name: zoo1-container2
     ports:
       - 2181:2181
     networks:
-      mynetwork:
-        ipv4_address: 172.19.0.2
+      - mynetwork
     environment:
       ZOO_MY_ID: 1
-      ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=172.19.0.3:2888:3888;2181 server.3=172.19.0.4:2888:3888;2181
+      ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
 
   zoo2:
     image: zookeeper:3.5.5
     hostname: zoo2
-    container_name: zoo2-container
+    container_name: zoo2-container2
     ports:
       - 2182:2181
     environment:
       ZOO_MY_ID: 2
-      ZOO_SERVERS: server.1=172.19.0.2:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=172.19.0.4:2888:3888;2181
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zoo3:2888:3888;2181
     networks:
-      mynetwork:
-        ipv4_address: 172.19.0.3
+      - mynetwork
 
   zoo3:
     image: zookeeper:3.5.5
     hostname: zoo3
-    container_name: zoo3-container
+    container_name: zoo3-container2
     ports:
       - 2183:2181
     environment:
       ZOO_MY_ID: 3
-      ZOO_SERVERS: server.1=172.19.0.2:2888:3888;2181 server.2=172.19.0.3:2888:3888;2181 server.3=0.0.0.0:2888:3888;2181
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=0.0.0.0:2888:3888;2181
     networks:
-      mynetwork:
-        ipv4_address: 172.19.0.4
+      - mynetwork
 
   zkredis:
     image: redis:6.2.6
+    container_name: zkredis2
     ports:
       - "6379:6379"
     volumes:
@@ -67,13 +61,16 @@ services:
       - ~/redis/data:/data
     command: redis-server /etc/redis/redis.conf
     networks:
-      mynetwork:
-        ipv4_address: 172.19.0.5
+      - mynetwork
+  #    command: >
+  #      apt-get update
+  #              && apt-get install net-tool"
 
   zkmysql:
     image: mysql:5.7
     ports:
       - "3307:3306"
+    container_name: zkmysql2
     environment:
       MYSQL_ROOT_PASSWORD: "20031230"
       MYSQL_DATABASE: "moviedb"
@@ -84,13 +81,17 @@ services:
       - ~/mysql/log:/var/log/mysql
       - ~/mysql/data:/var/lib/mysql
     networks:
-      mynetwork:
-        ipv4_address: 172.19.0.6
+      - mynetwork
     command: --default-authentication-plugin=mysql_native_password
 
 
 networks:
   mynetwork:
-    ipam:
-      config:
-        - subnet: 172.19.0.0/16
+    driver: bridge
+
+
+#networks://固定ip
+#  mynetwork:
+#    ipam:
+#      config:
+#        - subnet: 172.19.0.0/16
