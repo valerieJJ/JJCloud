@@ -24,8 +24,8 @@ import java.util.Properties;
 @Configuration
 public class Configurations {
 
-    private final String mongoHost = "localhost";
-    private final int mongoPort = 27017;
+    private final String mongoHost; // = "localhost";
+    private final int mongoPort; // = 27017;
     private final String esClusterName = "jj-cluster";
     private final String esHost = "localhost";
     private final int esPort =  9300;
@@ -43,11 +43,13 @@ public class Configurations {
 //        properties.load(new FileInputStream(resource.getFile()));
         properties.load(resource.getInputStream());
         this.redisHost = properties.getProperty("spring.redis.host");
+        this.mongoHost = properties.getProperty("mongodb.host");
+        this.mongoPort = Integer.parseInt(properties.getProperty("mongodb.port"));
     }
 
     @Bean(name = "mongoClient")
-    public MongoClient getMongoClient() throws UnknownHostException {
-        MongoClient mongoClient = new MongoClient( mongoHost , mongoPort );
+    public MongoClient getMongoClient() throws IOException {
+        MongoClient mongoClient = new MongoClient( this.mongoHost , this.mongoPort );
         return mongoClient;
     }
 

@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+  movie-module:
+    image: cloud-movie:1.0
+    container_name: movie-container
+    ports:
+      - "8004:8004"
+    volumes:
+      - ~/movie-docker:/data/movie
+    networks:
+      - user-docker_mynetwork
+    depends_on:
+      - zkmongo
+
+  zkmongo:
+    image: mongo:3.6.23
+    container_name: zkmongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ~/movie-docker/mongo-data/db:/data/db
+      - ~/movie-docker/mongo-data/log:/var/log/mongodb
+      - ~/movie-docker/mongo-data/config:/etc/mongo
+    #    command: mongod --auth
+    command: --config /etc/mongo/mongod.conf
+    networks:
+      - user-docker_mynetwork
+
+networks:
+  user-docker_mynetwork:
+    external: true
