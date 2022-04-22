@@ -8,6 +8,8 @@ The spring-boot modules are registered on different zk nodes(on virtual machine)
 
 <img width="1407" alt="image" src="https://user-images.githubusercontent.com/43733497/164595514-ad0e1941-da58-4267-946b-331cab6a041b.png">
 
+<img width="1486" alt="image" src="https://user-images.githubusercontent.com/43733497/164651015-e8dbcfb1-0372-458d-9a35-54c389400a93.png">
+
 
 <img width="949" alt="image" src="https://user-images.githubusercontent.com/43733497/161598285-4eb467d8-189e-43cc-ada3-0d856ca53ca5.png">
 
