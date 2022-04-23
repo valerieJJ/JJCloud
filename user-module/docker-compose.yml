@@ -9,6 +9,8 @@ services:
     volumes:
       - ~/user-docker:/data
     network_mode: host
+    environment:
+      - "SPRING_PROFILES_ACTIVE=pro"
     depends_on:
       - zkredis
       - zkmysql
