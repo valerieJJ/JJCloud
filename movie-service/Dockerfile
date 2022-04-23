@@ -1,6 +1,6 @@
 FROM java:8
 MAINTAINER valerie
-VOLUME /movie-service
+VOLUME /data
 
 ADD movie-service-0.0.1-SNAPSHOT.jar movie-service.jar
 

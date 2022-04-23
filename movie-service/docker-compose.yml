@@ -8,8 +8,9 @@ services:
       - "8004:8004"
     volumes:
       - ~/movie-docker:/data/movie
-    networks:
-      - user-docker_mynetwork
+    network_mode: host
+    #    networks:
+    #      - user-docker_mynetwork
     environment:
       - "SPRING_PROFILES_ACTIVE=pro"
     depends_on:
@@ -26,9 +27,10 @@ services:
       - ~/movie-docker/mongo-data/config:/etc/mongo
     #    command: mongod --auth
     command: --config /etc/mongo/mongod.conf
-    networks:
-      - user-docker_mynetwork
+    network_mode: host
+#    networks:
+#      - user-docker_mynetwork
 
-networks:
-  user-docker_mynetwork:
-    external: true
+#networks:
+#  user-docker_mynetwork:
+#    external: true
