@@ -9,9 +9,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.concurrent.CountDownLatch;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-
 @Configuration
 public class ZookeeperConfig {
 

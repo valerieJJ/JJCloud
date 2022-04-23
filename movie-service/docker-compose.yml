@@ -10,6 +10,8 @@ services:
       - ~/movie-docker:/data/movie
     networks:
       - user-docker_mynetwork
+    environment:
+      - "SPRING_PROFILES_ACTIVE=pro"
     depends_on:
       - zkmongo
 

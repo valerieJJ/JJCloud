@@ -4,6 +4,7 @@ import com.mongodb.MongoClient;
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,19 +18,24 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Properties;
 
-//import org.elasticsearch.client.transport.TransportClient;
-//import org.elasticsearch.common.settings.Settings;
-//import org.elasticsearch.common.transport.InetSocketTransportAddress;
 
 @Configuration
 public class Configurations {
 
-    private final String mongoHost; // = "localhost";
-    private final int mongoPort; // = 27017;
-    private final String esClusterName = "jj-cluster";
+    @Value("${spring.data.mongodb.host}")
+    private String mongoHost;
+    @Value("${spring.data.mongodb.port}")
+    private int mongoPort;
+
+    @Value("${es.clustername}")
+    private String esClusterName;
+    @Value("${es.host}")
     private final String esHost = "localhost";
+    @Value("${es.port}")
     private final int esPort =  9300;
-    private final String redisHost;
+
+    @Value("${spring.redis.host}")
+    private String redisHost;
 
     @Bean
     @LoadBalanced
@@ -37,15 +43,6 @@ public class Configurations {
         return new RestTemplate();
     }
 
-    public Configurations() throws IOException {
-        Properties properties = new Properties();
-        Resource resource = new ClassPathResource("application.properties");
-//        properties.load(new FileInputStream(resource.getFile()));
-        properties.load(resource.getInputStream());
-        this.redisHost = properties.getProperty("spring.redis.host");
-        this.mongoHost = properties.getProperty("mongodb.host");
-        this.mongoPort = Integer.parseInt(properties.getProperty("mongodb.port"));
-    }
 
     @Bean(name = "mongoClient")
     public MongoClient getMongoClient() throws IOException {
@@ -56,7 +53,7 @@ public class Configurations {
     @Bean(name = "esClient")
     public RestHighLevelClient getESClient() throws UnknownHostException {
         RestHighLevelClient esClient = new RestHighLevelClient(
-                RestClient.builder(new HttpHost("localhost",9200,"http"))
+                RestClient.builder(new HttpHost(this.esHost,this.esPort,"http"))
         );
         return esClient;
     }
@@ -66,12 +63,4 @@ public class Configurations {
         Jedis jedis = new Jedis(this.redisHost);
         return jedis;
     }
-
-//    @Bean(name = "transportClient")
-//    public TransportClient getTransportClient() throws UnknownHostException {
-//        Settings settings = Settings.builder().put("cluster.name",esClusterName).build();
-//        TransportClient esClient = new PreBuiltTransportClient(settings);
-//        esClient.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(esHost), esPort));
-//        return esClient;
-//    }
 }
