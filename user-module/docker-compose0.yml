@@ -8,24 +8,48 @@ services:
       - "8003:8003"
     volumes:
       - ~/user-docker:/data
-    network_mode: host
+    networks:
+      - mynetwork
     depends_on:
+      - zoo1
       - zkredis
       - zkmysql
-      - zoo1
 
   zoo1:
     image: zookeeper:3.5.5
-    restart: always
-    hostname: zk
-    container_name: zk-container
-    network_mode: host
+    hostname: zoo1
+    container_name: zoo1-container2
     ports:
       - 2181:2181
-    volumes:
-      - ~/zookeeper/conf:/conf
-      - ~/Documents/zk2/data:/data
-      - ~/Documents/zk2/logs:/datalog
+    networks:
+      - mynetwork
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
+
+  zoo2:
+    image: zookeeper:3.5.5
+    hostname: zoo2
+    container_name: zoo2-container2
+    ports:
+      - 2182:2181
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zoo3:2888:3888;2181
+    networks:
+      - mynetwork
+
+  zoo3:
+    image: zookeeper:3.5.5
+    hostname: zoo3
+    container_name: zoo3-container2
+    ports:
+      - 2183:2181
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=0.0.0.0:2888:3888;2181
+    networks:
+      - mynetwork
 
   zkredis:
     image: redis:6.2.6
@@ -36,9 +60,8 @@ services:
       - ~/redis/redis.conf:/etc/redis/redis.conf
       - ~/redis/data:/data
     command: redis-server /etc/redis/redis.conf
-    network_mode: host
-    depends_on:
-      - zoo1
+    networks:
+      - mynetwork
   #    command: >
   #      apt-get update
   #              && apt-get install net-tool"
@@ -51,16 +74,20 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "20031230"
       MYSQL_DATABASE: "moviedb"
-      MYSQL_USER: "root"
+      MYSQL_USER: "vj"
       MYSQL_PASSWORD: "20031230"
     volumes:
       - ~/mysql/conf/my.cnf:/etc/mysql.cnf
       - ~/mysql/log:/var/log/mysql
       - ~/mysql/data:/var/lib/mysql
+    networks:
+      - mynetwork
     command: --default-authentication-plugin=mysql_native_password
-    network_mode: host
-    depends_on:
-      - zoo1
+
+
+networks:
+  mynetwork:
+    driver: bridge
 
 
 #networks://固定ip
