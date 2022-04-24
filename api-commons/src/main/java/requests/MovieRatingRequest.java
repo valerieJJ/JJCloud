@@ -10,6 +10,9 @@ public class MovieRatingRequest implements Serializable {
 
     private Double score;
 
+    public MovieRatingRequest() {
+    }
+
     public MovieRatingRequest(int uid, int mid, Double score) {
         this.uid = uid;
         this.mid = mid;

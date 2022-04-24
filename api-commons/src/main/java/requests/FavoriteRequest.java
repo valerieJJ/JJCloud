@@ -7,9 +7,13 @@ public class FavoriteRequest implements Serializable {
     private int uid;
     private int mid;
 
+    public FavoriteRequest() {
+    }
+
     public void setUid(int uid) {
         this.uid = uid;
     }
+
 
     public FavoriteRequest(int uid, int mid) {
         this.uid = uid;

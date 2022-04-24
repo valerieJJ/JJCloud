@@ -5,6 +5,9 @@ import java.io.Serializable;
 public class LatestMovieRequest implements Serializable {
     private int sum;
 
+    public LatestMovieRequest() {
+    }
+
     public int getSum() {
         return sum;
     }

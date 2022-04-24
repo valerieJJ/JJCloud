@@ -6,6 +6,9 @@ public class NewRecommendationRequest implements Serializable {
 
     private int sum;
 
+    public NewRecommendationRequest() {
+    }
+
     public NewRecommendationRequest(int sum) {
         this.sum = sum;
     }

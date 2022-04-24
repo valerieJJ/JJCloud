@@ -11,6 +11,8 @@ public class LikeRequest implements Serializable {
         this.uid = uid;
     }
 
+    public LikeRequest(){}
+
     public LikeRequest(int uid, int mid) {
         this.uid = uid;
         this.mid = mid;

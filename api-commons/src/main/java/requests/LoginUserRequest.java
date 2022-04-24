@@ -8,6 +8,7 @@ public class LoginUserRequest implements Serializable {
 
     private String password;
 
+    public LoginUserRequest(){}
 
     public LoginUserRequest(String username, String password) {
         this.username = username;
