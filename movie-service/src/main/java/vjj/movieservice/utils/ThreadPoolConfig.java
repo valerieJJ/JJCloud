@@ -1,25 +1,16 @@
 package vjj.movieservice.utils;
 
-import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.AsyncConfigurer;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
+@Configuration
+public class ThreadPoolConfig {
 
-//@Configuration
-//@EnableAsync
-public class ThreadConfig implements AsyncConfigurer {
-
-    /**
-     *
-     利用EnableAsync来开启Springboot对于异步任务的支持
-     配置类实现接口AsyncConfigurator，返回一个ThreadPoolTaskExecutor线程池对象。
-     */
-    @Override
+    @Bean("executor")
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(10);
@@ -35,11 +26,5 @@ public class ThreadConfig implements AsyncConfigurer {
         executor.setKeepAliveSeconds(60);// 允许线程的空闲时间60秒：当超过了核心线程之外的线程在空闲时间到达之后会被销毁
         executor.initialize();
         return executor;
-    }
-
-
-    @Override
-    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
-        return null;
     }
 }

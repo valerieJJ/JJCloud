@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
-@Component
+//@Component
 public class ZKtool {
 
     @Autowired

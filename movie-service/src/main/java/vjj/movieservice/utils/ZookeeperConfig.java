@@ -1,5 +1,6 @@
 package vjj.movieservice.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
@@ -9,10 +10,9 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.concurrent.CountDownLatch;
 
-@Configuration
+@Slf4j
+//@Configuration
 public class ZookeeperConfig {
-
-//    private static final Logger logger = LoggerFactory.getLogger(ZookeeperConfig.class);
 
     @Value("${zookeeper.address}")
     private String host;
@@ -35,15 +35,16 @@ public class ZookeeperConfig {
                 public void process(WatchedEvent event) {
                     if(Event.KeeperState.SyncConnected==event.getState()){
                         //如果收到了服务端的响应事件,连接成功
+                        log.info("zkClient connected successfully");
                         countDownLatch.countDown();
                     }
                 }
             });
             countDownLatch.await();
-//            logger.info("init ZooKeeper connection: zk.state={}",zooKeeper.getState());
+            log.info("init ZooKeeper connection: zk.state={}",zooKeeper.getState());
 
         }catch (Exception e){
-//            logger.error("init ZooKeeper exception: {}",e);
+            log.error("init ZooKeeper exception: {}",e);
         }
         return  zooKeeper;
     }

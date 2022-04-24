@@ -10,11 +10,13 @@ import com.mongodb.client.model.Sorts;
 import com.mongodb.util.JSON;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import lombok.extern.slf4j.Slf4j;
 import models.Movie;
 import models.Rating;
 import models.Recommendation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import requests.NewRecommendationRequest;
 
@@ -22,7 +24,9 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
+@Slf4j
 @Service
 public class MovieService {
     @Autowired
@@ -34,6 +38,9 @@ public class MovieService {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private Executor executor;
 
     private DBCollection averageMoviesScoreCollection;
     private DBCollection rateCollection;
@@ -168,17 +175,22 @@ public class MovieService {
         return null;
     }
 
-    @Async
+    @Async("executor")
     public CompletableFuture<Movie> asyfindByMID(int mid){
-        System.out.println("Async finding movie by mID...");
-        DBObject query = new BasicDBObject("mid", mid);
-        DBCursor cursor = getMovieCollection().find(query);
-        if(cursor.hasNext()){
-            DBObject obj = cursor.next();
-            return CompletableFuture.completedFuture(this.DBObject2Movie(obj));
-        }
-        System.out.println("movieID not exist");
-        return null;
+        log.info("Async finding movie by mID...");
+        return CompletableFuture.supplyAsync(()->{
+            DBObject query = new BasicDBObject("mid", mid);
+            DBCursor cursor = getMovieCollection().find(query);
+            if(cursor.hasNext()){
+                DBObject obj = cursor.next();
+                Movie m = this.DBObject2Movie(obj);
+                log.info("completable-future get the movie...: " + m.getName());
+                return m;
+            }else{
+                log.info("movieID not exist");
+                return null;
+            }
+        });
     }
 
     public List<Movie> getDataObj(String field, String value) throws UnknownHostException {

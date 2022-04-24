@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.*;
 import com.mongodb.util.JSON;
+import lombok.extern.slf4j.Slf4j;
 import models.Rating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -25,15 +26,16 @@ import java.util.concurrent.CompletableFuture;
 //import models.Rating;
 //import requests.MovieRatingRequest;
 
+@Slf4j
 @Service
 public class RatingService {
 
-    private MongoClient mongoClient = new MongoClient( "localhost", 27017);
+    private final MongoClient mongoClient = new MongoClient( "localhost", 27017);
 
     @Autowired
     private MongodbService mongodbService;
     @Autowired
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     private Jedis jedis;
 
@@ -86,25 +88,29 @@ public class RatingService {
             cnt ++;
         }
         double avgScore = score/cnt;
-        return String.format("%.2f", avgScore).toString();
+        return String.format("%.2f", avgScore);
     }
 
-    @Async
+    @Async("executor")
     public CompletableFuture<String> asygetMovieAverageScores(int mid){
-        System.out.println("Async finding movie average score by mID...");
-        BasicDBObject query = new BasicDBObject();
-        query.append("mid", mid);
-        DBCursor cursor = getRatingCollection().find(query);
-        double score = 0;
-        int cnt = 0;
-        while(cursor.hasNext()){
-            Rating rating = DBObject2Rating(cursor.next()) ;
-            double curScore = rating.getScore();
-            score += curScore;
-            cnt ++;
-        }
-        double avgScore = score/cnt;
-        return  CompletableFuture.completedFuture(String.format("%.2f", avgScore).toString());
+        return CompletableFuture.supplyAsync(()->{
+            System.out.println("Async finding movie average score by mID...");
+            BasicDBObject query = new BasicDBObject();
+            query.append("mid", mid);
+            DBCursor cursor = getRatingCollection().find(query);
+            double score = 0;
+            int cnt = 0;
+            while(cursor.hasNext()){
+                Rating rating = DBObject2Rating(cursor.next()) ;
+                double curScore = rating.getScore();
+                score += curScore;
+                cnt ++;
+            }
+            double avgScore = score/cnt;
+            log.info("completable-future get movie score...: " + avgScore);
+            return String.format("%.2f", avgScore);
+        });
+
     }
 
     private Rating findRating(int uid, int mid){
@@ -135,11 +141,7 @@ public class RatingService {
     }
 
     public boolean ratingExistMongo(int uid, int mid){
-        if(findRating(uid, mid)!=null){
-            return true;
-        }else {
-            return false;
-        }
+        return findRating(uid, mid) != null;
     }
 
     public boolean insertNewRating2Mongo(Rating rating) throws JsonProcessingException, IllegalAccessException {

@@ -4,10 +4,12 @@ import VO.MovieVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import lombok.extern.slf4j.Slf4j;
 import models.Movie;
 import models.Rating;
 import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,7 +24,10 @@ import java.net.UnknownHostException;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ThreadPoolExecutor;
 
+@Slf4j
 @RestController
 public class MovieController {
     @Autowired
@@ -34,6 +39,8 @@ public class MovieController {
     @Autowired
     private FavoriteService favoriteService;
 
+    @Autowired
+    private Executor executor;
 
     @RequestMapping(value = "/movie/list", method = RequestMethod.GET)
     public List<MovieVO> getMovieVOS(@RequestParam("mids") List<Integer> mids){
@@ -56,9 +63,22 @@ public class MovieController {
     @RequestMapping(value = "/movie/score", method = RequestMethod.GET)
     public String getScoreById(@RequestParam("mid") Integer mid) throws ExecutionException, InterruptedException {
         System.out.println("getmovie - get mid = "+mid);
-        CompletableFuture<Movie> asy_movie = movieService.asyfindByMID(mid);
-        CompletableFuture<String> asy_movie_score = ratingService.asygetMovieAverageScores(mid);
-        CompletableFuture.allOf(asy_movie,asy_movie_score).join();
+//        CompletableFuture<Movie> asy_movie = movieService.asyfindByMID(mid);
+//        CompletableFuture<String> asy_movie_score = ratingService.asygetMovieAverageScores(mid);
+
+        CompletableFuture<Movie> asy_movie = CompletableFuture.supplyAsync(()->{
+            Movie m = movieService.findByMID(mid);
+            log.info("completable-future get the movie...: " + m.getName());
+            return  m;
+        }, executor);
+        CompletableFuture<String> asy_movie_score = CompletableFuture.supplyAsync(()->{
+            String score = ratingService.getMovieAverageScores(mid);
+            log.info("completable-future get its score...: " + score);
+            return  score;
+        }, executor);
+
+        CompletableFuture.allOf(asy_movie,asy_movie_score).get(); // 也可以用.join()
+
         System.out.println("completableFuture get all");
         Movie movie = asy_movie.get();
         String movie_score = asy_movie_score.get();
@@ -91,6 +111,15 @@ public class MovieController {
 
         CompletableFuture<Movie> asy_movie = movieService.asyfindByMID(mid);
         CompletableFuture<String> asy_movie_score = ratingService.asygetMovieAverageScores(mid);
+
+//        CompletableFuture<Movie> asy_movie = CompletableFuture.supplyAsync(()->{
+//            return movieService.findByMID(mid);
+//            return  m;
+//        }, executor);
+//        CompletableFuture<String> asy_movie_score = CompletableFuture.supplyAsync(()->{
+//            return ratingService.getMovieAverageScores(mid);
+//        }, executor);
+
         CompletableFuture.allOf(asy_movie,asy_movie_score).join();
         Movie movie = asy_movie.get();
         String movie_score = asy_movie_score.get();
