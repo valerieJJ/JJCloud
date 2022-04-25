@@ -47,7 +47,7 @@
         <div class="masthead-heading text-uppercase">LOVE IS OUR MESSGE</div>
 
         <!--  根据电影名模糊查询  -->
-        <form class="input-group-text" th:action="@{/movie/moviefield}">
+        <form class="input-group-text" th:action="@{/movie/field}">
             <label class="sr-only">movie name</label>
             <select class="form-control" th:name="fieldname" placeholder="choose field">
                 <option>name</option>
@@ -86,7 +86,7 @@
         <div class="row text-center">
             <div class="col-lg-4 col-sm-6 mb-4" th:each="movieVO:${reclatestmovieVOS}">
                 <div class="portfolio-item">
-                    <a th:href="@{'/movie/movieid?mid='+${movieVO.getMid()}}">
+                    <a th:href="@{'/movie/'+${movieVO.getMid()}}">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
@@ -112,7 +112,7 @@
         <div class="row text-center">
             <div class="col-lg-4 col-sm-6 mb-4" th:each="movieVO:${rechotmovieVOS}">
                 <div class="portfolio-item">
-                        <a th:href="@{'/movie/movieid?mid='+${movieVO.getMid()}}">
+                        <a th:href="@{'/movie/'+${movieVO.getMid()}}">
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                             </div>

@@ -42,12 +42,10 @@ public interface IFeignMovieService {
     @RequestMapping(value = "/movie/folder", method = RequestMethod.GET)
     List<Movie> goMovieFolder(@RequestParam("type") String type);
 
-    @RequestMapping(value = "/movie/moviefield", method = RequestMethod.GET)
-//    @PermissionAnnotation
-    Map<String, Object> searchMovieByField(
+    @RequestMapping(value = "/movie/field", method = RequestMethod.GET)
+    List<MovieVO> searchMovieByField(
             @RequestParam("fieldname") String fieldname
-            , @RequestParam("value") String value
-            , @RequestParam("request") HttpServletRequest request);
+            , @RequestParam("value") String value);
 
 //    @RequestMapping(value = "/movie/movieid", method = RequestMethod.POST)
 //    public Map<String, Object> getMovieInfo(@RequestParam("id") int mid

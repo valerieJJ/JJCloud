@@ -87,7 +87,7 @@ public class LoginController {
         User userCheck = (User) session.getAttribute("user");
         if(userCheck!=null){
             System.out.println("已登陆");
-            return "redirect:main";
+            return "redirect:main";//不加反斜杠，地址栏：工程地址/user/main
         }
         System.out.println("get usr: " + usr.toString());
         usr.setRole("user");
@@ -95,7 +95,7 @@ public class LoginController {
 
         if(user==null || !usr.getPassword().equals(user.getPassword())){
             System.out.println("Account does not exist");
-            return "login";
+            return "redirect:login"; // "redirect:login" 效果等于 "redirect:/user/login"
         }else {
             System.out.println("\nGet username="+user.getUname());
             System.out.println("Get password="+user.getPassword());
@@ -110,7 +110,8 @@ public class LoginController {
             cookie_user.setPath(request.getContextPath());//设置cookie共享路径
             response.addCookie(cookie_user);// 向客户端发送cookie
 
-            return "redirect:main";
+//            return "redirect:main";
+            return "forward:main";
 //            return "mainIndex";
         }
     }

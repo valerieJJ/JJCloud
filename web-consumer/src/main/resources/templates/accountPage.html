@@ -61,7 +61,8 @@
         <div class="row text-center">
             <div class="col-md-4" th:each="value:${movie_types}">
 
-                <a th:href="@{'/movie/moviefolder?type='+${value.getKey()}}">
+<!--                <a th:href="@{'/movie/moviefolder?type='+${value.getKey()}}">-->
+                <a th:href="@{'/movie/moviefolder/'+${value.getKey()}}">
                     <span class="fa-stack fa-4x" type="button">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
@@ -109,7 +110,8 @@
         <div class="row text-center">
             <div class="col-md-4" th:each="movieVO:${favoriteMovieVOS}">
 
-                <a th:href="@{'/movie/movieid?mid='+${movieVO.getMid()}}">
+<!--                <a th:href="@{'/movie/movieid?mid='+${movieVO.getMid()}}">-->
+                <a th:href="@{'/movie/'+${movieVO.getMid()}}">
                     <span class="fa-stack fa-4x" type="button">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         </span>

@@ -1,15 +1,14 @@
 package vjj.webconsumer.controllers;
 
 import VO.MovieVO;
+import lombok.extern.slf4j.Slf4j;
 import models.Movie;
 import models.Rating;
 import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import vjj.webconsumer.FeignServices.*;
@@ -25,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import java.util.*;
 
 
+@Slf4j
 @Controller
 public class MovieController {
 //    @Autowired
@@ -84,13 +84,14 @@ public class MovieController {
         System.out.println("get state2: "+ state);
     }
 
-    @RequestMapping("/movie/moviefolder")
+    @RequestMapping("/movie/moviefolder/{type}")
     @IdentityAnnotation
     @PermissionAnnotation
     public ModelAndView goMovieFolder(
             HttpServletRequest request
             ,HttpServletResponse response
-            ,@RequestParam("type") String type) {
+            ,@PathVariable("type") String type
+    ) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("~~~ go to "+ type);
         List<Movie> data = iFeignMovieService.goMovieFolder(type);
@@ -100,9 +101,10 @@ public class MovieController {
         return modelAndView;
     }
 
-    @RequestMapping("/movie/movieid")
+    @RequestMapping(value = {"/movie/{mid}"})
     public ModelAndView getMovieInfo(
-            @ModelAttribute("mid") int mid
+//            @ModelAttribute("mid") int mid
+            @PathVariable("mid") int mid
             ,@ModelAttribute("rating") Rating rating
             , HttpServletRequest request
             , ModelAndView modelAndView) {
@@ -134,22 +136,24 @@ public class MovieController {
         return modelAndView;
     }
 
-    @RequestMapping("/movie/moviefield")
-    public ModelAndView searchMovieByName(String fieldname, String value
+    @RequestMapping(value = "/movie/field", method = RequestMethod.GET)
+    public ModelAndView searchMovieByName(@RequestParam("fieldname") String fieldname,
+                                          @RequestParam("value")String value
                         , HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        System.out.println("search movie field = "+fieldname);
+        System.out.println("movie field = "+fieldname);
         System.out.println("search value = " + value);
-        Map<String, Object> res = iFeignMovieService.searchMovieByField(fieldname, value, request);
+        List<MovieVO> res = iFeignMovieService.searchMovieByField(fieldname, value);
 
-        List<MovieVO> movieVOList = (List<MovieVO>) res.get("movieVOList");
-        int num = (int) res.get("number");
+//        int num = (int) res.get("number");
 
-        if(movieVOList==null){
-            System.out.println("movie not found");
-            modelAndView.setViewName("show");
+        if(res==null){
+            log.info("movie not found");
+            modelAndView.setViewName("mainIndex");
         }else {
-            System.out.println("goto moviename = "+ movieVOList.get(0));
+            List<MovieVO> movieVOList = res;
+            System.out.println("movieVOList.toString() ="+movieVOList.toString());
+            log.info("goto moviename = "+ movieVOList.get(0));
             modelAndView.addObject("movieVOList",movieVOList);
             modelAndView.addObject("number",movieVOList.size());
             modelAndView.addObject("fieldname",fieldname);

@@ -52,21 +52,6 @@ public class UserController {
     public UserController() throws UnknownHostException {
     }
 
-    @RequestMapping("/user/whoisit")
-    public String getNickname(Model model, HttpServletRequest request) throws UnknownHostException {
-        HttpSession session = request.getSession();
-        System.out.println("whoisit - port:"+request.getServerPort()+",session:"+session.getId());
-        User user = (User)session.getAttribute("user");
-
-        if(user==null){
-            System.out.println("no log in");
-            return "index";
-        }else{
-            model.addAttribute("user", user);
-            return "whoisit";
-        }
-    }
-
     @HystrixCommand(fallbackMethod = "account_fallback",commandProperties = {
             @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "5000"),
             @HystrixProperty(name = "circuitBreaker.enabled",value = "true"),// 是否开启断路器
@@ -287,4 +272,20 @@ public class UserController {
         model.addAttribute("favoriteMovieVOS", null);
         return "accountPage";
     }
+
+//
+//    @RequestMapping("/user/whoisit")
+//    public String getNickname(Model model, HttpServletRequest request) throws UnknownHostException {
+//        HttpSession session = request.getSession();
+//        System.out.println("whoisit - port:"+request.getServerPort()+",session:"+session.getId());
+//        User user = (User)session.getAttribute("user");
+//
+//        if(user==null){
+//            System.out.println("no log in");
+//            return "index";
+//        }else{
+//            model.addAttribute("user", user);
+//            return "whoisit";
+//        }
+//    }
 }

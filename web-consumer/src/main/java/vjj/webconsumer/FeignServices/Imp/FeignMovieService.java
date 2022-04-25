@@ -47,8 +47,9 @@ public class FeignMovieService implements IFeignMovieService {
     }
 
     @Override
-    public Map<String, Object> searchMovieByField(String fieldname, String value, HttpServletRequest request) {
-        Map<String, Object> res = new HashMap<>();
+    public List<MovieVO> searchMovieByField(String fieldname, String value) {
+        List<MovieVO> res = new ArrayList<>();
         return res;
     }
+
 }
