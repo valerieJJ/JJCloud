@@ -145,36 +145,36 @@ public class MovieController {
         return res;
     }
 
-    @RequestMapping(value = "/movie/moviefield", method = RequestMethod.GET)
-//    @PermissionAnnotation
-    public Map<String, Object> searchMovieByField(
-            @RequestParam("fieldname") String fieldname
-            ,@RequestParam("value") String value
-            ,@RequestParam("request") HttpServletRequest request) throws IOException {
-        System.out.println("search movie field = "+fieldname);
+    @RequestMapping(value = "/movie/field", method = RequestMethod.GET)
+    public List<MovieVO> searchMovieByField(
+            @RequestParam("fieldname") String fieldname,
+            @RequestParam("value") String value
+            )
+            throws IOException {
+        log.info("movie-service field = "+fieldname);
         System.out.println("search value = " + value);
         String es_collection = "movietags";
         String[] excludes = {};
         String[] includes = {"mid", "name", "genres", "language", "descri", "issue", "shoot", "directors", "timelong"};
 
-        HashMap<List<MovieVO>, String> map;
-        map = esService.fullQuery("match", es_collection, fieldname, value, excludes, includes, 6);
-        Set<List<MovieVO>> set = map.keySet();
+//        HashMap<List<MovieVO>, String> map = new HashMap<>();
+//        map= esService.fullQuery("match", es_collection, fieldname, value, excludes, includes, 6);
+//        Set<List<MovieVO>> set = map.keySet();
+//        set.add()
+
+        HashMap<String, Object> res = new HashMap<>();
         List<MovieVO> movieVOList = new ArrayList<>();
-        Map<String, Object> res = new HashMap<>();
-        for(List<MovieVO> list: set){
-            for(MovieVO movieVO: list){
-                Integer mid = movieVO.getMid();
+
+                MovieVO movieVO = new MovieVO();
+                int mid = 2758;
                 Movie mov = movieService.findByMID(mid);
                 String movie_score = ratingService.getMovieAverageScores(mid);
                 movieVO.setScore(movie_score);
                 movieVO.setIssue(mov.getIssue());
                 movieVO.setGenres(mov.getGenres());
                 movieVOList.add(movieVO);
-            }
-        }
-        System.out.println("es get movieVOList.size() = "+movieVOList.size());
-        System.out.println("es get movieVOList.get(0) = "+movieVOList.get(0).getName());
+
+        log.info("es get movieVOList.size() = "+movieVOList.size());
 
         if(movieVOList==null){
             System.out.println("movie not found");
@@ -184,10 +184,8 @@ public class MovieController {
             res.put("number",movieVOList.size());
             res.put("fieldname",fieldname);
             res.put("value", value);
-            HttpSession session = request.getSession();
-            session.setAttribute("movieVOList", movieVOList);
         }
-        return res;
+        return movieVOList;
     }
 
 

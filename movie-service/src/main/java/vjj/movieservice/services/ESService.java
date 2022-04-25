@@ -89,19 +89,19 @@ public class ESService {
                                 , String[] excludes, String[] includes, int maxItems) throws IOException {
 //        MultiMatchQueryBuilder query = QueryBuilders.multiMatchQuery(text, "name", "descri");
 
-        HighlightBuilder highlightBuilder = new HighlightBuilder();
-        //高亮的字段
-        highlightBuilder.field(field);
-        //是否多个字段都高亮
-        highlightBuilder.requireFieldMatch(false);
+//        HighlightBuilder highlightBuilder = new HighlightBuilder();
+//        //高亮的字段
+//        highlightBuilder.field(field);
+//        //是否多个字段都高亮
+//        highlightBuilder.requireFieldMatch(false);
         //前缀后缀
-        highlightBuilder.preTags("<span style='color:red'>");
-        highlightBuilder.postTags("</span>");
+//        highlightBuilder.preTags("<span style='color:red'>");
+//        highlightBuilder.postTags("</span>");
 
         SearchRequest request = new SearchRequest();
         request.indices(index_name);
         SearchSourceBuilder builder = new SearchSourceBuilder();
-        builder.highlighter(highlightBuilder);
+//        builder.highlighter(highlightBuilder);
 
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
 
@@ -151,15 +151,15 @@ public class ESService {
 //        builder.query(QueryBuilders.fuzzyQuery(field, value).fuzziness(Fuzziness.AUTO));
 
 
-        HighlightBuilder highlightBuilder = new HighlightBuilder();
-        //高亮的字段
-        highlightBuilder.field(field);
-        //是否多个字段都高亮
-        highlightBuilder.requireFieldMatch(false);
-        //前缀后缀
-        highlightBuilder.preTags("<span style='color:red'>");
-        highlightBuilder.postTags("</span>");
-        builder.highlighter(highlightBuilder);
+//        HighlightBuilder highlightBuilder = new HighlightBuilder();
+//        //高亮的字段
+//        highlightBuilder.field(field);
+//        //是否多个字段都高亮
+//        highlightBuilder.requireFieldMatch(false);
+//        //前缀后缀
+//        highlightBuilder.preTags("<span style='color:red'>");
+//        highlightBuilder.postTags("</span>");
+//        builder.highlighter(highlightBuilder);
 //        sourceBuilder.highlighter(highlightBuilder);
 
         builder.query(QueryBuilders.matchQuery(field, value).operator(Operator.AND).fuzziness(Fuzziness.AUTO));
@@ -217,7 +217,7 @@ public class ESService {
         String collection = "movietags";
 
 //        System.out.println(es.search(collection));
-        Map<String, Object> doc = es.getDoc(collection, "2996");
+//        Map<String, Object> doc = es.getDoc(collection, "2996");
 //        List<MovieVO> lst = es.searchFullDoc(collection, "_id", "2996", 10);
 //        List<MovieVO> lst = es.searchFullDoc(collection, "shoot","1996", 10);
 //        List<MovieVO> lst = es.searchFullDoc(collection, "genres","Crime|Drama", 10);
