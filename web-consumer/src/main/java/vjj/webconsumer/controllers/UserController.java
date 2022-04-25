@@ -73,7 +73,7 @@ public class UserController {
         HashMap<String, String> movie_types = iFeignMovieService.getMovieTypes();
         if(user==null){
             System.out.println("please log in first");
-            return "index";
+            return "redirect:login";
         }else{
             System.out.println("account action: user " + user.getUname());
             model.addAttribute("user", user);

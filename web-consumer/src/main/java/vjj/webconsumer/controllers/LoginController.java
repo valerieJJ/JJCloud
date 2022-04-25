@@ -110,8 +110,7 @@ public class LoginController {
             cookie_user.setPath(request.getContextPath());//设置cookie共享路径
             response.addCookie(cookie_user);// 向客户端发送cookie
 
-//            return "redirect:main";
-            return "forward:main";
+            return "redirect:main";
 //            return "mainIndex";
         }
     }
