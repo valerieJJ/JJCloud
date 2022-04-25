@@ -95,7 +95,7 @@ public class LoginController {
 
         if(user==null || !usr.getPassword().equals(user.getPassword())){
             System.out.println("Account does not exist");
-            return "redirect:login"; // "redirect:login" 效果等于 "redirect:/user/login"
+            return "redirect:/"; // "redirect:login" 效果等于 "redirect:/user/login"
         }else {
             System.out.println("\nGet username="+user.getUname());
             System.out.println("Get password="+user.getPassword());
