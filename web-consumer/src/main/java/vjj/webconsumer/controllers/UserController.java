@@ -163,7 +163,7 @@ public class UserController {
             model.addAttribute("success",succ);
             model.addAttribute("state", state);
 
-        String toUrl = "/movie/movieid?mid="+mid;
+        String toUrl = "/movie/"+mid;// "/movie/movieid?mid="+mid;
         request.getRequestDispatcher(toUrl).forward(request, response);
     }
 
