@@ -14,7 +14,9 @@ services:
     environment:
       - "SPRING_PROFILES_ACTIVE=pro"
     depends_on:
+      - zoo2
       - zkmongo
+      - zkredis
 
   zkmongo:
     image: mongo:3.6.23
@@ -30,6 +32,33 @@ services:
     network_mode: host
 #    networks:
 #      - user-docker_mynetwork
+
+  zoo2:
+    image: zookeeper:3.5.5
+    restart: always
+    hostname: zk
+    container_name: zk-container
+    network_mode: host
+    ports:
+      - 2181:2181
+    volumes:
+      - ~/zookeeper/conf:/conf
+      - ~/Documents/zk3/data:/data
+      - ~/Documents/zk3/logs:/datalog
+
+
+  zkredis:
+    image: redis:6.2.6
+    container_name: zkredis2
+    ports:
+      - "6379:6379"
+    volumes:
+      - ~/redis/redis.conf:/etc/redis/redis.conf
+      - ~/redis/data:/data
+    command: redis-server /etc/redis/redis.conf
+    network_mode: host
+    depends_on:
+      - zoo2
 
 #networks:
 #  user-docker_mynetwork:
