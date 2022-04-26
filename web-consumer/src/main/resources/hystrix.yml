@@ -1,0 +1,47 @@
+#feign:
+#  client:
+#    config:
+#      default:
+#        connectTimeout: 1000
+#        readTimeout: 5000
+#  hystrix:
+#    enabled: true
+#
+##在feign和hystrix共存时，hystrix可以配置自身降级时间，默认1s
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 10000 # 设置hystrix的超时时间为6000ms
+#      circuitBreaker:
+#        #在当10秒的时间内，最近4次调用请求，请求错误率超过60%，则触发熔断5秒，期间快速失败，以下都是默认值
+#        requestVolumeThreshold: 4
+#        errorThresholdPercentage: 50
+#        sleepWindowInMilliseconds: 5000
+#      #设置统计的时间窗口值的毫秒值，circuit break 的打开会根据1个rolling window的统计来计算。
+#      #若rolling window被设为10000毫秒，则rolling window会被分成n个buckets，
+#      #每个bucket包含success，failure，timeout，rejection的次数的统计信息。默认10000。
+#      metrics:
+#        rollingStats:
+#          timeInMilliseconds: 10000
+#
+#
+##hystrix:
+##  command:
+##    default:
+##      execution:
+##        timeout:
+##          enabled: true
+##      isolation:
+##        thread:
+##          #目前有两个容器实例，单个请求超时5s,+重试>10s，超15s则熔断
+##          timeoutInMilliseconds: 5000
+##
+##ribbon:
+##  #ribbon请求连接的超时时间- 限制3秒内必须请求到服务，并不限制服务处理的返回时间
+##  connectTimeout: 3000
+##  #请求处理的超时时间 下级服务响应最大时间,超出时间消费方（路由也是消费方）返回timeout,超时时间不可大于断路器的超时时间
+##  readTimeout: 5000
+##
