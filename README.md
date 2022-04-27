@@ -19,3 +19,48 @@ The spring-boot modules are registered on different zk nodes(on virtual machine)
 <img width="1105" alt="image" src="https://user-images.githubusercontent.com/43733497/161597948-b302ebde-a4d0-421d-9694-8570b4f0229f.png">
 
 
+
+
+### zk起停脚本
+ ```shell
+ case $1 in
+"start"){
+	for i in master hadoop0 hadoop2
+	do
+        if [ "$i" == "master" ];then
+            echo "starting master..."
+            ssh $i "/Users/jj/zookeepers/zk1/bin/zkServer.sh start"
+        else
+            echo "starting hadoop $i zookeeper..."
+            ssh $i "docker start zk-container"
+        fi
+		echo "started!"
+	done
+};;
+"status"){
+	for i in master hadoop0 hadoop2
+	do
+        echo "status of $i :"
+        if [ "$i" == "master" ];then
+            ssh $i "/Users/jj/zookeepers/zk1/bin/zkServer.sh status"
+        elif [ "$i" == "hadoop0" ];then
+            ssh $i "~/Documents/zk2/bin/zkServer.sh status"
+        elif [ "$i" == "hadoop2" ];then
+            ssh $i "~/Documents/zk3/bin/zkServer.sh status"
+        fi
+    done
+};;
+"stop"){
+	for i in master hadoop0 hadoop2
+	do
+        echo "stopping $i :"
+        if [ "$i" == "master" ];then
+            ssh $i "/Users/jj/zookeepers/zk1/bin/zkServer.sh stop"
+        else
+            ssh $i "docker stop zk-container"
+        fi
+	done
+};;
+esac
+
+```
