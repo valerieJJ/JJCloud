@@ -1,11 +1,30 @@
 Note: Latest updates can be seen on `dev` branch. 
 
 # Intro
+
 This is an project that is currently under development.
 
 It extends my previous backend project **["JJSpring"](https://github.com/valerieJJ/JJSpring)** to micro-services using springcloud and zookeeper. 
 
 The spring-boot modules are registered on different zk nodes(on virtual machine). 
+
+1. Functions
+- Welcome page: movie display + Login registration entrance (jump to login page)
+- after login -> mainpage, menu bar includes: movie search + popular movies(number of ratings) + high rating movie list(zset) + user home page
+- Movie search: (drop-down list) select search method (name, actor, language, year), input search information, then jump to page to show the result list
+- Click movie picture => enter **movie detail page**, operation: **score** the movie, **add to my favourite** folder
+- User home page: user information modification, logout, my favorites, user browsing history (redis-list)
+2. Techniques
+- springcloud, zookeeper, feign+hystrix
+- redis、mongo、mysql，elasticsearch
+- thymleaf
+- maven，git
+3. Services
+- api-common
+- movie-service: zk1(mongodb,elasticsearch)，CompletableFuture
+- user-module: zk2(mysql) CRUD
+- web-consumer：zk3(redis)，Feign，hystrix，Intercepter，aop(identity, authentication)
+- order-module is currently under development
 
 <img width="1402" alt="image-20220426111822894" src="https://user-images.githubusercontent.com/43733497/165213803-398d0086-df97-4ecf-99e1-18d35451036e.png">
 
