@@ -1,8 +1,9 @@
 # Latest updates can be seen on `dev` branch. 
 
+# Intro
 This is an project that is currently under development.
 
-It extends my previous backend project ["JJSpring"](https://github.com/valerieJJ/JJSpring) to springcloud. 
+It extends my previous backend project **["JJSpring"](https://github.com/valerieJJ/JJSpring)** to micro-services using springcloud and zookeeper. 
 
 The spring-boot modules are registered on different zk nodes(on virtual machine). 
 
@@ -21,7 +22,7 @@ The spring-boot modules are registered on different zk nodes(on virtual machine)
 
 
 
-### zk起停脚本
+### zk shell commands
  ```shell
  case $1 in
 "start"){
@@ -64,3 +65,49 @@ The spring-boot modules are registered on different zk nodes(on virtual machine)
 esac
 
 ```
+
+
+
+### mongoDB
+Useful Tool: MongoDB - Robo
+
+start server:
+
+`jj@master ~ % mongod --dbpath /usr/local/Cellar/data/db`
+
+### redis
+
+start server:
+
+`jj@master ~ % redis-server`
+<img width="1623" alt="image" src="https://user-images.githubusercontent.com/43733497/158499459-46ce4489-72af-4133-98f7-9459892ee47d.png">
+
+### elasticsearch 
+`jj@master ~ % elasticsearch`（It has already been added to my system environment variables）
+Here it is applied to improve the speed of searching movies in various ways.
+
+It will return the movie ID retrieved based on the content, based on which you can further check the MongoDB table to get more information.
+
+### zookeeper utils
+I am considering extending this project to spring-cloud based on zookeeper
+
+<img width="1603" alt="image" src="https://user-images.githubusercontent.com/43733497/159327103-3947eda0-b6d3-4471-8de1-4dca4ce826fb.png">
+
+
+Here are some system showcases：
+Note: To save storage space, I didn't download all the poster images for each movie. Instead, I used the same images as general movie posters.
+
+![image-20220316094252015](/Users/jj/Library/Application Support/typora-user-images/image-20220316094252015.png)
+
+<img width="1280" alt="image" src="https://user-images.githubusercontent.com/43733497/158501934-0de13ccb-5eec-46e1-a3b2-e58f42b6f2e6.png">
+![piccc](/Users/jj/Pictures/piccc.png)
+
+<img width="1285" alt="image" src="https://user-images.githubusercontent.com/43733497/158501345-8cfe6ef0-97a5-4115-8dd0-7129cc249c9a.png">
+
+<img width="1296" alt="image" src="https://user-images.githubusercontent.com/43733497/158501396-3c576e5c-5032-44c6-a5ab-6d8e1ea842f5.png">
+
+
+<img width="1277" alt="image" src="https://user-images.githubusercontent.com/43733497/158501832-fb7a6d82-bbe8-4b15-b5fd-3feebe5ff946.png">
+
+
+
