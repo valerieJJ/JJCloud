@@ -1,5 +1,3 @@
-Note: Latest updates are available on `dev` branch. 
-
 # Intro
 
 This is an project that is currently under development.
