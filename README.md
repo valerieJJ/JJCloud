@@ -16,9 +16,9 @@ The spring-boot modules are registered on different zk nodes(on virtual machine)
 - User home page: user information modification, logout, my favorites, user browsing history (redis-list)
 2. Techniques
 - springcloud, zookeeper, feign+hystrix
-- redis、mongo、mysql，elasticsearch
+- redis, mongodb, mysql，elasticsearch
 - thymleaf
-- maven，git
+- maven, git, docker
 3. Services
 - api-common
 - movie-service: zk1(mongodb,elasticsearch)，CompletableFuture
