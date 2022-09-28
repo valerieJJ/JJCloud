@@ -1,4 +1,4 @@
-# Latest updates can be seen on `dev` branch. 
+# Intro
 
 This is an project that is currently under development.
 
