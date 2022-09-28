@@ -1,4 +1,4 @@
-Note: Latest updates is available on `dev` branch. 
+Note: Latest updates are available on `dev` branch. 
 
 # Intro
 
