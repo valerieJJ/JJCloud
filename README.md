@@ -21,9 +21,9 @@ The spring-boot modules are registered on different zk nodes(on virtual machine)
 - maven, git, docker
 3. Services
 - api-common
-- movie-service: zk1(mongodb,elasticsearch)，CompletableFuture
-- user-module: zk2(mysql) CRUD
-- web-consumer：zk3(redis)，Feign，hystrix，Intercepter，aop(identity, authentication)
+- movie-service: zk1(mongodb,elasticsearch), CompletableFuture
+- user-module: zk2(mysql)
+- web-consumer：zk3(redis), Feign, Hystrix, Intercepter, AOP(user identity & authentication)
 - order-module is currently under development
 
 <img width="1402" alt="image-20220426111822894" src="https://user-images.githubusercontent.com/43733497/165213803-398d0086-df97-4ecf-99e1-18d35451036e.png">
@@ -39,9 +39,7 @@ The spring-boot modules are registered on different zk nodes(on virtual machine)
 <img width="1105" alt="image" src="https://user-images.githubusercontent.com/43733497/161597948-b302ebde-a4d0-421d-9694-8570b4f0229f.png">
 
 
-
-
-### zk shell commands
+### shell commands for zookeeper cluster
  ```shell
  case $1 in
 "start"){
