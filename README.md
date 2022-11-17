@@ -1,6 +1,6 @@
 # Intro
 
-This is an project that is currently under development.
+This is a project that is currently under development.
 
 It extends my previous backend project **["JJSpring"](https://github.com/valerieJJ/JJSpring)** to micro-services using springcloud and zookeeper. 
 
